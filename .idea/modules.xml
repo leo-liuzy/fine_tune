@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/fine_tune.iml" filepath="$PROJECT_DIR$/.idea/fine_tune.iml" />
+      <module fileurl="file://$USER_HOME$/course/EE514/hw3/.idea/hw3.iml" filepath="$USER_HOME$/course/EE514/hw3/.idea/hw3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../neural_persona/.idea/neural_persona.iml" filepath="$PROJECT_DIR$/../neural_persona/.idea/neural_persona.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../transformers/.idea/transformers.iml" filepath="$PROJECT_DIR$/../transformers/.idea/transformers.iml" />
+    </modules>
+  </component>
+</project>
