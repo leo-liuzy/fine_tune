@@ -134,7 +134,13 @@ def train(args, train_dataset, model, tokenizer):
 
     global_step = 0
     tr_loss, logging_loss = 0.0, 0.0
-    model.zero_grad()
+
+    # only fine-tune the last layer
+    if args.freeze_pretrained:
+        for name, m in model.named_children():
+            if name != "qa_outputs":
+                m.requires_grad = False
+
     train_iterator = trange(int(args.num_train_epochs), desc="Epoch", disable=args.local_rank not in [-1, 0])
     set_seed(args)  # Added here for reproductibility (even between python 2 and 3)
     for _ in train_iterator:
@@ -359,6 +365,8 @@ def main():
                         help="The output directory where the model checkpoints and predictions will be written.")
 
     ## Other parameters
+    parser.add_argument("--freeze_pretrained", action='store_true',
+                        help="Store the pretrained BERT weights and only train the last layer")
     parser.add_argument("--config_name", default="", type=str,
                         help="Pretrained config name or path if not the same as model_name")
     parser.add_argument("--tokenizer_name", default="", type=str,
