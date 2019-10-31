@@ -1,0 +1,3 @@
+#!/bin/bash
+python runs/run_squad.py --train_file data/squad1_1/train-v1.1.json --predict_file data/squad1_1/dev-v1.1.json --model_type bert --model_name_or_path bert-base-uncased --output_dir out/fine_tune_top_layer --do_train --freeze_pretrained --overwrite_output_dir --save_steps 5500 --do_eval --do_lower_case --learning_rate 3e-5 --num_train_epochs 3.0
+python runs/run_squad.py --train_file data/squad1_1/train-v1.1.json --predict_file data/squad1_1/dev-v1.1.json --model_type bert --model_name_or_path bert-base-uncased --output_dir out/fine_tune --do_train --overwrite_output_dir --save_steps 5500 --do_eval --do_lower_case --learning_rate 3e-5 --num_train_epochs 3.0

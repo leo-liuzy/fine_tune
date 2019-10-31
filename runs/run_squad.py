@@ -17,6 +17,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+from ipdb import set_trace as bp
 import argparse
 import logging
 import os
@@ -157,6 +158,7 @@ def train(args, train_dataset, model, tokenizer):
             if args.model_type in ['xlnet', 'xlm']:
                 inputs.update({'cls_index': batch[5],
                                'p_mask': batch[6]})
+            # bp()
             outputs = model(**inputs)
             loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
 
@@ -311,7 +313,7 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
         logger.info("Creating features from dataset file at %s", input_file)
         examples = read_squad_examples(input_file=input_file,
                                        is_training=not evaluate,
-                                       version_2_with_negative=args.version_2_with_negative)[:10]
+                                       version_2_with_negative=args.version_2_with_negative)
         features = convert_examples_to_features(examples=examples,
                                                 tokenizer=tokenizer,
                                                 max_seq_length=args.max_seq_length,
@@ -464,11 +466,11 @@ def main():
         print("Waiting for debugger attach")
         ptvsd.enable_attach(address=(args.server_ip, args.server_port), redirect_output=True)
         ptvsd.wait_for_attach()
-
+    # bp()
     # Setup CUDA, GPU & distributed training
     if args.local_rank == -1 or args.no_cuda:
-        device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
-        args.n_gpu = torch.cuda.device_count()
+        device = torch.device("cuda:0" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
+        args.n_gpu = torch.cuda.device_count() - 1 # TODO: delete -1
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
@@ -485,7 +487,7 @@ def main():
 
     # Set seed
     set_seed(args)
-
+    # bp()
     # Load pretrained model and tokenizer
     if args.local_rank not in [-1, 0]:
         torch.distributed.barrier()  # Make sure only the first process in distributed training will download model & vocab
@@ -500,7 +502,7 @@ def main():
 
     if args.local_rank == 0:
         torch.distributed.barrier()   # Make sure only the first process in distributed training will download model & vocab
-
+    # bp()
     model.to(args.device)
 
     logger.info("Training/evaluation parameters %s", args)
