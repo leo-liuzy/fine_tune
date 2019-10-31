@@ -10,6 +10,7 @@
     <orderEntry type="module" module-name="transformers" />
     <orderEntry type="module" module-name="hw3" />
     <orderEntry type="module" module-name="neural_persona" />
+    <orderEntry type="module" module-name="neural_persona" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="pytest" />
