@@ -142,7 +142,6 @@ ACT2FN = {"gelu": gelu, "relu": torch.nn.functional.relu, "swish": swish, "gelu_
 
 BertLayerNorm = torch.nn.LayerNorm
 
-
 class BertEmbeddings(nn.Module):
     """Construct the embeddings from word, position and token_type embeddings.
     """
@@ -339,12 +338,15 @@ class BertEncoder(nn.Module):
         self.output_hidden_states = config.output_hidden_states
         self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
 
-    def forward(self, hidden_states, attention_mask=None, head_mask=None):
-        all_hidden_states = ()
+    def forward(self, hidden_states, attention_mask=None, head_mask=None, weights=None):
+        all_hidden_states = ()  # TODO: ()
         all_attentions = ()
         for i, layer_module in enumerate(self.layer):
             if self.output_hidden_states:
-                all_hidden_states = all_hidden_states + (hidden_states,)
+                if weights is not None and i > 0:
+                    all_hidden_states = all_hidden_states + (hidden_states * weights[i - 1],)
+                else:
+                    all_hidden_states = all_hidden_states + (hidden_states,)
 
             layer_outputs = layer_module(hidden_states, attention_mask, head_mask[i])
             hidden_states = layer_outputs[0]
@@ -354,8 +356,11 @@ class BertEncoder(nn.Module):
 
         # Add last layer
         if self.output_hidden_states:
-            all_hidden_states = all_hidden_states + (hidden_states,)
-
+            if weights is not None:
+                all_hidden_states = all_hidden_states + (hidden_states * weights[-1],)
+            else:
+                all_hidden_states = all_hidden_states + (hidden_states,)
+        
         outputs = (hidden_states,)
         if self.output_hidden_states:
             outputs = outputs + (all_hidden_states,)
@@ -586,7 +591,7 @@ class BertModel(BertPreTrainedModel):
         for layer, heads in heads_to_prune.items():
             self.encoder.layer[layer].attention.prune_heads(heads)
 
-    def forward(self, input_ids, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None):
+    def forward(self, input_ids, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None, weights=None):
         if attention_mask is None:
             attention_mask = torch.ones_like(input_ids)
         if token_type_ids is None:
@@ -625,8 +630,15 @@ class BertModel(BertPreTrainedModel):
         embedding_output = self.embeddings(input_ids, position_ids=position_ids, token_type_ids=token_type_ids)
         encoder_outputs = self.encoder(embedding_output,
                                        extended_attention_mask,
-                                       head_mask=head_mask)
+                                       head_mask=head_mask,
+                                       weights=weights)
+
         sequence_output = encoder_outputs[0]
+        if weights is not None:
+            x = encoder_outputs[1][1]  # encoder_outputs[1] = all hidden states including input
+            for hidden in encoder_outputs[1][2:]:
+                x += hidden
+            sequence_output = x
         pooled_output = self.pooler(sequence_output)
 
         outputs = (sequence_output, pooled_output,) + encoder_outputs[1:]  # add hidden_states and attentions if they are here
@@ -1113,18 +1125,21 @@ class BertForQuestionAnswering(BertPreTrainedModel):
         self.num_labels = config.num_labels
 
         self.bert = BertModel(config)
+        self.weights = torch.ones(len(self.bert.encoder.layer), requires_grad=True) * -10000
+        self.weights[-1] = 0  # start as if the weight are the same and see if the weighting changes.
         self.qa_outputs = nn.Linear(config.hidden_size, config.num_labels)
 
         self.init_weights()
 
     def forward(self, input_ids, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
                 start_positions=None, end_positions=None):
-
+        weights = torch.softmax(self.weights, dim=-1)
         outputs = self.bert(input_ids,
                             attention_mask=attention_mask,
                             token_type_ids=token_type_ids,
                             position_ids=position_ids, 
-                            head_mask=head_mask)
+                            head_mask=head_mask,
+                            weights=weights)
 
         sequence_output = outputs[0]
 
