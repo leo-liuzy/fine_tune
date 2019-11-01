@@ -1,3 +1,7 @@
 data/*
 data.tgz
-runs/runs/*
+runs/**
+!runs/*.*
+out/**
+.idea/
+**/*.pyc

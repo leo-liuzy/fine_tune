@@ -467,8 +467,8 @@ def main():
 
     # Setup CUDA, GPU & distributed training
     if args.local_rank == -1 or args.no_cuda:
-        device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
-        args.n_gpu = torch.cuda.device_count()
+        device = torch.device("cuda:0" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
+        args.n_gpu = torch.cuda.device_count() - 1  # TODO: delete -1
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)

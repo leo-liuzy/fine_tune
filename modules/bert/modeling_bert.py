@@ -1127,13 +1127,16 @@ class BertForQuestionAnswering(BertPreTrainedModel):
         self.bert = BertModel(config)
         self.weights = torch.ones(len(self.bert.encoder.layer), requires_grad=True) * -10000
         self.weights[-1] = 0  # start as if the weight are the same and see if the weighting changes.
+        self.weights = None
         self.qa_outputs = nn.Linear(config.hidden_size, config.num_labels)
 
         self.init_weights()
 
     def forward(self, input_ids, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
                 start_positions=None, end_positions=None):
-        weights = torch.softmax(self.weights, dim=-1)
+        weights = None
+        if self.weights is not None:
+            weights = torch.softmax(self.weights, dim=-1)
         outputs = self.bert(input_ids,
                             attention_mask=attention_mask,
                             token_type_ids=token_type_ids,
