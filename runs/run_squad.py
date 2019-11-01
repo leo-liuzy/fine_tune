@@ -22,6 +22,7 @@ import logging
 import os
 import random
 import glob
+from ipdb import set_trace
 
 import numpy as np
 import torch
@@ -136,6 +137,7 @@ def train(args, train_dataset, model, tokenizer):
     tr_loss, logging_loss = 0.0, 0.0
 
     # only fine-tune the last layer
+    bp()
     if args.freeze_pretrained:
         for name, m in model.named_children():
             if name != "qa_outputs":
@@ -311,7 +313,7 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
         logger.info("Creating features from dataset file at %s", input_file)
         examples = read_squad_examples(input_file=input_file,
                                        is_training=not evaluate,
-                                       version_2_with_negative=args.version_2_with_negative)[:10]
+                                       version_2_with_negative=args.version_2_with_negative)
         features = convert_examples_to_features(examples=examples,
                                                 tokenizer=tokenizer,
                                                 max_seq_length=args.max_seq_length,
