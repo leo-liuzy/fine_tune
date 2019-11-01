@@ -365,8 +365,13 @@ def main():
                         help="The output directory where the model checkpoints and predictions will be written.")
 
     ## Other parameters
+    # my own
     parser.add_argument("--freeze_pretrained", action='store_true',
                         help="Store the pretrained BERT weights and only train the last layer")
+    parser.add_argument("--elmo_style", action='store_true',
+                        help="Have our output to be weighted in a ELMo-like fashion")
+
+    # official
     parser.add_argument("--config_name", default="", type=str,
                         help="Pretrained config name or path if not the same as model_name")
     parser.add_argument("--tokenizer_name", default="", type=str,
@@ -493,7 +498,8 @@ def main():
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
     config = config_class.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
-    config.output_hidden_states = True  # TODO: experiment weighting different layers(ELMo style)
+    config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
+    config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
                                                 do_lower_case=args.do_lower_case)
     model = model_class.from_pretrained(args.model_name_or_path, from_tf=bool('.ckpt' in args.model_name_or_path),

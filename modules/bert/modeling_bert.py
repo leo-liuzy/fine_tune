@@ -1125,9 +1125,10 @@ class BertForQuestionAnswering(BertPreTrainedModel):
         self.num_labels = config.num_labels
 
         self.bert = BertModel(config)
-        self.weights = torch.ones(len(self.bert.encoder.layer), requires_grad=True) * -10000
-        self.weights[-1] = 0  # start as if the weight are the same and see if the weighting changes.
         self.weights = None
+        if config.elmo_style:
+            self.weights = torch.ones(len(self.bert.encoder.layer), requires_grad=True) * -10000
+            self.weights[-1] = 0  # start as if the weight are the same and see if the weighting changes.
         self.qa_outputs = nn.Linear(config.hidden_size, config.num_labels)
 
         self.init_weights()
