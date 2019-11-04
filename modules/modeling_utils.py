@@ -321,7 +321,7 @@ class PreTrainedModel(nn.Module):
                 if pretrained_model_name_or_path in cls.pretrained_model_archive_map:
                     msg = "Couldn't reach server at '{}' to download pretrained weights.".format(
                             archive_file)
-                else:from_pretrained
+                else:
                     msg = "Model name '{}' was not found in model name list ({}). " \
                         "We assumed '{}' was a path or url to model weight files named one of {} but " \
                         "couldn't find any such file at this path or url.".format(
