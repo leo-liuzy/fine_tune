@@ -16,13 +16,13 @@
 """ Finetuning the library models for question-answering on SQuAD (DistilBERT, Bert, XLM, XLNet)."""
 
 from __future__ import absolute_import, division, print_function
-from ipdb import set_trace as bp
+
 import argparse
 import logging
 import os
 import random
 import glob
-from ipdb import set_trace
+# from ipdb import set_trace as bp
 
 import numpy as np
 import torch
@@ -103,6 +103,14 @@ def train(args, train_dataset, model, tokenizer):
          'weight_decay': args.weight_decay},
         {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
     ]
+    if args.freeze_pretrained:
+        optimizer_grouped_parameters = [
+            {'params': [(n, p) for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
+                        and n.startswith("qa_outputs")],
+             'weight_decay': args.weight_decay},
+            {'params': [(n, p) for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
+                        and n.startswith("qa_outputs")], 'weight_decay': 0.0}
+        ]
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
     if args.fp16:
@@ -137,12 +145,6 @@ def train(args, train_dataset, model, tokenizer):
     tr_loss, logging_loss = 0.0, 0.0
 
     # only fine-tune the last layer
-    bp()
-    if args.freeze_pretrained:
-        for name, m in model.named_children():
-            if name != "qa_outputs":
-                m.requires_grad = False
-
     train_iterator = trange(int(args.num_train_epochs), desc="Epoch", disable=args.local_rank not in [-1, 0])
     set_seed(args)  # Added here for reproductibility (even between python 2 and 3)
     for _ in train_iterator:
@@ -302,6 +304,7 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
 
     # Load data features from cache or dataset file
     input_file = args.predict_file if evaluate else args.train_file
+    # bp()
     cached_features_file = os.path.join(os.path.dirname(input_file), 'cached_{}_{}_{}'.format(
         'dev' if evaluate else 'train',
         list(filter(None, args.model_name_or_path.split('/'))).pop(),
@@ -504,8 +507,8 @@ def main():
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
                                                 do_lower_case=args.do_lower_case)
-    bp()
-    model = model_class.from_p1retrained(args.model_name_or_path, from_tf=bool('.ckpt' in args.model_name_or_path),
+    # bp()
+    model = model_class.from_pretrained(args.model_name_or_path, from_tf=bool('.ckpt' in args.model_name_or_path),
                                         config=config)
 
     if args.local_rank == 0:
@@ -528,7 +531,6 @@ def main():
     # Training
     if args.do_train:
         train_dataset = load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=False)
-        # bp()
         global_step, tr_loss = train(args, train_dataset, model, tokenizer)
         logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
 
