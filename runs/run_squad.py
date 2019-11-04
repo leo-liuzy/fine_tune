@@ -22,6 +22,7 @@ import logging
 import os
 import random
 import glob
+from ipdb import set_trace
 
 import numpy as np
 import torch
@@ -136,6 +137,7 @@ def train(args, train_dataset, model, tokenizer):
     tr_loss, logging_loss = 0.0, 0.0
 
     # only fine-tune the last layer
+    bp()
     if args.freeze_pretrained:
         for name, m in model.named_children():
             if name != "qa_outputs":
@@ -502,7 +504,8 @@ def main():
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
                                                 do_lower_case=args.do_lower_case)
-    model = model_class.from_pretrained(args.model_name_or_path, from_tf=bool('.ckpt' in args.model_name_or_path),
+    bp()
+    model = model_class.from_p1retrained(args.model_name_or_path, from_tf=bool('.ckpt' in args.model_name_or_path),
                                         config=config)
 
     if args.local_rank == 0:
