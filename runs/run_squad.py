@@ -22,7 +22,7 @@ import logging
 import os
 import random
 import glob
-# from ipdb import set_trace as bp
+from ipdb import set_trace as bp
 
 import numpy as np
 import torch
@@ -160,6 +160,7 @@ def train(args, train_dataset, model, tokenizer):
             if args.model_type in ['xlnet', 'xlm']:
                 inputs.update({'cls_index': batch[5],
                                'p_mask': batch[6]})
+            bp()
             outputs = model(**inputs)
             loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
 
