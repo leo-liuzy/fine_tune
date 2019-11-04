@@ -16,7 +16,7 @@
 """ Finetuning the library models for question-answering on SQuAD (DistilBERT, Bert, XLM, XLNet)."""
 
 from __future__ import absolute_import, division, print_function
-
+from ipdb import set_trace as bp
 import argparse
 import logging
 import os
@@ -311,7 +311,7 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
         logger.info("Creating features from dataset file at %s", input_file)
         examples = read_squad_examples(input_file=input_file,
                                        is_training=not evaluate,
-                                       version_2_with_negative=args.version_2_with_negative)[:10]
+                                       version_2_with_negative=args.version_2_with_negative)
         features = convert_examples_to_features(examples=examples,
                                                 tokenizer=tokenizer,
                                                 max_seq_length=args.max_seq_length,
@@ -525,6 +525,7 @@ def main():
     # Training
     if args.do_train:
         train_dataset = load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=False)
+        # bp()
         global_step, tr_loss = train(args, train_dataset, model, tokenizer)
         logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
 
