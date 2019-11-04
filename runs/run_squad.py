@@ -37,14 +37,13 @@ except:
 
 from tqdm import tqdm, trange
 
-from transformers import (WEIGHTS_NAME, BertConfig,
-                          BertForQuestionAnswering, BertTokenizer,
-                          XLMConfig, XLMForQuestionAnswering,
-                          XLMTokenizer, XLNetConfig,
-                          XLNetForQuestionAnswering,
-                          XLNetTokenizer,
-                          DistilBertConfig, DistilBertForQuestionAnswering, DistilBertTokenizer)
-
+from modules import (WEIGHTS_NAME, BertConfig,
+                     BertForQuestionAnswering, BertTokenizer,
+                     XLMConfig, XLMForQuestionAnswering,
+                     XLMTokenizer, XLNetConfig,
+                     XLNetForQuestionAnswering,
+                     XLNetTokenizer,
+                     DistilBertConfig, DistilBertForQuestionAnswering, DistilBertTokenizer)
 from transformers import AdamW, WarmupLinearSchedule
 
 from utils.utils_squad import (read_squad_examples, convert_examples_to_features,
@@ -105,10 +104,10 @@ def train(args, train_dataset, model, tokenizer):
     ]
     if args.freeze_pretrained:
         optimizer_grouped_parameters = [
-            {'params': [(n, p) for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
+            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
                         and n.startswith("qa_outputs")],
              'weight_decay': args.weight_decay},
-            {'params': [(n, p) for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
+            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
                         and n.startswith("qa_outputs")], 'weight_decay': 0.0}
         ]
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
@@ -512,7 +511,7 @@ def main():
                                         config=config)
 
     if args.local_rank == 0:
-        torch.distributed.barrier()   # Make sure only the first process in distributed training will download model & vocab
+        torch.distributed.barrier()  # Make sure only the first process in distributed training will download model & vocab
 
     model.to(args.device)
 
