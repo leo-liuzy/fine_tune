@@ -1125,10 +1125,12 @@ class BertForQuestionAnswering(BertPreTrainedModel):
         self.num_labels = config.num_labels
 
         self.bert = BertModel(config)
-        self.weights = None
+        self.elmo_weights = None
         if config.elmo_style:
-            self.weights = torch.ones(len(self.bert.encoder.layer), requires_grad=True) * -10000
-            self.weights[-1] = 0  # start as if the weight are the same and see if the weighting changes.
+            init = [-10000] * len(self.bert.encoder.layer)
+            init[-1] = 0
+            self.elmo_weights = torch.nn.Parameter(torch.FloatTensor(init))
+            # start as if the weight are the same and see if the weighting changes.
         self.qa_outputs = nn.Linear(config.hidden_size, config.num_labels)
 
         self.init_weights()
@@ -1136,8 +1138,8 @@ class BertForQuestionAnswering(BertPreTrainedModel):
     def forward(self, input_ids, attention_mask=None, token_type_ids=None, position_ids=None, head_mask=None,
                 start_positions=None, end_positions=None):
         weights = None
-        if self.weights is not None:
-            weights = torch.softmax(self.weights, dim=-1)
+        if self.elmo_weights is not None:
+            weights = torch.softmax(self.elmo_weights, dim=-1)
         outputs = self.bert(input_ids,
                             attention_mask=attention_mask,
                             token_type_ids=token_type_ids,

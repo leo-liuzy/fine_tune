@@ -97,19 +97,45 @@ def train(args, train_dataset, model, tokenizer):
 
     # Prepare optimizer and schedule (linear warmup and decay)
     no_decay = ['bias', 'LayerNorm.weight']
-    optimizer_grouped_parameters = [
-        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
-         'weight_decay': args.weight_decay},
-        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
-    ]
-    if args.freeze_pretrained:
+    if not args.freeze_pretrained and args.elmo_style:
+        print("all parameter and elmo_style")
+        optimizer_grouped_parameters = [
+            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
+             'weight_decay': args.weight_decay},
+            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
+        ]
+    elif not args.freeze_pretrained and not args.elmo_style:
+        print("all parameter and no elmo_style")
         optimizer_grouped_parameters = [
             {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
-                        and n.startswith("qa_outputs")],
+                        and not n.startswith("elmo")],
              'weight_decay': args.weight_decay},
             {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
-                        and n.startswith("qa_outputs")], 'weight_decay': 0.0}
+                        and not n.startswith("elmo")], 'weight_decay': 0.0}
         ]
+    # only top layer
+    elif args.freeze_pretrained and args.elmo_style:
+        print("only top layer and elmo style")
+        optimizer_grouped_parameters = [
+            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
+                        and (n.startswith("qa_outputs") or n.startswith("elmo"))],
+             'weight_decay': args.weight_decay},
+            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
+                        and (n.startswith("qa_outputs") or n.startswith("elmo"))], 'weight_decay': 0.0}
+        ]
+    else:
+        print("only top layer and no elmo_style")
+        optimizer_grouped_parameters = [
+            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
+                        and n.startswith("qa_outputs") and not n.startswith("elmo")],
+             'weight_decay': args.weight_decay},
+            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
+                        and n.startswith("qa_outputs") and not n.startswith("elmo")], 'weight_decay': 0.0}
+        ]
+        
+    # bp() 
+    # import sys
+    # sys.exit(0)
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
     if args.fp16:
@@ -160,7 +186,7 @@ def train(args, train_dataset, model, tokenizer):
             if args.model_type in ['xlnet', 'xlm']:
                 inputs.update({'cls_index': batch[5],
                                'p_mask': batch[6]})
-            bp()
+            # bp()
             outputs = model(**inputs)
             loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
 

@@ -31,7 +31,7 @@
 
 #SBATCH --mail-type=ALL
 
-#SBATCH --mail-user=zeyuliu2@cs.washington.edu
+#SBATCH --mail-user=zeyuliu2@uw.edu
 
 ## export all your environment variables to the batch job session
 
