@@ -1,10 +1,12 @@
 data/*
 data.tgz
 runs/**
-!runs/*.*
+runs/runs/
+!runs/*\.*
 out/**
 .idea/
 **/*.pyc
+*.pyc
 cache/**
 out.tgz
 runs.tgz
