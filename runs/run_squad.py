@@ -133,8 +133,7 @@ def train(args, train_dataset, model, tokenizer):
                         and n.startswith("qa_outputs") and not n.startswith("elmo")], 'weight_decay': 0.0}
         ]
         
-    # bp()
-    # print(optimizer_grouped_parameters)
+    # bp() 
     # import sys
     # sys.exit(0)
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
