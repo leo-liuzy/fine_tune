@@ -17,6 +17,7 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from ipdb import set_trace as bp
 import json
 import logging
 import math
@@ -361,6 +362,7 @@ class BertEncoder(nn.Module):
             else:
                 all_hidden_states = all_hidden_states + (hidden_states,)
         if weights is not None:
+            # bp()
             outputs = (sum(all_hidden_states[1:]),)
         else:
             outputs = (hidden_states,)
