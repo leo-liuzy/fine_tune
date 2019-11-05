@@ -360,8 +360,10 @@ class BertEncoder(nn.Module):
                 all_hidden_states = all_hidden_states + (hidden_states * weights[-1],)
             else:
                 all_hidden_states = all_hidden_states + (hidden_states,)
-        
-        outputs = (hidden_states,)
+        if weights is not None:
+            outputs = (sum(all_hidden_states[1:]),)
+        else:
+            outputs = (hidden_states,)
         if self.output_hidden_states:
             outputs = outputs + (all_hidden_states,)
         if self.output_attentions:
