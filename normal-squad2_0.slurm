@@ -2,7 +2,7 @@
 
 ## Job Name
 
-#SBATCH --job-name=squad-elmo
+#SBATCH --job-name=squad2-normal
 
 #SBATCH --partition=stf-gpu
 
@@ -38,7 +38,7 @@
 #SBATCH --export=all
 
 export PROJ_DIR="/gscratch/stf/zeyuliu2/fine_tune"
-export SQUAD_DIR="$PROJ_DIR/data/squad1_1"
+export SQUAD_DIR="$PROJ_DIR/data/squad2_0"
 export HOME="/usr/lusers/zeyuliu2"
 export BATCH_SIZE=8
 export ACC_STEP=1
@@ -49,7 +49,7 @@ export TOKENIZER_PATH="$PROJ_DIR/cache/bert-base-uncased-vocab.txt"
 
 
 # bert as extractor
-python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --freeze_pretrained --elmo_style --output_dir out/fine_tune_top_layer+elmo --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP 
+python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v2.0.json --predict_file $SQUAD_DIR/dev-v2.0.json --freeze_pretrained --output_dir out/fine_tune_top_layer+squad2 --overwrite_output_dir  --save_steps 8246 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --version_2_with_negative --eval_all_checkpoints
 # bert fine_tune
-python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --elmo_style --output_dir out/fine_tune+elmo --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP
+python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v2.0.json --predict_file $SQUAD_DIR/dev-v2.0.json --output_dir out/fine_tune+squad2 --overwrite_output_dir  --save_steps 8246 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --version_2_with_negative --eval_all_checkpoints
 
