@@ -97,40 +97,45 @@ def train(args, train_dataset, model, tokenizer):
 
     # Prepare optimizer and schedule (linear warmup and decay)
     no_decay = ['bias', 'LayerNorm.weight']
+    unfreeze_layer_idxs = [str(len(model.bert.encoder.layer) - 1 - i) for i in range(args.unfreeze_top_k_layer)]
     if not args.freeze_pretrained and args.elmo_style:
         print("all parameter and elmo_style")
         optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
+            {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
              'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
+            {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
         ]
     elif not args.freeze_pretrained and not args.elmo_style:
         print("all parameter and no elmo_style")
         optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
+            {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
                         and not n.startswith("elmo")],
              'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
+            {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
                         and not n.startswith("elmo")], 'weight_decay': 0.0}
         ]
     # only top layer
     elif args.freeze_pretrained and args.elmo_style:
         print("only top layer and elmo style")
         optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
-                        and (n.startswith("qa_outputs") or n.startswith("elmo"))],
+            {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
+                        and (n.startswith("qa_outputs") or n.startswith("elmo") or
+                             any(idx in n for idx in unfreeze_layer_idxs))],
              'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
-                        and (n.startswith("qa_outputs") or n.startswith("elmo"))], 'weight_decay': 0.0}
+            {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
+                        and (n.startswith("qa_outputs") or n.startswith("elmo") or
+                             any(idx in n for idx in unfreeze_layer_idxs))], 'weight_decay': 0.0}
         ]
     else:
         print("only top layer and no elmo_style")
         optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
-                        and n.startswith("qa_outputs") and not n.startswith("elmo")],
+            {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
+                        and (n.startswith("qa_outputs") or any(idx in n for idx in unfreeze_layer_idxs))
+                        and not n.startswith("elmo")],
              'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
-                        and n.startswith("qa_outputs") and not n.startswith("elmo")], 'weight_decay': 0.0}
+            {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
+                        and (n.startswith("qa_outputs") or any(idx in n for idx in unfreeze_layer_idxs))
+                        and not n.startswith("elmo")], 'weight_decay': 0.0}
         ]
         
     # bp() 
@@ -401,6 +406,8 @@ def main():
                         help="Store the pretrained BERT weights and only train the last layer")
     parser.add_argument("--elmo_style", action='store_true',
                         help="Have our output to be weighted in a ELMo-like fashion")
+    parser.add_argument("--unfreeze_top_k_layer", default=0, type=int,
+                        help="unfreeze top k transformer layers")
 
     # official
     parser.add_argument("--config_name", default="", type=str,
