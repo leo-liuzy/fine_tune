@@ -5,6 +5,7 @@ runs/**
 out/**
 .idea/
 **/*.pyc
+*.pyc
 cache/**
 out.tgz
 runs.tgz
