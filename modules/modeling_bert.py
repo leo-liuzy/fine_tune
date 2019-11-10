@@ -361,6 +361,7 @@ class BertEncoder(nn.Module):
                 all_hidden_states = all_hidden_states + (hidden_states * weights[-1],)
             else:
                 all_hidden_states = all_hidden_states + (hidden_states,)
+        # bp()
         if weights is not None:
             # bp()
             outputs = (sum(all_hidden_states[1:]),)

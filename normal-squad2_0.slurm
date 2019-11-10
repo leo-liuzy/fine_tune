@@ -11,7 +11,7 @@
 #SBATCH --gres=gpu:P100:1
 
 
-#SBATCH --time=10:00:00
+#SBATCH --time=24:00:00
 
 ## Memory per node. It is important to specify the memory since the default memory is very small.
 
@@ -49,7 +49,7 @@ export TOKENIZER_PATH="$PROJ_DIR/cache/bert-base-uncased-vocab.txt"
 
 
 # bert as extractor
-python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v2.0.json --predict_file $SQUAD_DIR/dev-v2.0.json --freeze_pretrained --output_dir out/fine_tune_top_layer+squad2 --overwrite_output_dir  --save_steps 8246 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --version_2_with_negative --eval_all_checkpoints
+python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v2.0.json --predict_file $SQUAD_DIR/dev-v2.0.json --freeze_pretrained --output_dir /gscratch/stf/zeyuliu2/fine_tune/out/fine_tune_top_layer+squad2 --overwrite_output_dir  --save_steps 8246 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --version_2_with_negative
 # bert fine_tune
-python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v2.0.json --predict_file $SQUAD_DIR/dev-v2.0.json --output_dir out/fine_tune+squad2 --overwrite_output_dir  --save_steps 8246 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --version_2_with_negative --eval_all_checkpoints
+python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v2.0.json --predict_file $SQUAD_DIR/dev-v2.0.json --output_dir /gscratch/stf/zeyuliu2/fine_tune/out/fine_tune+squad2 --overwrite_output_dir  --save_steps 8246 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --version_2_with_negative
 
