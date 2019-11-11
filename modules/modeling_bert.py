@@ -1217,13 +1217,17 @@ class AdapterBlock(nn.Module):
         self.init_weights()
 
     @staticmethod
-    def truncated_normal(tensor, std):
-        nn.init.normal_(tensor, std=std)
-        torch.clamp_(tensor, -2 * std, 2    * std)
+    def truncated_normal_(tensor, mean=0, std=1):
+        size = tensor.shape
+        tmp = tensor.new_empty(size + (4,)).normal_()
+        valid = (tmp < 2) & (tmp > -2)
+        ind = valid.max(-1, keepdim=True)[1]
+        tensor.data.copy_(tmp.gather(-1, ind).squeeze(-1))
+        tensor.data.mul_(std).add_(mean)
 
     def init_weights(self):
-        self.truncated_normal(self.decompress.weight, std=self.init_scale)
-        self.truncated_normal(self.compress.weight, std=self.init_scale)
+        self.truncated_normal_(self.decompress.weight.data, std=self.init_scale)
+        self.truncated_normal_(self.compress.weight.data, std=self.init_scale)
 
     def forward(self, x: torch.tensor) -> torch.tensor:
         input_tensor = x

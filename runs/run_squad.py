@@ -86,7 +86,7 @@ def create_filter_conditions(args, model):
     if args.elmo_style:
         fns.append(lambda x: x.startswith("elmo"))
     if args.apply_adapter:
-        fns.append(lambda x: x.startswith("adapter"))
+        fns.append(lambda x: "adapter" in x)
     fns.append(lambda x: any(idx in x for idx in unfreeze_layer_idxs))
     return lambda x: any(fn(x) for fn in fns)
 
@@ -110,9 +110,9 @@ def train(args, train_dataset, model, tokenizer):
     no_decay = ['bias', 'LayerNorm.weight']
     condition_fn = create_filter_conditions(args, model)
     optimizer_grouped_parameters = [
-        {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': args.weight_decay},
-        {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': 0.0}
     ]
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
