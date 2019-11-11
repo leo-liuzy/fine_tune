@@ -1218,6 +1218,14 @@ class AdapterBlock(nn.Module):
 
     @staticmethod
     def truncated_normal_(tensor, mean=0, std=1):
+        """
+        Thanks to the code from ruotianluo
+        https://discuss.pytorch.org/t/implementing-truncated-normal-initializer/4778/19
+        :param tensor:
+        :param mean:
+        :param std:
+        :return:
+        """
         size = tensor.shape
         tmp = tensor.new_empty(size + (4,)).normal_()
         valid = (tmp < 2) & (tmp > -2)
