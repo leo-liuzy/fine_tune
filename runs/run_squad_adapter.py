@@ -538,6 +538,7 @@ def main():
     config = config_class.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
     config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
+    config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
                                                 do_lower_case=args.do_lower_case)
     # bp()

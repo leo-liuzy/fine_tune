@@ -1302,3 +1302,10 @@ class AdapterBertLayer(BertLayer):
         self.attention = AdapterBertAttention(config)
         self.intermediate = BertIntermediate(config)
         self.output = AdapterBertOutput(config)
+
+
+class AdapterBertForQuestionAnswering(BertForQuestionAnswering):
+    """See BertForQuestionAnswering"""
+    def __init__(self, config):
+        super(AdapterBertForQuestionAnswering, self).__init__(config)
+        self.bert = AdapterBertModel(config)
