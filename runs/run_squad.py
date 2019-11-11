@@ -80,6 +80,17 @@ def to_list(tensor):
     return tensor.detach().cpu().tolist()
 
 
+def create_filter_conditions(args, model):
+    unfreeze_layer_idxs = [str(len(model.bert.encoder.layer) - 1 - i) for i in range(args.unfreeze_top_k_bert_layer)]
+    fns = [lambda x: x.startswith("qa_outputs")]
+    if args.elmo_style:
+        fns.append(lambda x: x.startswith("elmo"))
+    if args.apply_adapter:
+        fns.append(lambda x: x.startswith("adapter"))
+    fns.append(lambda x: any(idx in x for idx in unfreeze_layer_idxs))
+    return lambda x: any(fn(x) for fn in fns)
+
+
 def train(args, train_dataset, model, tokenizer):
     """ Train the model """
     if args.local_rank in [-1, 0]:
@@ -97,50 +108,13 @@ def train(args, train_dataset, model, tokenizer):
 
     # Prepare optimizer and schedule (linear warmup and decay)
     no_decay = ['bias', 'LayerNorm.weight']
-    unfreeze_layer_idxs = [str(len(model.bert.encoder.layer) - 1 - i) for i in range(args.unfreeze_top_k_layer)]
-    if not args.freeze_pretrained and args.elmo_style:
-        print("all parameter and elmo_style")
-        optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],
-             'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
-        ]
-    elif not args.freeze_pretrained and not args.elmo_style:
-        print("all parameter and no elmo_style")
-        optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
-                        and not n.startswith("elmo")],
-             'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
-                        and not n.startswith("elmo")], 'weight_decay': 0.0}
-        ]
-    # only top layer
-    elif args.freeze_pretrained and args.elmo_style:
-        print("only top layer and elmo style")
-        optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
-                        and (n.startswith("qa_outputs") or n.startswith("elmo") or
-                             any(idx in n for idx in unfreeze_layer_idxs))],
-             'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
-                        and (n.startswith("qa_outputs") or n.startswith("elmo") or
-                             any(idx in n for idx in unfreeze_layer_idxs))], 'weight_decay': 0.0}
-        ]
-    else:
-        print("only top layer and no elmo_style")
-        optimizer_grouped_parameters = [
-            {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)
-                        and (n.startswith("qa_outputs") or any(idx in n for idx in unfreeze_layer_idxs))
-                        and not n.startswith("elmo")],
-             'weight_decay': args.weight_decay},
-            {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)
-                        and (n.startswith("qa_outputs") or any(idx in n for idx in unfreeze_layer_idxs))
-                        and not n.startswith("elmo")], 'weight_decay': 0.0}
-        ]
-        
-    # bp() 
-    # import sys
-    # sys.exit(0)
+    condition_fn = create_filter_conditions(args, model)
+    optimizer_grouped_parameters = [
+        {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
+         'weight_decay': args.weight_decay},
+        {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
+         'weight_decay': 0.0}
+    ]
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
     if args.fp16:
@@ -402,12 +376,19 @@ def main():
                         help="The output directory where the model checkpoints and predictions will be written.")
 
     ## Other parameters
-    # my own
-    parser.add_argument("--freeze_pretrained", action='store_true',
-                        help="Store the pretrained BERT weights and only train the last layer")
+    # elmo_style + freezing/unfreezing
+    # parser.add_argument("--freeze_pretrained", action='store_true',
+    #                     help="Store the pretrained BERT weights and only train the last layer")
     parser.add_argument("--elmo_style", action='store_true',
                         help="Have our output to be weighted in a ELMo-like fashion")
-    parser.add_argument("--unfreeze_top_k_layer", default=0, type=int,
+    parser.add_argument("--unfreeze_top_k_bert_layer", default=0, type=int,
+                        help="unfreeze top k transformer layers")
+    # adapter parameter
+    parser.add_argument("--apply_adapter", action='store_true',
+                        help="choose to whether apply adapter at each layer")
+    parser.add_argument("--bottleneck_size", default=64, type=int,
+                        help="unfreeze top k transformer layers")
+    parser.add_argument("--init_scale", default=1e-3, type=float,
                         help="unfreeze top k transformer layers")
 
     # official
@@ -468,13 +449,13 @@ def main():
     parser.add_argument("--verbose_logging", action='store_true',
                         help="If true, all of the warnings related to data processing will be printed. "
                              "A number of warnings are expected for a normal SQuAD evaluation.")
-
     parser.add_argument('--logging_steps', type=int, default=50,
                         help="Log every X updates steps.")
     parser.add_argument('--save_steps', type=int, default=50,
                         help="Save checkpoint every X updates steps.")
     parser.add_argument("--eval_all_checkpoints", action='store_true',
-                        help="Evaluate all checkpoints starting with the same prefix as model_name ending and ending with step number")
+                        help="Evaluate all checkpoints starting with the same prefix as model_name"
+                             " ending and ending with step number")
     parser.add_argument("--no_cuda", action='store_true',
                         help="Whether not to use CUDA when available")
     parser.add_argument('--overwrite_output_dir', action='store_true',
@@ -516,7 +497,7 @@ def main():
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
-        torch.distributed.init_process_group(backend='nccl')
+        torch.distributed.init_proBertForQuestionAnsweringcess_group(backend='nccl')
         args.n_gpu = 1
     args.device = device
 
@@ -537,8 +518,14 @@ def main():
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
     config = config_class.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
+    # customized config
     config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
+    config.apply_adapter = args.apply_adapter  # apply adapter
+    config.bottleneck_size = args.bottleneck_size  # set bottleneck size
+    config.init_scale = args.init_scale  # set bottleneck size
+    assert args.init_scale >= 0
+    config.init_scale = args.init_scale  # TODO: experiment weighting different layers(ELMo style)
     tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
                                                 do_lower_case=args.do_lower_case)
     # bp()

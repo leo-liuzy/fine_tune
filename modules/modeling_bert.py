@@ -240,6 +240,9 @@ class BertSelfAttention(nn.Module):
 class BertSelfOutput(nn.Module):
     def __init__(self, config):
         super(BertSelfOutput, self).__init__()
+        self.adapter = None
+        if config.apply_adapter:
+            self.adapter = AdapterBlock(config)
         self.dense = nn.Linear(config.hidden_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
@@ -247,6 +250,8 @@ class BertSelfOutput(nn.Module):
     def forward(self, hidden_states, input_tensor):
         hidden_states = self.dense(hidden_states)
         hidden_states = self.dropout(hidden_states)
+        if self.adapter:
+            hidden_states = self.adapter(hidden_states)
         hidden_states = self.LayerNorm(hidden_states + input_tensor)
         return hidden_states
 
@@ -306,6 +311,9 @@ class BertIntermediate(nn.Module):
 class BertOutput(nn.Module):
     def __init__(self, config):
         super(BertOutput, self).__init__()
+        self.adapter = None
+        if config.apply_adapter:
+            self.adapter = AdapterBlock(config)
         self.dense = nn.Linear(config.intermediate_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
@@ -313,6 +321,8 @@ class BertOutput(nn.Module):
     def forward(self, hidden_states, input_tensor):
         hidden_states = self.dense(hidden_states)
         hidden_states = self.dropout(hidden_states)
+        if self.adapter:
+            hidden_states = self.adapter(hidden_states)
         hidden_states = self.LayerNorm(hidden_states + input_tensor)
         return hidden_states
 
@@ -1204,6 +1214,16 @@ class AdapterBlock(nn.Module):
         self.init_scale = config.init_scale  # TODO: add param in config
         self.compress = nn.Linear(self.input_size, self.hidden_size)
         self.decompress = nn.Linear(self.hidden_size, self.input_size)
+        self.init_weights()
+
+    @staticmethod
+    def truncated_normal(tensor, std):
+        nn.init.normal_(tensor, std=std)
+        torch.clamp_(tensor, -2 * std, 2    * std)
+
+    def init_weights(self):
+        self.truncated_normal(self.decompress.weight, std=self.init_scale)
+        self.truncated_normal(self.compress.weight, std=self.init_scale)
 
     def forward(self, x: torch.tensor) -> torch.tensor:
         input_tensor = x
@@ -1211,101 +1231,3 @@ class AdapterBlock(nn.Module):
         x = self.activation(x)
         x = self.decompress(x)
         return input_tensor + x
-
-
-@add_start_docstrings("The Adapter Bert Model transformer outputting raw "
-                      "hidden-states without any specific head on top.",
-                      BERT_START_DOCSTRING, BERT_INPUTS_DOCSTRING)
-class AdapterBertModel(BertModel):
-    r"""
-    Outputs: `Tuple` comprising various elements depending on the configuration (config) and inputs:
-        **last_hidden_state**: ``torch.FloatTensor`` of shape ``(batch_size, sequence_length, hidden_size)``
-            Sequence of hidden-states at the output of the last layer of the model.
-        **pooler_output**: ``torch.FloatTensor`` of shape ``(batch_size, hidden_size)``
-            Last layer hidden-state of the first token of the sequence (classification token)
-            further processed by a Linear layer and a Tanh activation function. The Linear
-            layer weights are trained from the next sentence prediction (classification)
-            objective during Bert pretraining. This output is usually *not* a good summary
-            of the semantic content of the input, you're often better with averaging or pooling
-            the sequence of hidden-states for the whole input sequence.
-        **hidden_states**: (`optional`, returned when ``config.output_hidden_states=True``)
-            list of ``torch.FloatTensor`` (one for the output of each layer + the output of the embeddings)
-            of shape ``(batch_size, sequence_length, hidden_size)``:
-            Hidden-states of the model at the output of each layer plus the initial embedding outputs.
-        **attentions**: (`optional`, returned when ``config.output_attentions=True``)
-            list of ``torch.FloatTensor`` (one for each layer) of shape ``(batch_size, num_heads, sequence_length, sequence_length)``:
-            Attentions weights after the attention softmax, used to compute the weighted average in the self-attention heads.
-
-    Examples::
-
-        tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        model = BertModel.from_pretrained('bert-base-uncased')
-        input_ids = torch.tensor(tokenizer.encode("Hello, my dog is cute")).unsqueeze(0)  # Batch size 1
-        outputs = model(input_ids)
-        last_hidden_states = outputs[0]  # The last hidden-state is the first element of the output tuple
-
-    """
-    def __init__(self, config):
-        super(AdapterBertModel, self).__init__(config)
-
-        self.embeddings = BertEmbeddings(config)
-        self.encoder = AdapterBertEncoder(config)
-        self.pooler = BertPooler(config)
-
-        self.init_weights()
-
-
-class AdapterBertEncoder(BertEncoder):
-    def __init__(self, config):
-        """Not much code here because we reuse BERTEncoder"""
-        super(AdapterBertEncoder, self).__init__(config)
-        self.layer = nn.ModuleList([AdapterBertLayer(config) for _ in range(config.num_hidden_layers)])
-
-
-class AdapterBertAttention(BertAttention):
-    def __init__(self, config):
-        super(AdapterBertAttention, self).__init__(config)
-        self.output = AdapterBertSelfOutput(config)
-
-
-class AdapterBertSelfOutput(BertSelfOutput):
-    """This class is essentially the same as AdapterBertOutput,
-    but for the purpose of consistency, we still create one"""
-    def __init__(self, config):
-        super(AdapterBertSelfOutput, self).__init__(config)
-        self.adapter = AdapterBlock(config)
-
-    def forward(self, hidden_states, input_tensor):
-        hidden_states = self.dense(hidden_states)
-        hidden_states = self.dropout(hidden_states)
-        hidden_states = self.adapter(hidden_states)
-        hidden_states = self.LayerNorm(hidden_states + input_tensor)
-        return hidden_states
-
-
-class AdapterBertOutput(BertOutput):
-    def __init__(self, config):
-        super(AdapterBertOutput, self).__init__(config)
-        self.adapter = AdapterBlock(config)
-
-    def forward(self, hidden_states, input_tensor):
-        hidden_states = self.dense(hidden_states)
-        hidden_states = self.dropout(hidden_states)
-        hidden_states = self.adapter(hidden_states)
-        hidden_states = self.LayerNorm(hidden_states + input_tensor)
-        return hidden_states
-
-
-class AdapterBertLayer(BertLayer):
-    def __init__(self, config):
-        super(AdapterBertLayer, self).__init__(config)
-        self.attention = AdapterBertAttention(config)
-        self.intermediate = BertIntermediate(config)
-        self.output = AdapterBertOutput(config)
-
-
-class AdapterBertForQuestionAnswering(BertForQuestionAnswering):
-    """See BertForQuestionAnswering"""
-    def __init__(self, config):
-        super(AdapterBertForQuestionAnswering, self).__init__(config)
-        self.bert = AdapterBertModel(config)
