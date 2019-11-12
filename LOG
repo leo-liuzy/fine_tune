@@ -1,0 +1,4 @@
+11-11-2019
+run bert+adapter64 in the same fashion as bert+linear and fill results
+modify bidaf pytorch reimplementation, tomorrow integrate it to BERTQA
+
