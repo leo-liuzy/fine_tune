@@ -391,6 +391,10 @@ def main():
                         help="unfreeze top k transformer layers")
     parser.add_argument("--init_scale", default=1e-3, type=float,
                         help="unfreeze top k transformer layers")
+    # bidaf parameter
+    parser.add_argument("--top_layer", default="linear", type=str,
+                        help="The type of top layer")
+    parser.add_argument('--dropout', default=0.2, type=float)
 
     # official
     parser.add_argument("--config_name", default="", type=str,
@@ -520,15 +524,21 @@ def main():
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
     config = config_class.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
     # customized config
+    # elmo_style argument
     config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
+    # adapter argument
     config.apply_adapter = args.apply_adapter  # apply adapter
     config.bottleneck_size = args.bottleneck_size  # set bottleneck size
     config.init_scale = args.init_scale  # set bottleneck size
     assert args.init_scale >= 0
-    config.init_scale = args.init_scale  # TODO: experiment weighting different layers(ELMo style)
+    config.init_scale = args.init_scale  # standard deviation for normal
+    # bidaf argument
+    config.top_layer = args.top_layer
+    config.dropout = args.dropout
     tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
                                                 do_lower_case=args.do_lower_case)
+    config.sep = tokenizer._convert_token_to_id('[SEP]')
     # bp()
     model = model_class.from_pretrained(args.model_name_or_path, from_tf=bool('.ckpt' in args.model_name_or_path),
                                         config=config)
