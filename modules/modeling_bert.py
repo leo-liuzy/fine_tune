@@ -315,7 +315,7 @@ class BertOutput(nn.Module):
         super(BertOutput, self).__init__()
         self.adapter = None
         if config.apply_adapter:
-            self.adapter = AdapterBlock(config)
+            self.adapter =  AdapterBlock(config)
         self.dense = nn.Linear(config.intermediate_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)

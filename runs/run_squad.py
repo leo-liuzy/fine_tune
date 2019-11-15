@@ -92,9 +92,13 @@ def create_filter_conditions(args, model):
 
 
 def train(args, train_dataset, model, tokenizer):
+    summary_name = f"unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer.epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
+    if args.apply_adapter:
+        summary_name += f"adapter{args.bottleneck_size}"
+
     """ Train the model """
     if args.local_rank in [-1, 0]:
-        tb_writer = SummaryWriter()
+        tb_writer = SummaryWriter(summary_name)
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
@@ -110,9 +114,9 @@ def train(args, train_dataset, model, tokenizer):
     no_decay = ['bias', 'LayerNorm.weight']
     condition_fn = create_filter_conditions(args, model)
     optimizer_grouped_parameters = [
-        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': args.weight_decay},
-        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': 0.0}
     ]
     # bp()
