@@ -643,5 +643,5 @@ if __name__ == "__main__":
         if args.apply_adapter:
             model_dir_name += f"adapter{args.bottleneck_size}"
         args.out_dir = args.output_dir + f"/{model_dir_name}"
-        print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
+        logger.info(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         main(args)
