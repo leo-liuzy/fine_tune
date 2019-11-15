@@ -556,7 +556,7 @@ if __name__ == "__main__":
     parser.add_argument("--cache_dir", default="", type=str,
                         help="Where do you want to store the pre-trained models downloaded from s3")
 
-    parser.add_argumenbottleneckt('--version_2_with_negative', action='store_true',
+    parser.add_argument('--version_2_with_negative', action='store_true',
                         help='If true, the SQuAD examples contain some that do not have an answer.')
     parser.add_argument('--null_score_diff_threshold', type=float, default=0.0,
                         help="If null_score - best_non_null is greater than the threshold predict null.")
