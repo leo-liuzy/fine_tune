@@ -315,7 +315,7 @@ class BertOutput(nn.Module):
         super(BertOutput, self).__init__()
         self.adapter = None
         if config.apply_adapter:
-            self.adapter = AdapterBlock(config)
+            self.adapter =  AdapterBlock(config)
         self.dense = nn.Linear(config.intermediate_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
@@ -1390,7 +1390,7 @@ class BiDAFBlock(nn.Module):
             return q_tensors, c_tensors, q_lens, c_lens
 
         # 1. Contextual Embedding from bert
-        q, c, q_lens, c_lens = qc_from_bert(input_tensor, input_ids, self.SEP)
+        q, c, q_lens, c_lens = qc_from_bert(input_tensors, input_ids, self.SEP)
         # 2. Attention Flow Layer
         g = att_flow_layer(c, q)
         # 3. Modeling Layer
@@ -1399,5 +1399,4 @@ class BiDAFBlock(nn.Module):
         p1, p2 = output_layer(g, m, c_lens)
 
         # (batch, c_len), (batch, c_len)
-        return p1, p2
-
+        return p1, p2  # TODO: return q_lens, c_lens to help calculate start_positions
