@@ -99,7 +99,7 @@ def train(args, train_dataset, model, tokenizer):
 
     """ Train the model """
     if args.local_rank in [-1, 0]:
-        tb_writer = SummaryWriter(summary_name)
+        tb_writer = SummaryWriter(f"{args.logging_dir}/{summary_name}")
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
@@ -380,13 +380,15 @@ def main():
                             ALL_MODELS))
     parser.add_argument("--output_dir", default=None, type=str, required=True,
                         help="The output directory where the model checkpoints and predictions will be written.")
+    parser.add_argument("--logging_dir", default=None, type=str, required=True,
+                        help="Logging dir")
 
     ## Other parameters
     # elmo_style + freezing/unfreezing
     # parser.add_argument("--freeze_pretrained", action='store_true',
     #                     help="Store the pretrained BERT weights and only train the last layer")
     parser.add_argument("--elmo_style", action='store_true',
-                        help="Have our output to be weighted in a ELMo-like fashion")
+                        help="Have our output to be weighted in a ELMo-like fashion")  # TODO: This is not working
     parser.add_argument("--unfreeze_top_k_bert_layer", default=0, type=int,
                         help="unfreeze top k transformer layers")
     # adapter parameter
