@@ -127,7 +127,7 @@ def train(args, train_dataset, model, tokenizer):
             optimizer_grouped_parameters[1]['params'].append(p)
         else:
             p.requires_grad = False
-    
+
     # bp()
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
@@ -638,4 +638,5 @@ if __name__ == "__main__":
     for i in range(num_tune):
         args.learning_rate = np.random.choice(lrs)
         args.num_train_epochs = np.random.choice(epochs)
+        print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         main(args)
