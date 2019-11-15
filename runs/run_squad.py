@@ -93,9 +93,9 @@ def create_filter_conditions(args, model):
 
 def train(args, train_dataset, model, tokenizer):
     summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                   f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
+                   f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
     if args.apply_adapter:
-        summary_name += f"adapter{args.bottleneck_size}."
+        summary_name += f".adapter{args.bottleneck_size}"
 
     """ Train the model """
     if args.local_rank in [-1, 0]:
