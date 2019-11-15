@@ -93,9 +93,9 @@ def create_filter_conditions(args, model):
 
 def train(args, train_dataset, model, tokenizer):
     summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                   f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
+                   f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
     if args.apply_adapter:
-        summary_name += f"adapter{args.bottleneck_size}"
+        summary_name += f"adapter{args.bottleneck_size}."
 
     """ Train the model """
     if args.local_rank in [-1, 0]:
@@ -556,7 +556,7 @@ if __name__ == "__main__":
     parser.add_argument("--cache_dir", default="", type=str,
                         help="Where do you want to store the pre-trained models downloaded from s3")
 
-    parser.add_argument('--version_2_with_negative', action='store_true',
+    parser.add_argumenbottleneckt('--version_2_with_negative', action='store_true',
                         help='If true, the SQuAD examples contain some that do not have an answer.')
     parser.add_argument('--null_score_diff_threshold', type=float, default=0.0,
                         help="If null_score - best_non_null is greater than the threshold predict null.")
@@ -638,5 +638,10 @@ if __name__ == "__main__":
     for i in range(num_tune):
         args.learning_rate = np.random.choice(lrs)
         args.num_train_epochs = np.random.choice(epochs)
+        model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
+                         f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
+        if args.apply_adapter:
+            model_dir_name += f"adapter{args.bottleneck_size}"
+        args.out_dir = args.output_dir + f"/{model_dir_name}"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         main(args)
