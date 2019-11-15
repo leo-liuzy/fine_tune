@@ -639,9 +639,9 @@ if __name__ == "__main__":
         args.learning_rate = np.random.choice(lrs)
         args.num_train_epochs = np.random.choice(epochs)
         model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                         f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
+                         f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
         if args.apply_adapter:
-            model_dir_name += f"adapter{args.bottleneck_size}"
+            model_dir_name += f".adapter{args.bottleneck_size}"
         args.out_dir = args.output_dir + f"/{model_dir_name}"
         logger.info(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         main(args)
