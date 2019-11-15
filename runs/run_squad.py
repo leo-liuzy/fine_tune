@@ -115,12 +115,12 @@ def train(args, train_dataset, model, tokenizer):
     no_decay = ['bias', 'LayerNorm.weight']
     condition_fn = create_filter_conditions(args, model)
     optimizer_grouped_parameters = [
-        {'params': [n for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': args.weight_decay},
-        {'params': [n for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': 0.0}
     ]
-    bp()
+    bp() 
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
     if args.fp16:
