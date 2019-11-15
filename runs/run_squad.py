@@ -642,6 +642,6 @@ if __name__ == "__main__":
                          f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
         if args.apply_adapter:
             model_dir_name += f".adapter{args.bottleneck_size}"
-        args.out_dir = args.output_dir + f"/{model_dir_name}"
+        args.output_dir = args.output_dir + f"/{model_dir_name}"
         logger.info(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         main(args)
