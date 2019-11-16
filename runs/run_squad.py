@@ -93,9 +93,9 @@ def create_filter_conditions(args, model):
 
 def train(args, train_dataset, model, tokenizer):
     summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                   f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
+                   f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
     if args.apply_adapter:
-        summary_name += f"adapter{args.bottleneck_size}."
+        summary_name += f".adapter{args.bottleneck_size}"
 
     """ Train the model """
     if args.local_rank in [-1, 0]:
@@ -453,7 +453,10 @@ def main(args):
             apex.amp.register_half_function(torch, 'einsum')
         except ImportError:
             raise ImportError("Please install apex from https://www.github.com/nvidia/apex to use fp16 training.")
-
+    
+    print(args)
+    
+    return
     # Training
     if args.do_train:
         train_dataset = load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=False)
@@ -635,6 +638,7 @@ if __name__ == "__main__":
     lrs = [3e-5, 1e-4, 3e-4, 1e-3]
     epochs = [3, 10, 20]
     num_tune = 5
+    out_dir = args.output_dir
     for i in range(num_tune):
         args.learning_rate = np.random.choice(lrs)
         args.num_train_epochs = np.random.choice(epochs)
@@ -642,6 +646,8 @@ if __name__ == "__main__":
                          f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
         if args.apply_adapter:
             model_dir_name += f".adapter{args.bottleneck_size}"
-        args.output_dir = args.output_dir + f"/{model_dir_name}"
-        logger.info(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
-        main(args)
+        args.output_dir = out_dir + f"/{model_dir_name}"
+        print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
+        print(args)
+
+        # main(args)
