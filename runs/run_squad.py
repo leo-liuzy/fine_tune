@@ -639,15 +639,23 @@ if __name__ == "__main__":
     epochs = [3, 10, 20]
     num_tune = 5
     out_dir = args.output_dir
-    for i in range(num_tune):
-        args.learning_rate = np.random.choice(lrs)
-        args.num_train_epochs = np.random.choice(epochs)
+    import itertools
+    all_hypers = list(itertools.product(lrs, epochs))
+    hyper_idxs = np.random.randint(0, len(all_hypers), num_tune)
+    for i in hyper_idxs:
+        lr, epoch = all_hypers[i]
+        args.learning_rate = lr
+        args.num_train_epochs = epoch
         model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
                          f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
         if args.apply_adapter:
             model_dir_name += f".adapter{args.bottleneck_size}"
         args.output_dir = out_dir + f"/{model_dir_name}"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
-        print(args)
-
-        # main(args)
+        summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
+                       f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
+        if args.apply_adapter:
+            summary_name += f"adapter{args.bottleneck_size}."
+        print(f"{args.logging_dir}/{summary_name}")
+        print(args.output_dir)
+        main(args)
