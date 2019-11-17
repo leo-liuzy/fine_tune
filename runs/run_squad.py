@@ -455,7 +455,7 @@ def main(args):
     
     print(args)
     
-    return
+    # return
     # Training
     if args.do_train:
         train_dataset = load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=False)
