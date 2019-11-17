@@ -74,6 +74,8 @@ def set_seed(args):
     torch.manual_seed(args.seed)
     if args.n_gpu > 0:
         torch.cuda.manual_seed_all(args.seed)
+    torch.backends.cudnn.determinisctic = True
+    torch.backends.cudnn.benchmark = False
 
 def to_list(tensor):
     return tensor.detach().cpu().tolist()
