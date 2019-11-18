@@ -118,16 +118,22 @@ def train(args, train_dataset, model, tokenizer):
     optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
                                     {'params': [], 'weight_decay': 0.0}]
     for n, p in model.named_parameters():
-        if not any(nd in n for nd in no_decay) and condition_fn(n):
+        # print(n)
+        if condition_fn(n):
             p.requires_grad = True
-            optimizer_grouped_parameters[0]['params'].append(p)
+            if any(nd in n for nd in no_decay):
+                optimizer_grouped_parameters[1]['params'].append(p)
+            else:
+                optimizer_grouped_parameters[0]['params'].append(p)
         else:
             p.requires_grad = False
-        if any(nd in n for nd in no_decay) and condition_fn(n):
-            p.requires_grad = True
-            optimizer_grouped_parameters[1]['params'].append(p)
-        else:
-            p.requires_grad = False
+
+    # optimizer_grouped_parameters = [
+    #     {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
+    #      'weight_decay': args.weight_decay},
+    #     {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
+    #      'weight_decay': 0.0}
+    # ]
 
     # bp()
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
