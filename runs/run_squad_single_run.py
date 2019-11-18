@@ -18,11 +18,10 @@
 from __future__ import absolute_import, division, print_function
 
 import argparse
+import glob
 import logging
 import os
 import random
-import glob
-from ipdb import set_trace as bp
 
 import numpy as np
 import torch
@@ -327,7 +326,8 @@ def evaluate(args, model, tokenizer, prefix=""):
 
 def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=False):
     if args.local_rank not in [-1, 0] and not evaluate:
-        torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        torch.distributed.barrier()
 
     # Load data features from cache or dataset file
     input_file = args.predict_file if evaluate else args.train_file
@@ -353,10 +353,10 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
         if args.local_rank in [-1, 0]:
             logger.info("Saving features into cached file %s", cached_features_file)
             torch.save(features, cached_features_file)
-    import sys
     # sys.exit(0)
     if args.local_rank == 0 and not evaluate:
-        torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        torch.distributed.barrier()
 
     # Convert to Tensors and build dataset
     all_input_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
@@ -381,7 +381,6 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
 
 
 def main(args):
-
     if os.path.exists(args.output_dir) and os.listdir(
             args.output_dir) and args.do_train and not args.overwrite_output_dir:
         raise ValueError(
@@ -419,7 +418,8 @@ def main(args):
 
     # Load pretrained model and tokenizer
     if args.local_rank not in [-1, 0]:
-        torch.distributed.barrier()  # Make sure only the first process in distributed training will download model & vocab
+        # Make sure only the first process in distributed training will download model & vocab
+        torch.distributed.barrier()
 
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
@@ -460,9 +460,9 @@ def main(args):
             apex.amp.register_half_function(torch, 'einsum')
         except ImportError:
             raise ImportError("Please install apex from https://www.github.com/nvidia/apex to use fp16 training.")
-    
+
     print(args)
-    
+
     # return
     # Training
     # bp()
@@ -645,7 +645,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     out_dir = args.output_dir
     model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                         f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
+                     f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
     if args.apply_adapter:
         model_dir_name += f".adapter{args.bottleneck_size}"
     args.output_dir = out_dir + f"/{model_dir_name}" + ".check"
