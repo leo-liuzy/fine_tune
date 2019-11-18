@@ -668,8 +668,9 @@ if __name__ == "__main__":
 
         all_hypers = list(itertools.product(lrs, epochs))
         hyper_idxs = np.random.randint(0, len(all_hypers), num_tune)
-        for i in hyper_idxs:
-            lr, epoch = all_hypers[i]
+        for i, idx in enumerate(hyper_idxs):
+            print(f"The {i}th set of hyperparameters")
+            lr, epoch = all_hypers[idx]
             args.learning_rate = lr
             args.num_train_epochs = epoch
             model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
