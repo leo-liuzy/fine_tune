@@ -130,9 +130,9 @@ def train(args, train_dataset, model, tokenizer):
     #         p.requires_grad = False
 
     optimizer_grouped_parameters = [
-        {'params': [(n, p.requires_grad) for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': args.weight_decay},
-        {'params': [(n, p.requires_grad) for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
+        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay) and condition_fn(n)],
          'weight_decay': 0.0}
     ]
 
