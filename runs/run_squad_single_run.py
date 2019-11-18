@@ -534,6 +534,8 @@ if __name__ == "__main__":
     parser.add_argument("--model_name_or_path", default=None, type=str, required=True,
                         help="Path to pre-trained model or shortcut name selected in the list: " + ", ".join(
                             ALL_MODELS))
+    parser.add_argument("--run_mode", default=None, type=str, required=True,
+                        help="single_run | random_search | ...")
     parser.add_argument("--output_dir", default=None, type=str, required=True,
                         help="The output directory where the model checkpoints and predictions will be written.")
     parser.add_argument("--logging_dir", default=None, type=str, required=True,
