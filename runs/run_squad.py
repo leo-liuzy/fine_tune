@@ -18,11 +18,11 @@
 from __future__ import absolute_import, division, print_function
 
 import argparse
+import glob
+import itertools
 import logging
 import os
 import random
-import glob
-from ipdb import set_trace as bp
 
 import numpy as np
 import torch
@@ -74,8 +74,7 @@ def set_seed(args):
     torch.manual_seed(args.seed)
     if args.n_gpu > 0:
         torch.cuda.manual_seed_all(args.seed)
-    torch.backends.cudnn.determinisctic = True
-    torch.backends.cudnn.benchmark = False
+
 
 def to_list(tensor):
     return tensor.detach().cpu().tolist()
@@ -97,6 +96,7 @@ def train(args, train_dataset, model, tokenizer):
                    f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
     if args.apply_adapter:
         summary_name += f".adapter{args.bottleneck_size}"
+    summary_name += ".check"
 
     """ Train the model """
     if args.local_rank in [-1, 0]:
@@ -327,7 +327,8 @@ def evaluate(args, model, tokenizer, prefix=""):
 
 def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=False):
     if args.local_rank not in [-1, 0] and not evaluate:
-        torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        torch.distributed.barrier()
 
     # Load data features from cache or dataset file
     input_file = args.predict_file if evaluate else args.train_file
@@ -353,10 +354,10 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
         if args.local_rank in [-1, 0]:
             logger.info("Saving features into cached file %s", cached_features_file)
             torch.save(features, cached_features_file)
-    import sys
     # sys.exit(0)
     if args.local_rank == 0 and not evaluate:
-        torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        # Make sure only the first process in distributed training process the dataset, and the others will use the cache
+        torch.distributed.barrier()
 
     # Convert to Tensors and build dataset
     all_input_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
@@ -381,7 +382,6 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
 
 
 def main(args):
-
     if os.path.exists(args.output_dir) and os.listdir(
             args.output_dir) and args.do_train and not args.overwrite_output_dir:
         raise ValueError(
@@ -398,7 +398,7 @@ def main(args):
 
     # Setup CUDA, GPU & distributed training
     if args.local_rank == -1 or args.no_cuda:
-        device = torch.device("cuda:0" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
+        device = torch.device("cuda:1" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
         args.n_gpu = torch.cuda.device_count() - 1  # TODO: delete -1
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
@@ -419,7 +419,8 @@ def main(args):
 
     # Load pretrained model and tokenizer
     if args.local_rank not in [-1, 0]:
-        torch.distributed.barrier()  # Make sure only the first process in distributed training will download model & vocab
+        # Make sure only the first process in distributed training will download model & vocab
+        torch.distributed.barrier()
 
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
@@ -460,11 +461,12 @@ def main(args):
             apex.amp.register_half_function(torch, 'einsum')
         except ImportError:
             raise ImportError("Please install apex from https://www.github.com/nvidia/apex to use fp16 training.")
-    
+
     print(args)
-    
+
     # return
     # Training
+    # bp()
     if args.do_train:
         train_dataset = load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=False)
         global_step, tr_loss = train(args, train_dataset, model, tokenizer)
@@ -533,6 +535,8 @@ if __name__ == "__main__":
     parser.add_argument("--model_name_or_path", default=None, type=str, required=True,
                         help="Path to pre-trained model or shortcut name selected in the list: " + ", ".join(
                             ALL_MODELS))
+    parser.add_argument("--run_mode", default=None, type=str, required=True,
+                        help="single_run | adapter_random_search | ...")
     parser.add_argument("--output_dir", default=None, type=str, required=True,
                         help="The output directory where the model checkpoints and predictions will be written.")
     parser.add_argument("--logging_dir", default=None, type=str, required=True,
@@ -642,27 +646,39 @@ if __name__ == "__main__":
     parser.add_argument('--server_ip', type=str, default='', help="Can be used for distant debugging.")
     parser.add_argument('--server_port', type=str, default='', help="Can be used for distant debugging.")
     args = parser.parse_args()
-    lrs = [3e-5, 1e-4, 3e-4, 1e-3]
-    epochs = [3, 10, 20]
-    num_tune = 5
+
     out_dir = args.output_dir
-    import itertools
-    all_hypers = list(itertools.product(lrs, epochs))
-    hyper_idxs = np.random.randint(0, len(all_hypers), num_tune)
-    for i in hyper_idxs:
-        lr, epoch = all_hypers[i]
-        args.learning_rate = lr
-        args.num_train_epochs = epoch
+
+    if args.run_mode == "single_run":
         model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
                          f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
         if args.apply_adapter:
             model_dir_name += f".adapter{args.bottleneck_size}"
-        args.output_dir = out_dir + f"/{model_dir_name}"
+        args.output_dir = out_dir + f"/{model_dir_name}" + ".check"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
-        summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                       f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
-        if args.apply_adapter:
-            summary_name += f"adapter{args.bottleneck_size}."
-        print(f"{args.logging_dir}/{summary_name}")
         print(args.output_dir)
         main(args)
+    elif args.run_mode == "adapter_random_search":
+        lrs = [3e-5, 1e-4, 3e-4, 1e-3]
+        epochs = [3, 10, 20]
+        num_tune = 5
+
+        all_hypers = list(itertools.product(lrs, epochs))
+        hyper_idxs = np.random.randint(0, len(all_hypers), num_tune)
+        for i in hyper_idxs:
+            lr, epoch = all_hypers[i]
+            args.learning_rate = lr
+            args.num_train_epochs = epoch
+            model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
+                             f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
+            if args.apply_adapter:
+                model_dir_name += f".adapter{args.bottleneck_size}"
+            args.output_dir = out_dir + f"/{model_dir_name}"
+            print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
+            summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
+                           f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}."
+            if args.apply_adapter:
+                summary_name += f"adapter{args.bottleneck_size}."
+            print(f"{args.logging_dir}/{summary_name}")
+            print(args.output_dir)
+            main(args)
