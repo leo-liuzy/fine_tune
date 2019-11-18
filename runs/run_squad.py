@@ -541,6 +541,10 @@ if __name__ == "__main__":
                         help="The output directory where the model checkpoints and predictions will be written.")
     parser.add_argument("--logging_dir", default=None, type=str, required=True,
                         help="Logging dir")
+    parser.add_argument("--check", action="store_true",
+                        help="flag to indicate if current execution is for checking")
+
+
 
     ## Other parameters
     # elmo_style + freezing/unfreezing
@@ -613,7 +617,8 @@ if __name__ == "__main__":
     parser.add_argument("--warmup_steps", default=0, type=int,
                         help="Linear warmup over warmup_steps.")
     parser.add_argument("--n_best_size", default=20, type=int,
-                        help="The total number of n-best predictions to generate in the nbest_predictions.json output file.")
+                        help="The total number of n-best predictions to generate in the "
+                             "nbest_predictions.json output file.")
     parser.add_argument("--max_answer_length", default=30, type=int,
                         help="The maximum length of an answer that can be generated. This is needed because the start "
                              "and end predictions are not conditioned on one another.")
@@ -654,7 +659,9 @@ if __name__ == "__main__":
                          f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
         if args.apply_adapter:
             model_dir_name += f".adapter{args.bottleneck_size}"
-        args.output_dir = out_dir + f"/{model_dir_name}" + ".check"
+        if args.check:
+            model_dir_name += ".check"
+        args.output_dir = out_dir + f"/{model_dir_name}"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         print(args.output_dir)
         main(args)
@@ -673,6 +680,8 @@ if __name__ == "__main__":
                              f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size}"
             if args.apply_adapter:
                 model_dir_name += f".adapter{args.bottleneck_size}"
+            if args.check:
+                model_dir_name += ".check"
             args.output_dir = out_dir + f"/{model_dir_name}"
             print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
             summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
