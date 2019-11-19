@@ -540,8 +540,6 @@ if __name__ == "__main__":
     parser.add_argument("--check", action="store_true",
                         help="flag to indicate if current execution is for checking")
 
-
-
     ## Other parameters
     # elmo_style + freezing/unfreezing
     # parser.add_argument("--freeze_pretrained", action='store_true',
