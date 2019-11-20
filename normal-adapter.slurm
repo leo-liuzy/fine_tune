@@ -37,12 +37,12 @@
 
 #SBATCH --export=all
 
-export PROJ_DIR="/home/leo/fine_tune"
+export HOME="/home/leo"
+export PROJ_DIR="$HOME/fine_tune"
 export SQUAD_DIR="$PROJ_DIR/data/squad1_1"
 export LOG_DIR="$PROJ_DIR/logs"
-export HOME="/home/leo"
 export BATCH_SIZE=12
-export ACC_STEP=1
+export ACC_STEP=2
 export MODEL_NAME="bert-base-uncased"
 export MODEL_PATH="$PROJ_DIR/cache/bert-base-uncased-pytorch_model.bin"
 export CONFIG_PATH="$PROJ_DIR/cache/bert-base-uncased-config.json"

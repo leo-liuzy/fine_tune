@@ -37,10 +37,10 @@
 
 #SBATCH --export=all
 
-export PROJ_DIR="/gscratch/stf/zeyuliu2/fine_tune"
+export HOME="/home/leo"
+export PROJ_DIR="$HOME/fine_tune"
 export SQUAD_DIR="$PROJ_DIR/data/squad1_1"
 export LOG_DIR="$PROJ_DIR/logs"
-export HOME="/gscratch/stf/zeyuliu2"
 export BATCH_SIZE=12
 export ACC_STEP=1
 export MODEL_NAME="bert-base-uncased"
@@ -50,7 +50,7 @@ export TOKENIZER_PATH="$PROJ_DIR/cache/bert-base-uncased-vocab.txt"
 # export TBD_DIR="/gscratch/stf/zeyuliu2/fine_tune/out/fine_tune_top_layer+unfreeze8/checkpoint-11080"
 # tbd
 # python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --apply_adapter --bottleneck_size 64 --unfreeze_top_k_bert_layer 0 --output_dir $PROJ_DIR/out/fine_tune_top_layer+adapter64 --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP
-python runs/run_squad.py --num_sample 10000 --run_mode "single_run" --learning_rate 0.0001 --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file "$SQUAD_DIR/train-v1.1.json" --predict_file "$SQUAD_DIR/dev-v1.1.json" --apply_adapter --bottleneck_size 64 --adapter_activation 0 --unfreeze_top_k_bert_layer 0 --output_dir "$PROJ_DIR/out" --logging_dir "$LOG_DIR" --overwrite_output_dir --save_steps 833 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --num_train_epochs 10 --gpu_id 0
+python runs/run_squad.py --num_sample -1 --run_mode "single_run" --learning_rate 0.0001 --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file "$SQUAD_DIR/train-v1.1.json" --predict_file "$SQUAD_DIR/dev-v1.1.json" --apply_adapter --bottleneck_size 64 --adapter_activation 0 --unfreeze_top_k_bert_layer 0 --output_dir "$PROJ_DIR/out" --logging_dir "$LOG_DIR" --overwrite_output_dir --save_steps 833 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --num_train_epochs 10 --gpu_id 0
 
 # bert as extractor
 # python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --freeze_pretrained --unfreeze_top_k_layer 1 --output_dir out/fine_tune_top_layer+unfreeze1 --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP

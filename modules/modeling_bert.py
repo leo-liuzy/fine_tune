@@ -21,6 +21,7 @@ import logging
 import math
 import os
 import sys
+from ipdb import set_trace as bp
 
 import torch
 import torch.nn.functional as F
@@ -1259,6 +1260,7 @@ class AdapterBlock(nn.Module):
     def forward(self, x: torch.tensor) -> torch.tensor:
         input_tensor = x
         x = self.compress(x)
+        # bp()
         if self.apply_adapter_activation:
             x = self.activation(x)
         x = self.decompress(x)
