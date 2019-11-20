@@ -103,6 +103,7 @@ def train(args, train_dataset, model, tokenizer):
         tb_writer = SummaryWriter(f"{args.logging_dir}/{summary_name}")
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
+    # add sampling
     if args.num_sample > -1:
         random_indices = np.arange(len(train_dataset))
         np.random.shuffle(random_indices)
@@ -574,6 +575,11 @@ if __name__ == "__main__":
     parser.add_argument("--top_layer", default="linear", type=str,
                         help="The type of top layer")
     parser.add_argument('--dropout', default=0.2, type=float)
+
+    # other
+    parser.add_argument("--num_sample", default=-1, type=int,
+                        help="Number of samples(w/o replacement) to draw, presumably less than "
+                             "the entire dataset")
 
     # official
     parser.add_argument("--config_name", default="", type=str,
