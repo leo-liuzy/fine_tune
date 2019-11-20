@@ -716,6 +716,10 @@ if __name__ == "__main__":
                            f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}."
             if args.apply_adapter:
                 summary_name += f"adapter{args.bottleneck_size}."
+            if args.adapter_activation == 0:
+                model_dir_name += f".adapterNoActivation"
+            if args.num_sample > -1:
+                model_dir_name += f".sample{args.num_sample}"
             print(f"{args.logging_dir}/{summary_name}")
             print(args.output_dir)
             main(args)
