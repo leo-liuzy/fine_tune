@@ -25,6 +25,7 @@ import os
 import random
 
 import numpy as np
+from ipdb import set_trace as bp
 import torch
 from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
                               TensorDataset)
@@ -414,6 +415,7 @@ def main(args):
         torch.distributed.init_proBertForQuestionAnsweringcess_group(backend='nccl')
         args.n_gpu = 1
     args.device = device
+    bp()
 
     # Setup logging
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
@@ -569,7 +571,7 @@ if __name__ == "__main__":
                         help="unfreeze top k transformer layers")
     parser.add_argument("--init_scale", default=1e-3, type=float,
                         help="unfreeze top k transformer layers")
-    parser.add_argument("--adapter_activation", int=0, type=int,
+    parser.add_argument("--adapter_activation", default=0, type=int,
                         help="0/1 flag to decide if apply non-linearity function on bottleneck")
     # bidaf parameter
     parser.add_argument("--top_layer", default="linear", type=str,
