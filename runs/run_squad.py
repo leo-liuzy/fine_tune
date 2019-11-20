@@ -93,15 +93,11 @@ def create_filter_conditions(args, model):
 
 
 def train(args, train_dataset, model, tokenizer):
-    summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                   f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
-    if args.apply_adapter:
-        summary_name += f".adapter{args.bottleneck_size}"
-    summary_name += ".check"
+    summary_dir_name = construct_folder_name(args)
 
     """ Train the model """
     if args.local_rank in [-1, 0]:
-        tb_writer = SummaryWriter(f"{args.logging_dir}/{summary_name}")
+        tb_writer = SummaryWriter(f"{args.logging_dir}/{summary_dir_name}")
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
     # add sampling
@@ -535,6 +531,20 @@ def main(args):
     return results
 
 
+def construct_folder_name(args):
+    model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
+                     f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
+    if args.apply_adapter:
+        model_dir_name += f".adapter{args.bottleneck_size}"
+    if args.adapter_activation == 0:
+        model_dir_name += f".adapterNoActivation"
+    if args.num_sample > -1:
+        model_dir_name += f".sample{args.num_sample}"
+    if args.check:
+        model_dir_name += ".check"
+    return model_dir_name
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -675,16 +685,7 @@ if __name__ == "__main__":
     out_dir = args.output_dir
 
     if args.run_mode == "single_run":
-        model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                         f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
-        if args.apply_adapter:
-            model_dir_name += f".adapter{args.bottleneck_size}"
-        if args.adapter_activation == 0:
-            model_dir_name += f".adapterNoActivation"
-        if args.num_sample > -1:
-            model_dir_name += f".sample{args.num_sample}"
-        if args.check:
-            model_dir_name += ".check"
+        model_dir_name = construct_folder_name(args)
         args.output_dir = out_dir + f"/{model_dir_name}"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         print(args.output_dir)
@@ -701,15 +702,7 @@ if __name__ == "__main__":
             lr, epoch = all_hypers[idx]
             args.learning_rate = lr
             args.num_train_epochs = epoch
-            model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
-                             f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
-            if args.apply_adapter:
-                model_dir_name += f".adapter{args.bottleneck_size}"
-            
-            if args.adapter_activation == 0:
-                model_dir_name += f"adapterNoActivation"
-            if args.check:
-                model_dir_name += ".check"
+            model_dir_name = construct_folder_name(args)
             args.output_dir = out_dir + f"/{model_dir_name}"
             print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
             summary_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
