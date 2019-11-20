@@ -537,8 +537,7 @@ def construct_folder_name(args):
                      f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
     if args.apply_adapter:
         model_dir_name += f".adapter{args.bottleneck_size}"
-    if args.adapter_activation == 0:
-        model_dir_name += f".adapterNoActivation"
+    model_dir_name += f".adapterNoActivation" if args.adapter_activation == 0 else ".adapterActivation"
     if args.num_sample > -1:
         model_dir_name += f".sample{args.num_sample}"
     if args.check:
