@@ -103,8 +103,10 @@ def train(args, train_dataset, model, tokenizer):
         tb_writer = SummaryWriter(f"{args.logging_dir}/{summary_name}")
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
-    # if args.num_sample > -1:
-      #   random_indices = np.random.randint(0, len(train_dataset))
+    if args.num_sample > -1:
+        random_indices = np.arange(len(train_dataset))
+        np.random.shuffle(random_indices)
+        train_dataset = train_dataset[random_indices][:args.num_sample]
 
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
@@ -381,6 +383,11 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
 
 
 def main(args):
+    if args.num_sample == 0:
+        raise ValueError("Either -1 to indicate not using sampling, "
+                         "or > 0 to indicate the legitimate number of samples")
+    if args.adapter_activation not in [0, 1]:
+        raise ValueError("Only 0/1 are legit")
     if os.path.exists(args.output_dir) and os.listdir(
             args.output_dir) and args.do_train and not args.overwrite_output_dir:
         raise ValueError(
@@ -561,6 +568,8 @@ if __name__ == "__main__":
                         help="unfreeze top k transformer layers")
     parser.add_argument("--init_scale", default=1e-3, type=float,
                         help="unfreeze top k transformer layers")
+    parser.add_argument("--adapter_activation", int=0, type=int,
+                        help="0/1 flag to decide if apply non-linearity function on bottleneck")
     # bidaf parameter
     parser.add_argument("--top_layer", default="linear", type=str,
                         help="The type of top layer")
