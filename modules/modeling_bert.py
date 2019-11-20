@@ -1258,7 +1258,7 @@ class AdapterBlock(nn.Module):
     def forward(self, x: torch.tensor) -> torch.tensor:
         input_tensor = x
         x = self.compress(x)
-        x = self.activation(x)
+        # x = self.activation(x)
         x = self.decompress(x)
         return input_tensor + x
 
