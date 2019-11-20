@@ -105,10 +105,12 @@ def train(args, train_dataset, model, tokenizer):
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
     # add sampling
+    # bp()
     if args.num_sample > -1:
         random_indices = np.arange(len(train_dataset))
         np.random.shuffle(random_indices)
-        train_dataset = train_dataset[random_indices][:args.num_sample]
+        random_indices = random_indices[:args.num_sample]	
+        train_dataset = torch.utils.data.TensorDataset(*train_dataset[random_indices])
 
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
@@ -678,7 +680,9 @@ if __name__ == "__main__":
         if args.apply_adapter:
             model_dir_name += f".adapter{args.bottleneck_size}"
         if args.adapter_activation == 0:
-            model_dir_name += f"adapterNoActivation"
+            model_dir_name += f".adapterNoActivation"
+        if args.num_sample > -1:
+            model_dir_name += f".sample{args.num_sample}"
         if args.check:
             model_dir_name += ".check"
         args.output_dir = out_dir + f"/{model_dir_name}"
@@ -701,6 +705,9 @@ if __name__ == "__main__":
                              f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
             if args.apply_adapter:
                 model_dir_name += f".adapter{args.bottleneck_size}"
+            
+            if args.adapter_activation == 0:
+                model_dir_name += f"adapterNoActivation"
             if args.check:
                 model_dir_name += ".check"
             args.output_dir = out_dir + f"/{model_dir_name}"
