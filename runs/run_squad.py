@@ -103,9 +103,9 @@ def train(args, train_dataset, model, tokenizer):
         tb_writer = SummaryWriter(f"{args.logging_dir}/{summary_name}")
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
-    if args.num_sample > -1:
-        random_indices = np.random.randint(0, len(train_dataset))
-        
+    # if args.num_sample > -1:
+      #   random_indices = np.random.randint(0, len(train_dataset))
+
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
 
