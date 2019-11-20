@@ -1,8 +1,8 @@
 To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
 To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
-11/19/2019 16:20:47 - WARNING - __main__ -   Process rank: -1, device: cuda:0, n_gpu: 2, distributed training: False, 16-bits training: False
-11/19/2019 16:20:47 - INFO - modules.configuration_utils -   loading configuration file /home/leo/fine_tune/cache/bert-base-uncased-config.json
-11/19/2019 16:20:47 - INFO - modules.configuration_utils -   Model config {
+11/19/2019 21:41:11 - WARNING - __main__ -   Process rank: -1, device: cuda:0, n_gpu: 1, distributed training: False, 16-bits training: False
+11/19/2019 21:41:11 - INFO - modules.configuration_utils -   loading configuration file /home/leo/fine_tune/cache/bert-base-uncased-config.json
+11/19/2019 21:41:11 - INFO - modules.configuration_utils -   Model config {
   "attention_probs_dropout_prob": 0.1,
   "finetuning_task": null,
   "hidden_act": "gelu",
@@ -26,78 +26,141 @@ To use data.metrics please install scikit-learn. See https://scikit-learn.org/st
   "vocab_size": 30522
 }
 
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   Model name '/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt' not found in model shortcut name list (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, bert-base-german-dbmdz-uncased). Assuming '/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt' is a path or url to a directory containing tokenizer files.
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/added_tokens.json. We won't load it.
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/special_tokens_map.json. We won't load it.
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/tokenizer_config.json. We won't load it.
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   loading file /home/leo/fine_tune/cache/bert-base-uncased-vocab.txt
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   loading file None
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   loading file None
-11/19/2019 16:20:47 - INFO - utils.tokenization_utils -   loading file None
-11/19/2019 16:20:47 - INFO - modules.modeling_utils -   loading weights file /home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin
-11/19/2019 16:20:50 - INFO - modules.modeling_utils -   Weights of BertForQuestionAnswering not initialized from pretrained model: ['bert.encoder.layer.0.attention.output.adapter.compress.weight', 'bert.encoder.layer.0.attention.output.adapter.compress.bias', 'bert.encoder.layer.0.attention.output.adapter.decompress.weight', 'bert.encoder.layer.0.attention.output.adapter.decompress.bias', 'bert.encoder.layer.0.output.adapter.compress.weight', 'bert.encoder.layer.0.output.adapter.compress.bias', 'bert.encoder.layer.0.output.adapter.decompress.weight', 'bert.encoder.layer.0.output.adapter.decompress.bias', 'bert.encoder.layer.1.attention.output.adapter.compress.weight', 'bert.encoder.layer.1.attention.output.adapter.compress.bias', 'bert.encoder.layer.1.attention.output.adapter.decompress.weight', 'bert.encoder.layer.1.attention.output.adapter.decompress.bias', 'bert.encoder.layer.1.output.adapter.compress.weight', 'bert.encoder.layer.1.output.adapter.compress.bias', 'bert.encoder.layer.1.output.adapter.decompress.weight', 'bert.encoder.layer.1.output.adapter.decompress.bias', 'bert.encoder.layer.2.attention.output.adapter.compress.weight', 'bert.encoder.layer.2.attention.output.adapter.compress.bias', 'bert.encoder.layer.2.attention.output.adapter.decompress.weight', 'bert.encoder.layer.2.attention.output.adapter.decompress.bias', 'bert.encoder.layer.2.output.adapter.compress.weight', 'bert.encoder.layer.2.output.adapter.compress.bias', 'bert.encoder.layer.2.output.adapter.decompress.weight', 'bert.encoder.layer.2.output.adapter.decompress.bias', 'bert.encoder.layer.3.attention.output.adapter.compress.weight', 'bert.encoder.layer.3.attention.output.adapter.compress.bias', 'bert.encoder.layer.3.attention.output.adapter.decompress.weight', 'bert.encoder.layer.3.attention.output.adapter.decompress.bias', 'bert.encoder.layer.3.output.adapter.compress.weight', 'bert.encoder.layer.3.output.adapter.compress.bias', 'bert.encoder.layer.3.output.adapter.decompress.weight', 'bert.encoder.layer.3.output.adapter.decompress.bias', 'bert.encoder.layer.4.attention.output.adapter.compress.weight', 'bert.encoder.layer.4.attention.output.adapter.compress.bias', 'bert.encoder.layer.4.attention.output.adapter.decompress.weight', 'bert.encoder.layer.4.attention.output.adapter.decompress.bias', 'bert.encoder.layer.4.output.adapter.compress.weight', 'bert.encoder.layer.4.output.adapter.compress.bias', 'bert.encoder.layer.4.output.adapter.decompress.weight', 'bert.encoder.layer.4.output.adapter.decompress.bias', 'bert.encoder.layer.5.attention.output.adapter.compress.weight', 'bert.encoder.layer.5.attention.output.adapter.compress.bias', 'bert.encoder.layer.5.attention.output.adapter.decompress.weight', 'bert.encoder.layer.5.attention.output.adapter.decompress.bias', 'bert.encoder.layer.5.output.adapter.compress.weight', 'bert.encoder.layer.5.output.adapter.compress.bias', 'bert.encoder.layer.5.output.adapter.decompress.weight', 'bert.encoder.layer.5.output.adapter.decompress.bias', 'bert.encoder.layer.6.attention.output.adapter.compress.weight', 'bert.encoder.layer.6.attention.output.adapter.compress.bias', 'bert.encoder.layer.6.attention.output.adapter.decompress.weight', 'bert.encoder.layer.6.attention.output.adapter.decompress.bias', 'bert.encoder.layer.6.output.adapter.compress.weight', 'bert.encoder.layer.6.output.adapter.compress.bias', 'bert.encoder.layer.6.output.adapter.decompress.weight', 'bert.encoder.layer.6.output.adapter.decompress.bias', 'bert.encoder.layer.7.attention.output.adapter.compress.weight', 'bert.encoder.layer.7.attention.output.adapter.compress.bias', 'bert.encoder.layer.7.attention.output.adapter.decompress.weight', 'bert.encoder.layer.7.attention.output.adapter.decompress.bias', 'bert.encoder.layer.7.output.adapter.compress.weight', 'bert.encoder.layer.7.output.adapter.compress.bias', 'bert.encoder.layer.7.output.adapter.decompress.weight', 'bert.encoder.layer.7.output.adapter.decompress.bias', 'bert.encoder.layer.8.attention.output.adapter.compress.weight', 'bert.encoder.layer.8.attention.output.adapter.compress.bias', 'bert.encoder.layer.8.attention.output.adapter.decompress.weight', 'bert.encoder.layer.8.attention.output.adapter.decompress.bias', 'bert.encoder.layer.8.output.adapter.compress.weight', 'bert.encoder.layer.8.output.adapter.compress.bias', 'bert.encoder.layer.8.output.adapter.decompress.weight', 'bert.encoder.layer.8.output.adapter.decompress.bias', 'bert.encoder.layer.9.attention.output.adapter.compress.weight', 'bert.encoder.layer.9.attention.output.adapter.compress.bias', 'bert.encoder.layer.9.attention.output.adapter.decompress.weight', 'bert.encoder.layer.9.attention.output.adapter.decompress.bias', 'bert.encoder.layer.9.output.adapter.compress.weight', 'bert.encoder.layer.9.output.adapter.compress.bias', 'bert.encoder.layer.9.output.adapter.decompress.weight', 'bert.encoder.layer.9.output.adapter.decompress.bias', 'bert.encoder.layer.10.attention.output.adapter.compress.weight', 'bert.encoder.layer.10.attention.output.adapter.compress.bias', 'bert.encoder.layer.10.attention.output.adapter.decompress.weight', 'bert.encoder.layer.10.attention.output.adapter.decompress.bias', 'bert.encoder.layer.10.output.adapter.compress.weight', 'bert.encoder.layer.10.output.adapter.compress.bias', 'bert.encoder.layer.10.output.adapter.decompress.weight', 'bert.encoder.layer.10.output.adapter.decompress.bias', 'bert.encoder.layer.11.attention.output.adapter.compress.weight', 'bert.encoder.layer.11.attention.output.adapter.compress.bias', 'bert.encoder.layer.11.attention.output.adapter.decompress.weight', 'bert.encoder.layer.11.attention.output.adapter.decompress.bias', 'bert.encoder.layer.11.output.adapter.compress.weight', 'bert.encoder.layer.11.output.adapter.compress.bias', 'bert.encoder.layer.11.output.adapter.decompress.weight', 'bert.encoder.layer.11.output.adapter.decompress.bias', 'qa_outputs.weight', 'qa_outputs.bias']
-11/19/2019 16:20:50 - INFO - modules.modeling_utils -   Weights from pretrained model not used in BertForQuestionAnswering: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
-11/19/2019 16:20:53 - INFO - __main__ -   Training/evaluation parameters Namespace(adam_epsilon=1e-08, apply_adapter=True, bottleneck_size=64, cache_dir='', check=False, config_name='/home/leo/fine_tune/cache/bert-base-uncased-config.json', device=device(type='cuda', index=0), do_eval=True, do_lower_case=True, do_train=True, doc_stride=128, dropout=0.2, elmo_style=False, eval_all_checkpoints=False, evaluate_during_training=False, fp16=False, fp16_opt_level='O1', gpu_id=0, gradient_accumulation_steps=1, init_scale=0.001, learning_rate=0.0001, local_rank=-1, logging_dir='/home/leo/fine_tune/logs', logging_steps=50, max_answer_length=30, max_grad_norm=1.0, max_query_length=64, max_seq_length=384, max_steps=-1, model_name_or_path='/home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin', model_type='bert', n_best_size=20, n_gpu=2, no_cuda=False, null_score_diff_threshold=0.0, num_train_epochs=10, output_dir='/home/leo/fine_tune/out/lr0.0001.unfreeze_top_0_bert_layer.epoch10.bs12.adapter64', overwrite_cache=False, overwrite_output_dir=True, per_gpu_eval_batch_size=12, per_gpu_train_batch_size=12, predict_file='/home/leo/fine_tune/data/squad1_1/dev-v1.1.json', run_mode='single_run', save_steps=7386, seed=42, server_ip='', server_port='', tokenizer_name='/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt', top_layer='linear', train_file='/home/leo/fine_tune/data/squad1_1/train-v1.1.json', unfreeze_top_k_bert_layer=0, verbose_logging=False, version_2_with_negative=False, warmup_steps=0, weight_decay=0.0)
-11/19/2019 16:20:53 - INFO - __main__ -   Loading features from cached file /home/leo/fine_tune/data/squad1_1/cached_train_bert-base-uncased-pytorch_model.bin_384
-11/19/2019 16:21:05 - INFO - __main__ -   ***** Running training *****
-11/19/2019 16:21:05 - INFO - __main__ -     Num examples = 88641
-11/19/2019 16:21:05 - INFO - __main__ -     Num Epochs = 10
-11/19/2019 16:21:05 - INFO - __main__ -     Instantaneous batch size per GPU = 12
-11/19/2019 16:21:05 - INFO - __main__ -     Total train batch size (w. parallel, distributed & accumulation) = 24
-11/19/2019 16:21:05 - INFO - __main__ -     Gradient Accumulation steps = 1
-11/19/2019 16:21:05 - INFO - __main__ -     Total optimization steps = 36940
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   Model name '/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt' not found in model shortcut name list (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, bert-base-german-dbmdz-uncased). Assuming '/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt' is a path or url to a directory containing tokenizer files.
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/added_tokens.json. We won't load it.
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/special_tokens_map.json. We won't load it.
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/tokenizer_config.json. We won't load it.
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   loading file /home/leo/fine_tune/cache/bert-base-uncased-vocab.txt
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   loading file None
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   loading file None
+11/19/2019 21:41:11 - INFO - utils.tokenization_utils -   loading file None
+11/19/2019 21:41:11 - INFO - modules.modeling_utils -   loading weights file /home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin
+11/19/2019 21:41:14 - INFO - modules.modeling_utils -   Weights of BertForQuestionAnswering not initialized from pretrained model: ['bert.encoder.layer.0.attention.output.adapter.compress.weight', 'bert.encoder.layer.0.attention.output.adapter.compress.bias', 'bert.encoder.layer.0.attention.output.adapter.decompress.weight', 'bert.encoder.layer.0.attention.output.adapter.decompress.bias', 'bert.encoder.layer.0.output.adapter.compress.weight', 'bert.encoder.layer.0.output.adapter.compress.bias', 'bert.encoder.layer.0.output.adapter.decompress.weight', 'bert.encoder.layer.0.output.adapter.decompress.bias', 'bert.encoder.layer.1.attention.output.adapter.compress.weight', 'bert.encoder.layer.1.attention.output.adapter.compress.bias', 'bert.encoder.layer.1.attention.output.adapter.decompress.weight', 'bert.encoder.layer.1.attention.output.adapter.decompress.bias', 'bert.encoder.layer.1.output.adapter.compress.weight', 'bert.encoder.layer.1.output.adapter.compress.bias', 'bert.encoder.layer.1.output.adapter.decompress.weight', 'bert.encoder.layer.1.output.adapter.decompress.bias', 'bert.encoder.layer.2.attention.output.adapter.compress.weight', 'bert.encoder.layer.2.attention.output.adapter.compress.bias', 'bert.encoder.layer.2.attention.output.adapter.decompress.weight', 'bert.encoder.layer.2.attention.output.adapter.decompress.bias', 'bert.encoder.layer.2.output.adapter.compress.weight', 'bert.encoder.layer.2.output.adapter.compress.bias', 'bert.encoder.layer.2.output.adapter.decompress.weight', 'bert.encoder.layer.2.output.adapter.decompress.bias', 'bert.encoder.layer.3.attention.output.adapter.compress.weight', 'bert.encoder.layer.3.attention.output.adapter.compress.bias', 'bert.encoder.layer.3.attention.output.adapter.decompress.weight', 'bert.encoder.layer.3.attention.output.adapter.decompress.bias', 'bert.encoder.layer.3.output.adapter.compress.weight', 'bert.encoder.layer.3.output.adapter.compress.bias', 'bert.encoder.layer.3.output.adapter.decompress.weight', 'bert.encoder.layer.3.output.adapter.decompress.bias', 'bert.encoder.layer.4.attention.output.adapter.compress.weight', 'bert.encoder.layer.4.attention.output.adapter.compress.bias', 'bert.encoder.layer.4.attention.output.adapter.decompress.weight', 'bert.encoder.layer.4.attention.output.adapter.decompress.bias', 'bert.encoder.layer.4.output.adapter.compress.weight', 'bert.encoder.layer.4.output.adapter.compress.bias', 'bert.encoder.layer.4.output.adapter.decompress.weight', 'bert.encoder.layer.4.output.adapter.decompress.bias', 'bert.encoder.layer.5.attention.output.adapter.compress.weight', 'bert.encoder.layer.5.attention.output.adapter.compress.bias', 'bert.encoder.layer.5.attention.output.adapter.decompress.weight', 'bert.encoder.layer.5.attention.output.adapter.decompress.bias', 'bert.encoder.layer.5.output.adapter.compress.weight', 'bert.encoder.layer.5.output.adapter.compress.bias', 'bert.encoder.layer.5.output.adapter.decompress.weight', 'bert.encoder.layer.5.output.adapter.decompress.bias', 'bert.encoder.layer.6.attention.output.adapter.compress.weight', 'bert.encoder.layer.6.attention.output.adapter.compress.bias', 'bert.encoder.layer.6.attention.output.adapter.decompress.weight', 'bert.encoder.layer.6.attention.output.adapter.decompress.bias', 'bert.encoder.layer.6.output.adapter.compress.weight', 'bert.encoder.layer.6.output.adapter.compress.bias', 'bert.encoder.layer.6.output.adapter.decompress.weight', 'bert.encoder.layer.6.output.adapter.decompress.bias', 'bert.encoder.layer.7.attention.output.adapter.compress.weight', 'bert.encoder.layer.7.attention.output.adapter.compress.bias', 'bert.encoder.layer.7.attention.output.adapter.decompress.weight', 'bert.encoder.layer.7.attention.output.adapter.decompress.bias', 'bert.encoder.layer.7.output.adapter.compress.weight', 'bert.encoder.layer.7.output.adapter.compress.bias', 'bert.encoder.layer.7.output.adapter.decompress.weight', 'bert.encoder.layer.7.output.adapter.decompress.bias', 'bert.encoder.layer.8.attention.output.adapter.compress.weight', 'bert.encoder.layer.8.attention.output.adapter.compress.bias', 'bert.encoder.layer.8.attention.output.adapter.decompress.weight', 'bert.encoder.layer.8.attention.output.adapter.decompress.bias', 'bert.encoder.layer.8.output.adapter.compress.weight', 'bert.encoder.layer.8.output.adapter.compress.bias', 'bert.encoder.layer.8.output.adapter.decompress.weight', 'bert.encoder.layer.8.output.adapter.decompress.bias', 'bert.encoder.layer.9.attention.output.adapter.compress.weight', 'bert.encoder.layer.9.attention.output.adapter.compress.bias', 'bert.encoder.layer.9.attention.output.adapter.decompress.weight', 'bert.encoder.layer.9.attention.output.adapter.decompress.bias', 'bert.encoder.layer.9.output.adapter.compress.weight', 'bert.encoder.layer.9.output.adapter.compress.bias', 'bert.encoder.layer.9.output.adapter.decompress.weight', 'bert.encoder.layer.9.output.adapter.decompress.bias', 'bert.encoder.layer.10.attention.output.adapter.compress.weight', 'bert.encoder.layer.10.attention.output.adapter.compress.bias', 'bert.encoder.layer.10.attention.output.adapter.decompress.weight', 'bert.encoder.layer.10.attention.output.adapter.decompress.bias', 'bert.encoder.layer.10.output.adapter.compress.weight', 'bert.encoder.layer.10.output.adapter.compress.bias', 'bert.encoder.layer.10.output.adapter.decompress.weight', 'bert.encoder.layer.10.output.adapter.decompress.bias', 'bert.encoder.layer.11.attention.output.adapter.compress.weight', 'bert.encoder.layer.11.attention.output.adapter.compress.bias', 'bert.encoder.layer.11.attention.output.adapter.decompress.weight', 'bert.encoder.layer.11.attention.output.adapter.decompress.bias', 'bert.encoder.layer.11.output.adapter.compress.weight', 'bert.encoder.layer.11.output.adapter.compress.bias', 'bert.encoder.layer.11.output.adapter.decompress.weight', 'bert.encoder.layer.11.output.adapter.decompress.bias', 'qa_outputs.weight', 'qa_outputs.bias']
+11/19/2019 21:41:14 - INFO - modules.modeling_utils -   Weights from pretrained model not used in BertForQuestionAnswering: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+11/19/2019 21:41:17 - INFO - __main__ -   Training/evaluation parameters Namespace(adam_epsilon=1e-08, adapter_activation=0, apply_adapter=True, bottleneck_size=64, cache_dir='', check=False, config_name='/home/leo/fine_tune/cache/bert-base-uncased-config.json', device=device(type='cuda', index=0), do_eval=True, do_lower_case=True, do_train=True, doc_stride=128, dropout=0.2, elmo_style=False, eval_all_checkpoints=False, evaluate_during_training=False, fp16=False, fp16_opt_level='O1', gpu_id=0, gradient_accumulation_steps=1, init_scale=0.001, learning_rate=0.0001, local_rank=-1, logging_dir='/home/leo/fine_tune/logs', logging_steps=50, max_answer_length=30, max_grad_norm=1.0, max_query_length=64, max_seq_length=384, max_steps=-1, model_name_or_path='/home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin', model_type='bert', n_best_size=20, n_gpu=1, no_cuda=False, null_score_diff_threshold=0.0, num_sample=-1, num_train_epochs=10, output_dir='/home/leo/fine_tune/out/lr0.0001.unfreeze_top_0_bert_layer.epoch10.bs12.adapter64adapterNoActivation', overwrite_cache=False, overwrite_output_dir=True, per_gpu_eval_batch_size=12, per_gpu_train_batch_size=12, predict_file='/home/leo/fine_tune/data/squad1_1/dev-v1.1.json', run_mode='single_run', save_steps=7386, seed=42, server_ip='', server_port='', tokenizer_name='/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt', top_layer='linear', train_file='/home/leo/fine_tune/data/squad1_1/train-v1.1.json', unfreeze_top_k_bert_layer=0, verbose_logging=False, version_2_with_negative=False, warmup_steps=0, weight_decay=0.0)
+11/19/2019 21:41:17 - INFO - __main__ -   Loading features from cached file /home/leo/fine_tune/data/squad1_1/cached_train_bert-base-uncased-pytorch_model.bin_384
+11/19/2019 21:41:28 - INFO - __main__ -   ***** Running training *****
+11/19/2019 21:41:28 - INFO - __main__ -     Num examples = 88641
+11/19/2019 21:41:28 - INFO - __main__ -     Num Epochs = 10
+11/19/2019 21:41:28 - INFO - __main__ -     Instantaneous batch size per GPU = 12
+11/19/2019 21:41:28 - INFO - __main__ -     Total train batch size (w. parallel, distributed & accumulation) = 12
+11/19/2019 21:41:28 - INFO - __main__ -     Gradient Accumulation steps = 1
+11/19/2019 21:41:28 - INFO - __main__ -     Total optimization steps = 73870
 Epoch:   0%|          | 0/10 [00:00<?, ?it/s]
-Iteration:   0%|          | 0/3694 [00:00<?, ?it/s][Alr: 0.0001 	 num_train_epochs: 10
-/home/leo/fine_tune/out/lr0.0001.unfreeze_top_0_bert_layer.epoch10.bs12.adapter64
-Namespace(adam_epsilon=1e-08, apply_adapter=True, bottleneck_size=64, cache_dir='', check=False, config_name='/home/leo/fine_tune/cache/bert-base-uncased-config.json', device=device(type='cuda', index=0), do_eval=True, do_lower_case=True, do_train=True, doc_stride=128, dropout=0.2, elmo_style=False, eval_all_checkpoints=False, evaluate_during_training=False, fp16=False, fp16_opt_level='O1', gpu_id=0, gradient_accumulation_steps=1, init_scale=0.001, learning_rate=0.0001, local_rank=-1, logging_dir='/home/leo/fine_tune/logs', logging_steps=50, max_answer_length=30, max_grad_norm=1.0, max_query_length=64, max_seq_length=384, max_steps=-1, model_name_or_path='/home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin', model_type='bert', n_best_size=20, n_gpu=2, no_cuda=False, null_score_diff_threshold=0.0, num_train_epochs=10, output_dir='/home/leo/fine_tune/out/lr0.0001.unfreeze_top_0_bert_layer.epoch10.bs12.adapter64', overwrite_cache=False, overwrite_output_dir=True, per_gpu_eval_batch_size=12, per_gpu_train_batch_size=12, predict_file='/home/leo/fine_tune/data/squad1_1/dev-v1.1.json', run_mode='single_run', save_steps=7386, seed=42, server_ip='', server_port='', tokenizer_name='/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt', top_layer='linear', train_file='/home/leo/fine_tune/data/squad1_1/train-v1.1.json', unfreeze_top_k_bert_layer=0, verbose_logging=False, version_2_with_negative=False, warmup_steps=0, weight_decay=0.0)
-Parameters to be optimized: ['bert.encoder.layer.0.attention.output.adapter.compress.weight', 'bert.encoder.layer.0.attention.output.adapter.compress.bias', 'bert.encoder.layer.0.attention.output.adapter.decompress.weight', 'bert.encoder.layer.0.attention.output.adapter.decompress.bias', 'bert.encoder.layer.0.output.adapter.compress.weight', 'bert.encoder.layer.0.output.adapter.compress.bias', 'bert.encoder.layer.0.output.adapter.decompress.weight', 'bert.encoder.layer.0.output.adapter.decompress.bias', 'bert.encoder.layer.1.attention.output.adapter.compress.weight', 'bert.encoder.layer.1.attention.output.adapter.compress.bias', 'bert.encoder.layer.1.attention.output.adapter.decompress.weight', 'bert.encoder.layer.1.attention.output.adapter.decompress.bias', 'bert.encoder.layer.1.output.adapter.compress.weight', 'bert.encoder.layer.1.output.adapter.compress.bias', 'bert.encoder.layer.1.output.adapter.decompress.weight', 'bert.encoder.layer.1.output.adapter.decompress.bias', 'bert.encoder.layer.2.attention.output.adapter.compress.weight', 'bert.encoder.layer.2.attention.output.adapter.compress.bias', 'bert.encoder.layer.2.attention.output.adapter.decompress.weight', 'bert.encoder.layer.2.attention.output.adapter.decompress.bias', 'bert.encoder.layer.2.output.adapter.compress.weight', 'bert.encoder.layer.2.output.adapter.compress.bias', 'bert.encoder.layer.2.output.adapter.decompress.weight', 'bert.encoder.layer.2.output.adapter.decompress.bias', 'bert.encoder.layer.3.attention.output.adapter.compress.weight', 'bert.encoder.layer.3.attention.output.adapter.compress.bias', 'bert.encoder.layer.3.attention.output.adapter.decompress.weight', 'bert.encoder.layer.3.attention.output.adapter.decompress.bias', 'bert.encoder.layer.3.output.adapter.compress.weight', 'bert.encoder.layer.3.output.adapter.compress.bias', 'bert.encoder.layer.3.output.adapter.decompress.weight', 'bert.encoder.layer.3.output.adapter.decompress.bias', 'bert.encoder.layer.4.attention.output.adapter.compress.weight', 'bert.encoder.layer.4.attention.output.adapter.compress.bias', 'bert.encoder.layer.4.attention.output.adapter.decompress.weight', 'bert.encoder.layer.4.attention.output.adapter.decompress.bias', 'bert.encoder.layer.4.output.adapter.compress.weight', 'bert.encoder.layer.4.output.adapter.compress.bias', 'bert.encoder.layer.4.output.adapter.decompress.weight', 'bert.encoder.layer.4.output.adapter.decompress.bias', 'bert.encoder.layer.5.attention.output.adapter.compress.weight', 'bert.encoder.layer.5.attention.output.adapter.compress.bias', 'bert.encoder.layer.5.attention.output.adapter.decompress.weight', 'bert.encoder.layer.5.attention.output.adapter.decompress.bias', 'bert.encoder.layer.5.output.adapter.compress.weight', 'bert.encoder.layer.5.output.adapter.compress.bias', 'bert.encoder.layer.5.output.adapter.decompress.weight', 'bert.encoder.layer.5.output.adapter.decompress.bias', 'bert.encoder.layer.6.attention.output.adapter.compress.weight', 'bert.encoder.layer.6.attention.output.adapter.compress.bias', 'bert.encoder.layer.6.attention.output.adapter.decompress.weight', 'bert.encoder.layer.6.attention.output.adapter.decompress.bias', 'bert.encoder.layer.6.output.adapter.compress.weight', 'bert.encoder.layer.6.output.adapter.compress.bias', 'bert.encoder.layer.6.output.adapter.decompress.weight', 'bert.encoder.layer.6.output.adapter.decompress.bias', 'bert.encoder.layer.7.attention.output.adapter.compress.weight', 'bert.encoder.layer.7.attention.output.adapter.compress.bias', 'bert.encoder.layer.7.attention.output.adapter.decompress.weight', 'bert.encoder.layer.7.attention.output.adapter.decompress.bias', 'bert.encoder.layer.7.output.adapter.compress.weight', 'bert.encoder.layer.7.output.adapter.compress.bias', 'bert.encoder.layer.7.output.adapter.decompress.weight', 'bert.encoder.layer.7.output.adapter.decompress.bias', 'bert.encoder.layer.8.attention.output.adapter.compress.weight', 'bert.encoder.layer.8.attention.output.adapter.compress.bias', 'bert.encoder.layer.8.attention.output.adapter.decompress.weight', 'bert.encoder.layer.8.attention.output.adapter.decompress.bias', 'bert.encoder.layer.8.output.adapter.compress.weight', 'bert.encoder.layer.8.output.adapter.compress.bias', 'bert.encoder.layer.8.output.adapter.decompress.weight', 'bert.encoder.layer.8.output.adapter.decompress.bias', 'bert.encoder.layer.9.attention.output.adapter.compress.weight', 'bert.encoder.layer.9.attention.output.adapter.compress.bias', 'bert.encoder.layer.9.attention.output.adapter.decompress.weight', 'bert.encoder.layer.9.attention.output.adapter.decompress.bias', 'bert.encoder.layer.9.output.adapter.compress.weight', 'bert.encoder.layer.9.output.adapter.compress.bias', 'bert.encoder.layer.9.output.adapter.decompress.weight', 'bert.encoder.layer.9.output.adapter.decompress.bias', 'bert.encoder.layer.10.attention.output.adapter.compress.weight', 'bert.encoder.layer.10.attention.output.adapter.compress.bias', 'bert.encoder.layer.10.attention.output.adapter.decompress.weight', 'bert.encoder.layer.10.attention.output.adapter.decompress.bias', 'bert.encoder.layer.10.output.adapter.compress.weight', 'bert.encoder.layer.10.output.adapter.compress.bias', 'bert.encoder.layer.10.output.adapter.decompress.weight', 'bert.encoder.layer.10.output.adapter.decompress.bias', 'bert.encoder.layer.11.attention.output.adapter.compress.weight', 'bert.encoder.layer.11.attention.output.adapter.compress.bias', 'bert.encoder.layer.11.attention.output.adapter.decompress.weight', 'bert.encoder.layer.11.attention.output.adapter.decompress.bias', 'bert.encoder.layer.11.output.adapter.compress.weight', 'bert.encoder.layer.11.output.adapter.compress.bias', 'bert.encoder.layer.11.output.adapter.decompress.weight', 'bert.encoder.layer.11.output.adapter.decompress.bias', 'qa_outputs.weight', 'qa_outputs.bias']
-Traceback (most recent call last):
-  File "runs/run_squad.py", line 667, in <module>
-    main(args)
-  File "runs/run_squad.py", line 472, in main
-    global_step, tr_loss = train(args, train_dataset, model, tokenizer)
-  File "runs/run_squad.py", line 190, in train
-    outputs = model(**inputs)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/parallel/data_parallel.py", line 152, in forward
-    outputs = self.parallel_apply(replicas, inputs, kwargs)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/parallel/data_parallel.py", line 162, in parallel_apply
-    return parallel_apply(replicas, inputs, kwargs, self.device_ids[:len(replicas)])
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/parallel/parallel_apply.py", line 85, in parallel_apply
-    output.reraise()
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/_utils.py", line 385, in reraise
-    raise self.exc_type(msg)
-RuntimeError: Caught RuntimeError in replica 1 on device 1.
-Original Traceback (most recent call last):
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/parallel/parallel_apply.py", line 60, in _worker
-    output = module(*input, **kwargs)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/home/leo/fine_tune/modules/modeling_bert.py", line 1182, in forward
-    weights=weights)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/home/leo/fine_tune/modules/modeling_bert.py", line 658, in forward
-    weights=weights)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/home/leo/fine_tune/modules/modeling_bert.py", line 366, in forward
-    layer_outputs = layer_module(hidden_states, attention_mask, head_mask[i])
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/home/leo/fine_tune/modules/modeling_bert.py", line 341, in forward
-    attention_outputs = self.attention(hidden_states, attention_mask, head_mask)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/home/leo/fine_tune/modules/modeling_bert.py", line 293, in forward
-    self_outputs = self.self(input_tensor, attention_mask, head_mask)
-  File "/home/leo/miniconda3/envs/py3/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/home/leo/fine_tune/modules/modeling_bert.py", line 216, in forward
-    attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))
-RuntimeError: CUDA out of memory. Tried to allocate 82.00 MiB (GPU 1; 10.73 GiB total capacity; 820.94 MiB already allocated; 54.06 MiB free; 95.06 MiB cached)
-
-
-                                                   [AEpoch:   0%|          | 0/10 [00:06<?, ?it/s]
-Iteration:   0%|          | 0/3694 [00:06<?, ?it/s]
+Iteration:   0%|          | 0/7387 [00:00<?, ?it/s][A
+Iteration:   0%|          | 1/7387 [00:00<1:02:13,  1.98it/s][A
+Iteration:   0%|          | 2/7387 [00:00<53:55,  2.28it/s]  [A
+Iteration:   0%|          | 3/7387 [00:01<48:07,  2.56it/s][A
+Iteration:   0%|          | 4/7387 [00:01<44:04,  2.79it/s][A
+Iteration:   0%|          | 5/7387 [00:01<41:13,  2.98it/s][A
+Iteration:   0%|          | 6/7387 [00:01<39:15,  3.13it/s][A
+Iteration:   0%|          | 7/7387 [00:02<37:51,  3.25it/s][A
+Iteration:   0%|          | 8/7387 [00:02<36:53,  3.33it/s][A
+Iteration:   0%|          | 9/7387 [00:02<36:13,  3.39it/s][A
+Iteration:   0%|          | 10/7387 [00:03<35:45,  3.44it/s][A
+Iteration:   0%|          | 11/7387 [00:03<35:41,  3.44it/s][A
+Iteration:   0%|          | 12/7387 [00:03<35:21,  3.48it/s][A
+Iteration:   0%|          | 13/7387 [00:03<35:08,  3.50it/s][A
+Iteration:   0%|          | 14/7387 [00:04<34:59,  3.51it/s][A
+Iteration:   0%|          | 15/7387 [00:04<34:53,  3.52it/s][A
+Iteration:   0%|          | 16/7387 [00:04<34:49,  3.53it/s][A
+Iteration:   0%|          | 17/7387 [00:05<34:48,  3.53it/s][A
+Iteration:   0%|          | 18/7387 [00:05<34:46,  3.53it/s][A
+Iteration:   0%|          | 19/7387 [00:05<34:45,  3.53it/s][A
+Iteration:   0%|          | 20/7387 [00:05<34:44,  3.53it/s][A
+Iteration:   0%|          | 21/7387 [00:06<34:44,  3.53it/s][A
+Iteration:   0%|          | 22/7387 [00:06<34:44,  3.53it/s][A
+Iteration:   0%|          | 23/7387 [00:06<34:43,  3.53it/s][A
+Iteration:   0%|          | 24/7387 [00:07<34:43,  3.53it/s][A
+Iteration:   0%|          | 25/7387 [00:07<34:43,  3.53it/s][A
+Iteration:   0%|          | 26/7387 [00:07<34:41,  3.54it/s][A
+Iteration:   0%|          | 27/7387 [00:07<34:41,  3.54it/s][A
+Iteration:   0%|          | 28/7387 [00:08<34:42,  3.53it/s][A
+Iteration:   0%|          | 29/7387 [00:08<34:43,  3.53it/s][A
+Iteration:   0%|          | 30/7387 [00:08<34:42,  3.53it/s][A
+Iteration:   0%|          | 31/7387 [00:08<34:42,  3.53it/s][A
+Iteration:   0%|          | 32/7387 [00:09<34:42,  3.53it/s][A
+Iteration:   0%|          | 33/7387 [00:09<34:41,  3.53it/s][A
+Iteration:   0%|          | 34/7387 [00:09<34:41,  3.53it/s][A
+Iteration:   0%|          | 35/7387 [00:10<34:43,  3.53it/s][A
+Iteration:   0%|          | 36/7387 [00:10<34:43,  3.53it/s][A
+Iteration:   1%|          | 37/7387 [00:10<34:43,  3.53it/s][A
+Iteration:   1%|          | 38/7387 [00:10<34:43,  3.53it/s][A
+Iteration:   1%|          | 39/7387 [00:11<34:44,  3.53it/s][A
+Iteration:   1%|          | 40/7387 [00:11<34:44,  3.52it/s][A
+Iteration:   1%|          | 41/7387 [00:11<34:46,  3.52it/s][A
+Iteration:   1%|          | 42/7387 [00:12<34:47,  3.52it/s][A
+Iteration:   1%|          | 43/7387 [00:12<34:47,  3.52it/s][A
+Iteration:   1%|          | 44/7387 [00:12<35:04,  3.49it/s][A
+Iteration:   1%|          | 45/7387 [00:12<34:59,  3.50it/s][A
+Iteration:   1%|          | 46/7387 [00:13<34:57,  3.50it/s][A
+Iteration:   1%|          | 47/7387 [00:13<34:55,  3.50it/s][A
+Iteration:   1%|          | 48/7387 [00:13<34:52,  3.51it/s][A
+Iteration:   1%|          | 49/7387 [00:14<34:51,  3.51it/s][A
+Iteration:   1%|          | 50/7387 [00:14<34:50,  3.51it/s][A
+Iteration:   1%|          | 51/7387 [00:14<34:50,  3.51it/s][A
+Iteration:   1%|          | 52/7387 [00:14<34:50,  3.51it/s][A
+Iteration:   1%|          | 53/7387 [00:15<34:48,  3.51it/s][A
+Iteration:   1%|          | 54/7387 [00:15<34:48,  3.51it/s][A
+Iteration:   1%|          | 55/7387 [00:15<34:48,  3.51it/s][A
+Iteration:   1%|          | 56/7387 [00:16<34:48,  3.51it/s][A
+Iteration:   1%|          | 57/7387 [00:16<34:48,  3.51it/s][A
+Iteration:   1%|          | 58/7387 [00:16<34:48,  3.51it/s][A
+Iteration:   1%|          | 59/7387 [00:16<34:48,  3.51it/s][A
+Iteration:   1%|          | 60/7387 [00:17<34:47,  3.51it/s][A
+Iteration:   1%|          | 61/7387 [00:17<34:47,  3.51it/s][A
+Iteration:   1%|          | 62/7387 [00:17<34:47,  3.51it/s][A
+Iteration:   1%|          | 63/7387 [00:18<34:46,  3.51it/s][A
+Iteration:   1%|          | 64/7387 [00:18<34:45,  3.51it/s][A
+Iteration:   1%|          | 65/7387 [00:18<34:46,  3.51it/s][A
+Iteration:   1%|          | 66/7387 [00:18<34:47,  3.51it/s][A
+Iteration:   1%|          | 67/7387 [00:19<34:47,  3.51it/s][A
+Iteration:   1%|          | 68/7387 [00:19<34:47,  3.51it/s][A
+Iteration:   1%|          | 69/7387 [00:19<34:48,  3.50it/s][A
+Iteration:   1%|          | 70/7387 [00:20<34:49,  3.50it/s][A
+Iteration:   1%|          | 71/7387 [00:20<34:50,  3.50it/s][A
+Iteration:   1%|          | 72/7387 [00:20<34:51,  3.50it/s][A
+Iteration:   1%|          | 73/7387 [00:20<34:51,  3.50it/s][A
+Iteration:   1%|          | 74/7387 [00:21<34:51,  3.50it/s][A
+Iteration:   1%|          | 75/7387 [00:21<34:52,  3.50it/s][A
+Iteration:   1%|          | 76/7387 [00:21<34:51,  3.50it/s][A
+Iteration:   1%|          | 77/7387 [00:22<34:51,  3.49it/s][A
+Iteration:   1%|          | 78/7387 [00:22<34:51,  3.49it/s][A
+Iteration:   1%|          | 79/7387 [00:22<34:51,  3.49it/s][A
+Iteration:   1%|          | 80/7387 [00:22<34:50,  3.49it/s][A
+Iteration:   1%|          | 81/7387 [00:23<34:50,  3.50it/s][A
+Iteration:   1%|          | 82/7387 [00:23<35:06,  3.47it/s][A
+Iteration:   1%|          | 83/7387 [00:23<34:59,  3.48it/s][A
+Iteration:   1%|          | 84/7387 [00:24<34:56,  3.48it/s][A
+Iteration:   1%|          | 85/7387 [00:24<34:53,  3.49it/s][A
+Iteration:   1%|          | 86/7387 [00:24<34:52,  3.49it/s][A
+Iteration:   1%|          | 87/7387 [00:24<34:51,  3.49it/s][A
+Iteration:   1%|          | 88/7387 [00:25<34:50,  3.49it/s][A
+Iteration:   1%|          | 89/7387 [00:25<34:49,  3.49it/s][A
+Iteration:   1%|          | 90/7387 [00:25<34:50,  3.49it/s][A
+Iteration:   1%|          | 91/7387 [00:26<34:50,  3.49it/s][A
+Iteration:   1%|          | 92/7387 [00:26<34:49,  3.49it/s][A
+Iteration:   1%|▏         | 93/7387 [00:26<34:48,  3.49it/s][A
+Iteration:   1%|▏         | 94/7387 [00:26<34:48,  3.49it/s][A
+Iteration:   1%|▏         | 95/7387 [00:27<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 96/7387 [00:27<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 97/7387 [00:27<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 98/7387 [00:28<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 99/7387 [00:28<34:45,  3.49it/s][A
+Iteration:   1%|▏         | 100/7387 [00:28<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 101/7387 [00:28<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 102/7387 [00:29<34:48,  3.49it/s][A
+Iteration:   1%|▏         | 103/7387 [00:29<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 104/7387 [00:29<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 105/7387 [00:30<34:47,  3.49it/s][A
+Iteration:   1%|▏         | 106/7387 [00:30<34:48,  3.49it/s][A
+Iteration:   1%|▏         | 107/7387 [00:30<34:48,  3.49it/s][A
+Iteration:   1%|▏         | 108/7387 [00:30<34:48,  3.49it/s][A
+Iteration:   1%|▏         | 109/7387 [00:31<34:48,  3.49it/s][A
+Iteration:   1%|▏         | 110/7387 [00:31<34:47,  3.49it/s][A
+Iteration:   2%|▏         | 111/7387 [00:31<34:45,  3.49it/s][A
+Iteration:   2%|▏         | 112/7387 [00:32<34:47,  3.49it/s][A
+Iteration:   2%|▏         | 113/7387 [00:32<34:47,  3.48it/s][A
+Iteration:   2%|▏         | 114/7387 [00:32<34:46,  3.49it/s][A
+Iteration:   2%|▏         | 115/7387 [00:32<34:46,  3.48it/s][A
+Iteration:   2%|▏         | 116/7387 [00:33<34:47,  3.48it/s][A

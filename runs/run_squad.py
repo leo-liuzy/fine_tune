@@ -408,14 +408,14 @@ def main(args):
     if args.local_rank == -1 or args.no_cuda:
         device = torch.device(
             f"cuda:{args.gpu_id}" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
-        args.n_gpu = torch.cuda.device_count()  # TODO: delete -1
+        args.n_gpu =  1  # TODO:  torch.cuda.device_count()
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
         torch.distributed.init_proBertForQuestionAnsweringcess_group(backend='nccl')
         args.n_gpu = 1
     args.device = device
-    bp()
+    # bp()
 
     # Setup logging
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
@@ -572,7 +572,7 @@ if __name__ == "__main__":
                         help="unfreeze top k transformer layers")
     parser.add_argument("--init_scale", default=1e-3, type=float,
                         help="unfreeze top k transformer layers")
-    parser.add_argument("--adapter_activation", default=0, type=int,
+    parser.add_argument("--adapter_activation", default=1, type=int,
                         help="0/1 flag to decide if apply non-linearity function on bottleneck")
     # bidaf parameter
     parser.add_argument("--top_layer", default="linear", type=str,
@@ -677,6 +677,8 @@ if __name__ == "__main__":
                          f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
         if args.apply_adapter:
             model_dir_name += f".adapter{args.bottleneck_size}"
+        if args.adapter_activation == 0:
+            model_dir_name += f"adapterNoActivation"
         if args.check:
             model_dir_name += ".check"
         args.output_dir = out_dir + f"/{model_dir_name}"
