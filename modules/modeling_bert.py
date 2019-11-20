@@ -1229,6 +1229,7 @@ class AdapterBlock(nn.Module):
         self.input_size = config.hidden_size
         self.hidden_size = config.bottleneck_size  # TODO: add param in config
         self.activation = gelu_new
+        self.apply_adapter_activation = config.adapter_activation
         self.init_scale = config.init_scale  # TODO: add param in config
         self.compress = nn.Linear(self.input_size, self.hidden_size)
         self.decompress = nn.Linear(self.hidden_size, self.input_size)
@@ -1258,7 +1259,7 @@ class AdapterBlock(nn.Module):
     def forward(self, x: torch.tensor) -> torch.tensor:
         input_tensor = x
         x = self.compress(x)
-        if args.adapter_activation:
+        if self.apply_adapter_activation:
             x = self.activation(x)
         x = self.decompress(x)
         return input_tensor + x
