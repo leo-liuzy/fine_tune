@@ -440,6 +440,7 @@ def main(args):
     config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     # adapter argument
+    config.adapter_activation = args.adapter_activation
     config.apply_adapter = args.apply_adapter  # apply adapter
     config.bottleneck_size = args.bottleneck_size  # set bottleneck size
     config.init_scale = args.init_scale  # set bottleneck size
