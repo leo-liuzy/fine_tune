@@ -103,6 +103,9 @@ def train(args, train_dataset, model, tokenizer):
         tb_writer = SummaryWriter(f"{args.logging_dir}/{summary_name}")
 
     args.train_batch_size = args.per_gpu_train_batch_size * max(1, args.n_gpu)
+    if args.num_sample > -1:
+        random_indices = np.random.randint(0, len(train_dataset))
+        
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
 
@@ -394,8 +397,9 @@ def main(args):
 
     # Setup CUDA, GPU & distributed training
     if args.local_rank == -1 or args.no_cuda:
-        device = torch.device("cuda:1" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
-        args.n_gpu = torch.cuda.device_count() - 1  # TODO: delete -1
+        device = torch.device(
+            f"cuda:{args.gpu_id}" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
+        args.n_gpu = torch.cuda.device_count()  # TODO: delete -1
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
@@ -539,6 +543,8 @@ if __name__ == "__main__":
                         help="Logging dir")
     parser.add_argument("--check", action="store_true",
                         help="flag to indicate if current execution is for checking")
+    parser.add_argument("--gpu_id", default=None, type=int, required=True,
+                        help="The index of gpu to use")
 
     ## Other parameters
     # elmo_style + freezing/unfreezing
