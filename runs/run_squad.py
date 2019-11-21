@@ -536,8 +536,12 @@ def main(args):
 def construct_folder_name(args):
     model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer." \
                      f"epoch{args.num_train_epochs}.bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
-    if args.apply_adapter:
-        model_dir_name += f".adapter{args.bottleneck_size}"
+    if args.apply_first_adapter_in_layer:
+        model_dir_name += f".adapter{args.bottleneck_size}.FirstAdaInLayer"
+    if args.apply_second_adapter_in_layer:
+        model_dir_name += f".adapter{args.bottleneck_size}.SecondAdaInLayer"
+    if args.apply_adapter_between_layer:
+        model_dir_name += f".adapter{args.bottleneck_size}.AdaBetweenLayer"
     if args.adapter_activation == 0:
         model_dir_name += f".adapterNoActivation"
     if args.num_sample > -1:
