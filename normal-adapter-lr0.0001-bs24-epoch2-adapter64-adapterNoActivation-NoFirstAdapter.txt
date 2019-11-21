@@ -1,0 +1,1538 @@
+To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
+To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
+11/21/2019 12:54:51 - WARNING - __main__ -   Process rank: -1, device: cuda:0, n_gpu: 1, distributed training: False, 16-bits training: False
+11/21/2019 12:54:51 - INFO - modules.configuration_utils -   loading configuration file /gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-config.json
+11/21/2019 12:54:51 - INFO - modules.configuration_utils -   Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 2,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 2,
+  "use_bfloat16": false,
+  "vocab_size": 30522
+}
+
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   Model name '/gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-vocab.txt' not found in model shortcut name list (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, bert-base-german-dbmdz-uncased). Assuming '/gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-vocab.txt' is a path or url to a directory containing tokenizer files.
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   Didn't find file /gscratch/stf/zeyuliu2/fine_tune/cache/added_tokens.json. We won't load it.
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   Didn't find file /gscratch/stf/zeyuliu2/fine_tune/cache/special_tokens_map.json. We won't load it.
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   Didn't find file /gscratch/stf/zeyuliu2/fine_tune/cache/tokenizer_config.json. We won't load it.
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   loading file /gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-vocab.txt
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   loading file None
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   loading file None
+11/21/2019 12:54:51 - INFO - utils.tokenization_utils -   loading file None
+11/21/2019 12:54:51 - INFO - modules.modeling_utils -   loading weights file /gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-pytorch_model.bin
+11/21/2019 12:54:55 - INFO - modules.modeling_utils -   Weights of BertForQuestionAnswering not initialized from pretrained model: ['bert.encoder.layer.0.attention.output.adapter.compress.weight', 'bert.encoder.layer.0.attention.output.adapter.compress.bias', 'bert.encoder.layer.0.attention.output.adapter.decompress.weight', 'bert.encoder.layer.0.attention.output.adapter.decompress.bias', 'bert.encoder.layer.0.output.adapter.compress.weight', 'bert.encoder.layer.0.output.adapter.compress.bias', 'bert.encoder.layer.0.output.adapter.decompress.weight', 'bert.encoder.layer.0.output.adapter.decompress.bias', 'bert.encoder.layer.1.attention.output.adapter.compress.weight', 'bert.encoder.layer.1.attention.output.adapter.compress.bias', 'bert.encoder.layer.1.attention.output.adapter.decompress.weight', 'bert.encoder.layer.1.attention.output.adapter.decompress.bias', 'bert.encoder.layer.1.output.adapter.compress.weight', 'bert.encoder.layer.1.output.adapter.compress.bias', 'bert.encoder.layer.1.output.adapter.decompress.weight', 'bert.encoder.layer.1.output.adapter.decompress.bias', 'bert.encoder.layer.2.attention.output.adapter.compress.weight', 'bert.encoder.layer.2.attention.output.adapter.compress.bias', 'bert.encoder.layer.2.attention.output.adapter.decompress.weight', 'bert.encoder.layer.2.attention.output.adapter.decompress.bias', 'bert.encoder.layer.2.output.adapter.compress.weight', 'bert.encoder.layer.2.output.adapter.compress.bias', 'bert.encoder.layer.2.output.adapter.decompress.weight', 'bert.encoder.layer.2.output.adapter.decompress.bias', 'bert.encoder.layer.3.attention.output.adapter.compress.weight', 'bert.encoder.layer.3.attention.output.adapter.compress.bias', 'bert.encoder.layer.3.attention.output.adapter.decompress.weight', 'bert.encoder.layer.3.attention.output.adapter.decompress.bias', 'bert.encoder.layer.3.output.adapter.compress.weight', 'bert.encoder.layer.3.output.adapter.compress.bias', 'bert.encoder.layer.3.output.adapter.decompress.weight', 'bert.encoder.layer.3.output.adapter.decompress.bias', 'bert.encoder.layer.4.attention.output.adapter.compress.weight', 'bert.encoder.layer.4.attention.output.adapter.compress.bias', 'bert.encoder.layer.4.attention.output.adapter.decompress.weight', 'bert.encoder.layer.4.attention.output.adapter.decompress.bias', 'bert.encoder.layer.4.output.adapter.compress.weight', 'bert.encoder.layer.4.output.adapter.compress.bias', 'bert.encoder.layer.4.output.adapter.decompress.weight', 'bert.encoder.layer.4.output.adapter.decompress.bias', 'bert.encoder.layer.5.attention.output.adapter.compress.weight', 'bert.encoder.layer.5.attention.output.adapter.compress.bias', 'bert.encoder.layer.5.attention.output.adapter.decompress.weight', 'bert.encoder.layer.5.attention.output.adapter.decompress.bias', 'bert.encoder.layer.5.output.adapter.compress.weight', 'bert.encoder.layer.5.output.adapter.compress.bias', 'bert.encoder.layer.5.output.adapter.decompress.weight', 'bert.encoder.layer.5.output.adapter.decompress.bias', 'bert.encoder.layer.6.attention.output.adapter.compress.weight', 'bert.encoder.layer.6.attention.output.adapter.compress.bias', 'bert.encoder.layer.6.attention.output.adapter.decompress.weight', 'bert.encoder.layer.6.attention.output.adapter.decompress.bias', 'bert.encoder.layer.6.output.adapter.compress.weight', 'bert.encoder.layer.6.output.adapter.compress.bias', 'bert.encoder.layer.6.output.adapter.decompress.weight', 'bert.encoder.layer.6.output.adapter.decompress.bias', 'bert.encoder.layer.7.attention.output.adapter.compress.weight', 'bert.encoder.layer.7.attention.output.adapter.compress.bias', 'bert.encoder.layer.7.attention.output.adapter.decompress.weight', 'bert.encoder.layer.7.attention.output.adapter.decompress.bias', 'bert.encoder.layer.7.output.adapter.compress.weight', 'bert.encoder.layer.7.output.adapter.compress.bias', 'bert.encoder.layer.7.output.adapter.decompress.weight', 'bert.encoder.layer.7.output.adapter.decompress.bias', 'bert.encoder.layer.8.attention.output.adapter.compress.weight', 'bert.encoder.layer.8.attention.output.adapter.compress.bias', 'bert.encoder.layer.8.attention.output.adapter.decompress.weight', 'bert.encoder.layer.8.attention.output.adapter.decompress.bias', 'bert.encoder.layer.8.output.adapter.compress.weight', 'bert.encoder.layer.8.output.adapter.compress.bias', 'bert.encoder.layer.8.output.adapter.decompress.weight', 'bert.encoder.layer.8.output.adapter.decompress.bias', 'bert.encoder.layer.9.attention.output.adapter.compress.weight', 'bert.encoder.layer.9.attention.output.adapter.compress.bias', 'bert.encoder.layer.9.attention.output.adapter.decompress.weight', 'bert.encoder.layer.9.attention.output.adapter.decompress.bias', 'bert.encoder.layer.9.output.adapter.compress.weight', 'bert.encoder.layer.9.output.adapter.compress.bias', 'bert.encoder.layer.9.output.adapter.decompress.weight', 'bert.encoder.layer.9.output.adapter.decompress.bias', 'bert.encoder.layer.10.attention.output.adapter.compress.weight', 'bert.encoder.layer.10.attention.output.adapter.compress.bias', 'bert.encoder.layer.10.attention.output.adapter.decompress.weight', 'bert.encoder.layer.10.attention.output.adapter.decompress.bias', 'bert.encoder.layer.10.output.adapter.compress.weight', 'bert.encoder.layer.10.output.adapter.compress.bias', 'bert.encoder.layer.10.output.adapter.decompress.weight', 'bert.encoder.layer.10.output.adapter.decompress.bias', 'bert.encoder.layer.11.attention.output.adapter.compress.weight', 'bert.encoder.layer.11.attention.output.adapter.compress.bias', 'bert.encoder.layer.11.attention.output.adapter.decompress.weight', 'bert.encoder.layer.11.attention.output.adapter.decompress.bias', 'bert.encoder.layer.11.output.adapter.compress.weight', 'bert.encoder.layer.11.output.adapter.compress.bias', 'bert.encoder.layer.11.output.adapter.decompress.weight', 'bert.encoder.layer.11.output.adapter.decompress.bias', 'qa_outputs.weight', 'qa_outputs.bias']
+11/21/2019 12:54:55 - INFO - modules.modeling_utils -   Weights from pretrained model not used in BertForQuestionAnswering: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+11/21/2019 12:54:58 - INFO - __main__ -   Training/evaluation parameters Namespace(adam_epsilon=1e-08, adapter_activation=0, apply_adapter=True, bottleneck_size=64, cache_dir='', check=False, config_name='/gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-config.json', device=device(type='cuda', index=0), do_eval=True, do_lower_case=True, do_train=True, doc_stride=128, dropout=0.2, elmo_style=False, eval_all_checkpoints=False, evaluate_during_training=True, fp16=False, fp16_opt_level='O1', gpu_id=0, gradient_accumulation_steps=1, init_scale=0.001, learning_rate=0.0001, local_rank=-1, logging_dir='/gscratch/stf/zeyuliu2/fine_tune/logs', logging_steps=50, max_answer_length=30, max_grad_norm=1.0, max_query_length=64, max_seq_length=384, max_steps=-1, model_name_or_path='/gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-pytorch_model.bin', model_type='bert', n_best_size=20, n_gpu=1, no_cuda=False, null_score_diff_threshold=0.0, num_sample=-1, num_train_epochs=10, output_dir='/gscratch/stf/zeyuliu2/fine_tune/out/lr0.0001.unfreeze_top_0_bert_layer.epoch10.bs12.adapter64.adapterNoActivation', overwrite_cache=False, overwrite_output_dir=True, per_gpu_eval_batch_size=12, per_gpu_train_batch_size=12, predict_file='/gscratch/stf/zeyuliu2/fine_tune/data/squad1_1/dev-v1.1.json', run_mode='single_run', save_steps=7386, seed=42, server_ip='', server_port='', tokenizer_name='/gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-vocab.txt', top_layer='linear', train_file='/gscratch/stf/zeyuliu2/fine_tune/data/squad1_1/train-v1.1.json', unfreeze_top_k_bert_layer=0, verbose_logging=False, version_2_with_negative=False, warmup_steps=0, weight_decay=0.0)
+11/21/2019 12:54:58 - INFO - __main__ -   Loading features from cached file /gscratch/stf/zeyuliu2/fine_tune/data/squad1_1/cached_train_bert-base-uncased-pytorch_model.bin_384
+11/21/2019 12:55:12 - INFO - __main__ -   ***** Running training *****
+11/21/2019 12:55:12 - INFO - __main__ -     Num examples = 88641
+11/21/2019 12:55:12 - INFO - __main__ -     Num Epochs = 10
+11/21/2019 12:55:12 - INFO - __main__ -     Instantaneous batch size per GPU = 12
+11/21/2019 12:55:12 - INFO - __main__ -     Total train batch size (w. parallel, distributed & accumulation) = 12
+11/21/2019 12:55:12 - INFO - __main__ -     Gradient Accumulation steps = 1
+11/21/2019 12:55:12 - INFO - __main__ -     Total optimization steps = 73870
+Epoch:   0%|          | 0/10 [00:00<?, ?it/s]
+Iteration:   0%|          | 0/7387 [00:00<?, ?it/s][A
+Iteration:   0%|          | 1/7387 [00:00<1:08:52,  1.79it/s][A
+Iteration:   0%|          | 2/7387 [00:00<1:01:29,  2.00it/s][A
+Iteration:   0%|          | 3/7387 [00:01<56:18,  2.19it/s]  [A
+Iteration:   0%|          | 4/7387 [00:01<52:40,  2.34it/s][A
+Iteration:   0%|          | 5/7387 [00:01<50:07,  2.45it/s][A
+Iteration:   0%|          | 6/7387 [00:02<48:20,  2.54it/s][A
+Iteration:   0%|          | 7/7387 [00:02<47:05,  2.61it/s][A
+Iteration:   0%|          | 8/7387 [00:03<46:12,  2.66it/s][A
+Iteration:   0%|          | 9/7387 [00:03<45:38,  2.69it/s][A
+Iteration:   0%|          | 10/7387 [00:03<45:11,  2.72it/s][A
+Iteration:   0%|          | 11/7387 [00:04<44:52,  2.74it/s][A
+Iteration:   0%|          | 12/7387 [00:04<44:39,  2.75it/s][A
+Iteration:   0%|          | 13/7387 [00:04<44:30,  2.76it/s][A
+Iteration:   0%|          | 14/7387 [00:05<44:23,  2.77it/s][A
+Iteration:   0%|          | 15/7387 [00:05<44:18,  2.77it/s][A
+Iteration:   0%|          | 16/7387 [00:05<44:14,  2.78it/s][A
+Iteration:   0%|          | 17/7387 [00:06<44:12,  2.78it/s][A
+Iteration:   0%|          | 18/7387 [00:06<44:10,  2.78it/s][A
+Iteration:   0%|          | 19/7387 [00:07<44:09,  2.78it/s][A
+Iteration:   0%|          | 20/7387 [00:07<44:08,  2.78it/s][A
+Iteration:   0%|          | 21/7387 [00:07<44:07,  2.78it/s][A
+Iteration:   0%|          | 22/7387 [00:08<44:06,  2.78it/s][A
+Iteration:   0%|          | 23/7387 [00:08<44:06,  2.78it/s][A
+Iteration:   0%|          | 24/7387 [00:08<44:05,  2.78it/s][A
+Iteration:   0%|          | 25/7387 [00:09<44:05,  2.78it/s][A
+Iteration:   0%|          | 26/7387 [00:09<44:05,  2.78it/s][A
+Iteration:   0%|          | 27/7387 [00:09<44:04,  2.78it/s][A
+Iteration:   0%|          | 28/7387 [00:10<44:04,  2.78it/s][A
+Iteration:   0%|          | 29/7387 [00:10<44:03,  2.78it/s][A
+Iteration:   0%|          | 30/7387 [00:10<44:03,  2.78it/s][A
+Iteration:   0%|          | 31/7387 [00:11<44:02,  2.78it/s][A
+Iteration:   0%|          | 32/7387 [00:11<44:04,  2.78it/s][A
+Iteration:   0%|          | 33/7387 [00:12<44:06,  2.78it/s][A
+Iteration:   0%|          | 34/7387 [00:12<44:05,  2.78it/s][A
+Iteration:   0%|          | 35/7387 [00:12<44:03,  2.78it/s][A
+Iteration:   0%|          | 36/7387 [00:13<44:02,  2.78it/s][A
+Iteration:   1%|          | 37/7387 [00:13<44:01,  2.78it/s][A
+Iteration:   1%|          | 38/7387 [00:13<44:00,  2.78it/s][A
+Iteration:   1%|          | 39/7387 [00:14<43:59,  2.78it/s][A
+Iteration:   1%|          | 40/7387 [00:14<43:58,  2.78it/s][A
+Iteration:   1%|          | 41/7387 [00:14<43:58,  2.78it/s][A
+Iteration:   1%|          | 42/7387 [00:15<44:02,  2.78it/s][A
+Iteration:   1%|          | 43/7387 [00:15<44:00,  2.78it/s][A
+Iteration:   1%|          | 44/7387 [00:16<43:59,  2.78it/s][A
+Iteration:   1%|          | 45/7387 [00:16<43:58,  2.78it/s][A
+Iteration:   1%|          | 46/7387 [00:16<43:57,  2.78it/s][A
+Iteration:   1%|          | 47/7387 [00:17<43:57,  2.78it/s][A
+Iteration:   1%|          | 48/7387 [00:17<43:56,  2.78it/s][A
+Iteration:   1%|          | 49/7387 [00:17<43:55,  2.78it/s][A11/21/2019 12:55:31 - INFO - __main__ -   Creating features from dataset file at /gscratch/stf/zeyuliu2/fine_tune/data/squad1_1/dev-v1.1.json
+
+
+  0%|          | 0/10570 [00:00<?, ?it/s][A[A11/21/2019 12:55:31 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   unique_id: 1000000000
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   example_index: 0
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   tokens: [CLS] which nfl team represented the afc at super bowl 50 ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   token_to_orig_map: 13:0 14:1 15:2 16:3 17:4 18:5 19:6 20:7 21:8 22:9 23:10 24:11 25:12 26:13 27:14 28:15 29:16 30:17 31:17 32:17 33:18 34:19 35:20 36:21 37:21 38:22 39:23 40:24 41:25 42:26 43:26 44:26 45:27 46:28 47:29 48:30 49:31 50:32 51:33 52:34 53:35 54:35 55:35 56:36 57:37 58:38 59:39 60:39 61:39 62:40 63:41 64:42 65:43 66:44 67:45 68:46 69:46 70:47 71:48 72:49 73:50 74:51 75:52 76:53 77:53 78:54 79:54 80:55 81:56 82:56 83:56 84:57 85:58 86:59 87:60 88:61 89:62 90:63 91:64 92:65 93:66 94:66 95:67 96:67 97:68 98:69 99:70 100:71 101:72 102:73 103:74 104:74 105:75 106:76 107:77 108:78 109:79 110:79 111:80 112:80 113:81 114:82 115:83 116:83 117:83 118:84 119:84 120:85 121:86 122:87 123:88 124:89 125:89 126:90 127:91 128:92 129:93 130:94 131:95 132:96 133:97 134:98 135:99 136:100 137:100 138:100 139:101 140:101 141:102 142:103 143:104 144:105 145:106 146:107 147:108 148:109 149:110 150:110 151:111 152:112 153:112 154:112 155:112 156:113 157:114 158:115 159:116 160:117 161:118 162:119 163:120 164:121 165:122 166:122 167:122 168:123 169:123
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   token_is_max_context: 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True 169:True
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   input_ids: 101 2029 5088 2136 3421 1996 10511 2012 3565 4605 2753 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:31 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000001
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 1
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] which nfl team represented the nfc at super bowl 50 ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 13:0 14:1 15:2 16:3 17:4 18:5 19:6 20:7 21:8 22:9 23:10 24:11 25:12 26:13 27:14 28:15 29:16 30:17 31:17 32:17 33:18 34:19 35:20 36:21 37:21 38:22 39:23 40:24 41:25 42:26 43:26 44:26 45:27 46:28 47:29 48:30 49:31 50:32 51:33 52:34 53:35 54:35 55:35 56:36 57:37 58:38 59:39 60:39 61:39 62:40 63:41 64:42 65:43 66:44 67:45 68:46 69:46 70:47 71:48 72:49 73:50 74:51 75:52 76:53 77:53 78:54 79:54 80:55 81:56 82:56 83:56 84:57 85:58 86:59 87:60 88:61 89:62 90:63 91:64 92:65 93:66 94:66 95:67 96:67 97:68 98:69 99:70 100:71 101:72 102:73 103:74 104:74 105:75 106:76 107:77 108:78 109:79 110:79 111:80 112:80 113:81 114:82 115:83 116:83 117:83 118:84 119:84 120:85 121:86 122:87 123:88 124:89 125:89 126:90 127:91 128:92 129:93 130:94 131:95 132:96 133:97 134:98 135:99 136:100 137:100 138:100 139:101 140:101 141:102 142:103 143:104 144:105 145:106 146:107 147:108 148:109 149:110 150:110 151:111 152:112 153:112 154:112 155:112 156:113 157:114 158:115 159:116 160:117 161:118 162:119 163:120 164:121 165:122 166:122 167:122 168:123 169:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True 169:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2029 5088 2136 3421 1996 22309 2012 3565 4605 2753 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000002
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 2
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] where did super bowl 50 take place ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 10:0 11:1 12:2 13:3 14:4 15:5 16:6 17:7 18:8 19:9 20:10 21:11 22:12 23:13 24:14 25:15 26:16 27:17 28:17 29:17 30:18 31:19 32:20 33:21 34:21 35:22 36:23 37:24 38:25 39:26 40:26 41:26 42:27 43:28 44:29 45:30 46:31 47:32 48:33 49:34 50:35 51:35 52:35 53:36 54:37 55:38 56:39 57:39 58:39 59:40 60:41 61:42 62:43 63:44 64:45 65:46 66:46 67:47 68:48 69:49 70:50 71:51 72:52 73:53 74:53 75:54 76:54 77:55 78:56 79:56 80:56 81:57 82:58 83:59 84:60 85:61 86:62 87:63 88:64 89:65 90:66 91:66 92:67 93:67 94:68 95:69 96:70 97:71 98:72 99:73 100:74 101:74 102:75 103:76 104:77 105:78 106:79 107:79 108:80 109:80 110:81 111:82 112:83 113:83 114:83 115:84 116:84 117:85 118:86 119:87 120:88 121:89 122:89 123:90 124:91 125:92 126:93 127:94 128:95 129:96 130:97 131:98 132:99 133:100 134:100 135:100 136:101 137:101 138:102 139:103 140:104 141:105 142:106 143:107 144:108 145:109 146:110 147:110 148:111 149:112 150:112 151:112 152:112 153:113 154:114 155:115 156:116 157:117 158:118 159:119 160:120 161:121 162:122 163:122 164:122 165:123 166:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 10:True 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2073 2106 3565 4605 2753 2202 2173 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000003
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 3
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] which nfl team won super bowl 50 ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 10:0 11:1 12:2 13:3 14:4 15:5 16:6 17:7 18:8 19:9 20:10 21:11 22:12 23:13 24:14 25:15 26:16 27:17 28:17 29:17 30:18 31:19 32:20 33:21 34:21 35:22 36:23 37:24 38:25 39:26 40:26 41:26 42:27 43:28 44:29 45:30 46:31 47:32 48:33 49:34 50:35 51:35 52:35 53:36 54:37 55:38 56:39 57:39 58:39 59:40 60:41 61:42 62:43 63:44 64:45 65:46 66:46 67:47 68:48 69:49 70:50 71:51 72:52 73:53 74:53 75:54 76:54 77:55 78:56 79:56 80:56 81:57 82:58 83:59 84:60 85:61 86:62 87:63 88:64 89:65 90:66 91:66 92:67 93:67 94:68 95:69 96:70 97:71 98:72 99:73 100:74 101:74 102:75 103:76 104:77 105:78 106:79 107:79 108:80 109:80 110:81 111:82 112:83 113:83 114:83 115:84 116:84 117:85 118:86 119:87 120:88 121:89 122:89 123:90 124:91 125:92 126:93 127:94 128:95 129:96 130:97 131:98 132:99 133:100 134:100 135:100 136:101 137:101 138:102 139:103 140:104 141:105 142:106 143:107 144:108 145:109 146:110 147:110 148:111 149:112 150:112 151:112 152:112 153:113 154:114 155:115 156:116 157:117 158:118 159:119 160:120 161:121 162:122 163:122 164:122 165:123 166:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 10:True 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2029 5088 2136 2180 3565 4605 2753 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000004
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 4
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what color was used to emphasize the 50th anniversary of the super bowl ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 16:0 17:1 18:2 19:3 20:4 21:5 22:6 23:7 24:8 25:9 26:10 27:11 28:12 29:13 30:14 31:15 32:16 33:17 34:17 35:17 36:18 37:19 38:20 39:21 40:21 41:22 42:23 43:24 44:25 45:26 46:26 47:26 48:27 49:28 50:29 51:30 52:31 53:32 54:33 55:34 56:35 57:35 58:35 59:36 60:37 61:38 62:39 63:39 64:39 65:40 66:41 67:42 68:43 69:44 70:45 71:46 72:46 73:47 74:48 75:49 76:50 77:51 78:52 79:53 80:53 81:54 82:54 83:55 84:56 85:56 86:56 87:57 88:58 89:59 90:60 91:61 92:62 93:63 94:64 95:65 96:66 97:66 98:67 99:67 100:68 101:69 102:70 103:71 104:72 105:73 106:74 107:74 108:75 109:76 110:77 111:78 112:79 113:79 114:80 115:80 116:81 117:82 118:83 119:83 120:83 121:84 122:84 123:85 124:86 125:87 126:88 127:89 128:89 129:90 130:91 131:92 132:93 133:94 134:95 135:96 136:97 137:98 138:99 139:100 140:100 141:100 142:101 143:101 144:102 145:103 146:104 147:105 148:106 149:107 150:108 151:109 152:110 153:110 154:111 155:112 156:112 157:112 158:112 159:113 160:114 161:115 162:116 163:117 164:118 165:119 166:120 167:121 168:122 169:122 170:122 171:123 172:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True 169:True 170:True 171:True 172:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 3609 2001 2109 2000 17902 1996 12951 5315 1997 1996 3565 4605 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000005
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 5
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what was the theme of super bowl 50 ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 11:0 12:1 13:2 14:3 15:4 16:5 17:6 18:7 19:8 20:9 21:10 22:11 23:12 24:13 25:14 26:15 27:16 28:17 29:17 30:17 31:18 32:19 33:20 34:21 35:21 36:22 37:23 38:24 39:25 40:26 41:26 42:26 43:27 44:28 45:29 46:30 47:31 48:32 49:33 50:34 51:35 52:35 53:35 54:36 55:37 56:38 57:39 58:39 59:39 60:40 61:41 62:42 63:43 64:44 65:45 66:46 67:46 68:47 69:48 70:49 71:50 72:51 73:52 74:53 75:53 76:54 77:54 78:55 79:56 80:56 81:56 82:57 83:58 84:59 85:60 86:61 87:62 88:63 89:64 90:65 91:66 92:66 93:67 94:67 95:68 96:69 97:70 98:71 99:72 100:73 101:74 102:74 103:75 104:76 105:77 106:78 107:79 108:79 109:80 110:80 111:81 112:82 113:83 114:83 115:83 116:84 117:84 118:85 119:86 120:87 121:88 122:89 123:89 124:90 125:91 126:92 127:93 128:94 129:95 130:96 131:97 132:98 133:99 134:100 135:100 136:100 137:101 138:101 139:102 140:103 141:104 142:105 143:106 144:107 145:108 146:109 147:110 148:110 149:111 150:112 151:112 152:112 153:112 154:113 155:114 156:115 157:116 158:117 159:118 160:119 161:120 162:121 163:122 164:122 165:122 166:123 167:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2001 1996 4323 1997 3565 4605 2753 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000006
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 6
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what day was the game played on ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 10:0 11:1 12:2 13:3 14:4 15:5 16:6 17:7 18:8 19:9 20:10 21:11 22:12 23:13 24:14 25:15 26:16 27:17 28:17 29:17 30:18 31:19 32:20 33:21 34:21 35:22 36:23 37:24 38:25 39:26 40:26 41:26 42:27 43:28 44:29 45:30 46:31 47:32 48:33 49:34 50:35 51:35 52:35 53:36 54:37 55:38 56:39 57:39 58:39 59:40 60:41 61:42 62:43 63:44 64:45 65:46 66:46 67:47 68:48 69:49 70:50 71:51 72:52 73:53 74:53 75:54 76:54 77:55 78:56 79:56 80:56 81:57 82:58 83:59 84:60 85:61 86:62 87:63 88:64 89:65 90:66 91:66 92:67 93:67 94:68 95:69 96:70 97:71 98:72 99:73 100:74 101:74 102:75 103:76 104:77 105:78 106:79 107:79 108:80 109:80 110:81 111:82 112:83 113:83 114:83 115:84 116:84 117:85 118:86 119:87 120:88 121:89 122:89 123:90 124:91 125:92 126:93 127:94 128:95 129:96 130:97 131:98 132:99 133:100 134:100 135:100 136:101 137:101 138:102 139:103 140:104 141:105 142:106 143:107 144:108 145:109 146:110 147:110 148:111 149:112 150:112 151:112 152:112 153:113 154:114 155:115 156:116 157:117 158:118 159:119 160:120 161:121 162:122 163:122 164:122 165:123 166:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 10:True 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2154 2001 1996 2208 2209 2006 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000007
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 7
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what is the afc short for ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 9:0 10:1 11:2 12:3 13:4 14:5 15:6 16:7 17:8 18:9 19:10 20:11 21:12 22:13 23:14 24:15 25:16 26:17 27:17 28:17 29:18 30:19 31:20 32:21 33:21 34:22 35:23 36:24 37:25 38:26 39:26 40:26 41:27 42:28 43:29 44:30 45:31 46:32 47:33 48:34 49:35 50:35 51:35 52:36 53:37 54:38 55:39 56:39 57:39 58:40 59:41 60:42 61:43 62:44 63:45 64:46 65:46 66:47 67:48 68:49 69:50 70:51 71:52 72:53 73:53 74:54 75:54 76:55 77:56 78:56 79:56 80:57 81:58 82:59 83:60 84:61 85:62 86:63 87:64 88:65 89:66 90:66 91:67 92:67 93:68 94:69 95:70 96:71 97:72 98:73 99:74 100:74 101:75 102:76 103:77 104:78 105:79 106:79 107:80 108:80 109:81 110:82 111:83 112:83 113:83 114:84 115:84 116:85 117:86 118:87 119:88 120:89 121:89 122:90 123:91 124:92 125:93 126:94 127:95 128:96 129:97 130:98 131:99 132:100 133:100 134:100 135:101 136:101 137:102 138:103 139:104 140:105 141:106 142:107 143:108 144:109 145:110 146:110 147:111 148:112 149:112 150:112 151:112 152:113 153:114 154:115 155:116 156:117 157:118 158:119 159:120 160:121 161:122 162:122 163:122 164:123 165:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 9:True 10:True 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2003 1996 10511 2460 2005 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000008
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 8
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what was the theme of super bowl 50 ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 11:0 12:1 13:2 14:3 15:4 16:5 17:6 18:7 19:8 20:9 21:10 22:11 23:12 24:13 25:14 26:15 27:16 28:17 29:17 30:17 31:18 32:19 33:20 34:21 35:21 36:22 37:23 38:24 39:25 40:26 41:26 42:26 43:27 44:28 45:29 46:30 47:31 48:32 49:33 50:34 51:35 52:35 53:35 54:36 55:37 56:38 57:39 58:39 59:39 60:40 61:41 62:42 63:43 64:44 65:45 66:46 67:46 68:47 69:48 70:49 71:50 72:51 73:52 74:53 75:53 76:54 77:54 78:55 79:56 80:56 81:56 82:57 83:58 84:59 85:60 86:61 87:62 88:63 89:64 90:65 91:66 92:66 93:67 94:67 95:68 96:69 97:70 98:71 99:72 100:73 101:74 102:74 103:75 104:76 105:77 106:78 107:79 108:79 109:80 110:80 111:81 112:82 113:83 114:83 115:83 116:84 117:84 118:85 119:86 120:87 121:88 122:89 123:89 124:90 125:91 126:92 127:93 128:94 129:95 130:96 131:97 132:98 133:99 134:100 135:100 136:100 137:101 138:101 139:102 140:103 141:104 142:105 143:106 144:107 145:108 146:109 147:110 148:110 149:111 150:112 151:112 152:112 153:112 154:113 155:114 156:115 157:116 158:117 159:118 160:119 161:120 162:121 163:122 164:122 165:122 166:123 167:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2001 1996 4323 1997 3565 4605 2753 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000009
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 9
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what does afc stand for ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 8:0 9:1 10:2 11:3 12:4 13:5 14:6 15:7 16:8 17:9 18:10 19:11 20:12 21:13 22:14 23:15 24:16 25:17 26:17 27:17 28:18 29:19 30:20 31:21 32:21 33:22 34:23 35:24 36:25 37:26 38:26 39:26 40:27 41:28 42:29 43:30 44:31 45:32 46:33 47:34 48:35 49:35 50:35 51:36 52:37 53:38 54:39 55:39 56:39 57:40 58:41 59:42 60:43 61:44 62:45 63:46 64:46 65:47 66:48 67:49 68:50 69:51 70:52 71:53 72:53 73:54 74:54 75:55 76:56 77:56 78:56 79:57 80:58 81:59 82:60 83:61 84:62 85:63 86:64 87:65 88:66 89:66 90:67 91:67 92:68 93:69 94:70 95:71 96:72 97:73 98:74 99:74 100:75 101:76 102:77 103:78 104:79 105:79 106:80 107:80 108:81 109:82 110:83 111:83 112:83 113:84 114:84 115:85 116:86 117:87 118:88 119:89 120:89 121:90 122:91 123:92 124:93 125:94 126:95 127:96 128:97 129:98 130:99 131:100 132:100 133:100 134:101 135:101 136:102 137:103 138:104 139:105 140:106 141:107 142:108 143:109 144:110 145:110 146:111 147:112 148:112 149:112 150:112 151:113 152:114 153:115 154:116 155:117 156:118 157:119 158:120 159:121 160:122 161:122 162:122 163:123 164:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 8:True 9:True 10:True 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2515 10511 3233 2005 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+
+  0%|          | 10/10570 [00:00<01:45, 99.78it/s][A[A11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000010
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 10
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what day was the super bowl played on ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 11:0 12:1 13:2 14:3 15:4 16:5 17:6 18:7 19:8 20:9 21:10 22:11 23:12 24:13 25:14 26:15 27:16 28:17 29:17 30:17 31:18 32:19 33:20 34:21 35:21 36:22 37:23 38:24 39:25 40:26 41:26 42:26 43:27 44:28 45:29 46:30 47:31 48:32 49:33 50:34 51:35 52:35 53:35 54:36 55:37 56:38 57:39 58:39 59:39 60:40 61:41 62:42 63:43 64:44 65:45 66:46 67:46 68:47 69:48 70:49 71:50 72:51 73:52 74:53 75:53 76:54 77:54 78:55 79:56 80:56 81:56 82:57 83:58 84:59 85:60 86:61 87:62 88:63 89:64 90:65 91:66 92:66 93:67 94:67 95:68 96:69 97:70 98:71 99:72 100:73 101:74 102:74 103:75 104:76 105:77 106:78 107:79 108:79 109:80 110:80 111:81 112:82 113:83 114:83 115:83 116:84 117:84 118:85 119:86 120:87 121:88 122:89 123:89 124:90 125:91 126:92 127:93 128:94 129:95 130:96 131:97 132:98 133:99 134:100 135:100 136:100 137:101 138:101 139:102 140:103 141:104 142:105 143:106 144:107 145:108 146:109 147:110 148:110 149:111 150:112 151:112 152:112 153:112 154:113 155:114 156:115 157:116 158:117 159:118 160:119 161:120 162:121 163:122 164:122 165:122 166:123 167:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2154 2001 1996 3565 4605 2209 2006 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000011
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 11
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] who won super bowl 50 ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 8:0 9:1 10:2 11:3 12:4 13:5 14:6 15:7 16:8 17:9 18:10 19:11 20:12 21:13 22:14 23:15 24:16 25:17 26:17 27:17 28:18 29:19 30:20 31:21 32:21 33:22 34:23 35:24 36:25 37:26 38:26 39:26 40:27 41:28 42:29 43:30 44:31 45:32 46:33 47:34 48:35 49:35 50:35 51:36 52:37 53:38 54:39 55:39 56:39 57:40 58:41 59:42 60:43 61:44 62:45 63:46 64:46 65:47 66:48 67:49 68:50 69:51 70:52 71:53 72:53 73:54 74:54 75:55 76:56 77:56 78:56 79:57 80:58 81:59 82:60 83:61 84:62 85:63 86:64 87:65 88:66 89:66 90:67 91:67 92:68 93:69 94:70 95:71 96:72 97:73 98:74 99:74 100:75 101:76 102:77 103:78 104:79 105:79 106:80 107:80 108:81 109:82 110:83 111:83 112:83 113:84 114:84 115:85 116:86 117:87 118:88 119:89 120:89 121:90 122:91 123:92 124:93 125:94 126:95 127:96 128:97 129:98 130:99 131:100 132:100 133:100 134:101 135:101 136:102 137:103 138:104 139:105 140:106 141:107 142:108 143:109 144:110 145:110 146:111 147:112 148:112 149:112 150:112 151:113 152:114 153:115 154:116 155:117 156:118 157:119 158:120 159:121 160:122 161:122 162:122 163:123 164:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 8:True 9:True 10:True 11:True 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2040 2180 3565 4605 2753 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000012
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 12
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what venue did super bowl 50 take place in ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 12:0 13:1 14:2 15:3 16:4 17:5 18:6 19:7 20:8 21:9 22:10 23:11 24:12 25:13 26:14 27:15 28:16 29:17 30:17 31:17 32:18 33:19 34:20 35:21 36:21 37:22 38:23 39:24 40:25 41:26 42:26 43:26 44:27 45:28 46:29 47:30 48:31 49:32 50:33 51:34 52:35 53:35 54:35 55:36 56:37 57:38 58:39 59:39 60:39 61:40 62:41 63:42 64:43 65:44 66:45 67:46 68:46 69:47 70:48 71:49 72:50 73:51 74:52 75:53 76:53 77:54 78:54 79:55 80:56 81:56 82:56 83:57 84:58 85:59 86:60 87:61 88:62 89:63 90:64 91:65 92:66 93:66 94:67 95:67 96:68 97:69 98:70 99:71 100:72 101:73 102:74 103:74 104:75 105:76 106:77 107:78 108:79 109:79 110:80 111:80 112:81 113:82 114:83 115:83 116:83 117:84 118:84 119:85 120:86 121:87 122:88 123:89 124:89 125:90 126:91 127:92 128:93 129:94 130:95 131:96 132:97 133:98 134:99 135:100 136:100 137:100 138:101 139:101 140:102 141:103 142:104 143:105 144:106 145:107 146:108 147:109 148:110 149:110 150:111 151:112 152:112 153:112 154:112 155:113 156:114 157:115 158:116 159:117 160:118 161:119 162:120 163:121 164:122 165:122 166:122 167:123 168:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 6891 2106 3565 4605 2753 2202 2173 1999 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000013
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 13
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what city did super bowl 50 take place in ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 12:0 13:1 14:2 15:3 16:4 17:5 18:6 19:7 20:8 21:9 22:10 23:11 24:12 25:13 26:14 27:15 28:16 29:17 30:17 31:17 32:18 33:19 34:20 35:21 36:21 37:22 38:23 39:24 40:25 41:26 42:26 43:26 44:27 45:28 46:29 47:30 48:31 49:32 50:33 51:34 52:35 53:35 54:35 55:36 56:37 57:38 58:39 59:39 60:39 61:40 62:41 63:42 64:43 65:44 66:45 67:46 68:46 69:47 70:48 71:49 72:50 73:51 74:52 75:53 76:53 77:54 78:54 79:55 80:56 81:56 82:56 83:57 84:58 85:59 86:60 87:61 88:62 89:63 90:64 91:65 92:66 93:66 94:67 95:67 96:68 97:69 98:70 99:71 100:72 101:73 102:74 103:74 104:75 105:76 106:77 107:78 108:79 109:79 110:80 111:80 112:81 113:82 114:83 115:83 116:83 117:84 118:84 119:85 120:86 121:87 122:88 123:89 124:89 125:90 126:91 127:92 128:93 129:94 130:95 131:96 132:97 133:98 134:99 135:100 136:100 137:100 138:101 139:101 140:102 141:103 142:104 143:105 144:106 145:107 146:108 147:109 148:110 149:110 150:111 151:112 152:112 153:112 154:112 155:113 156:114 157:115 158:116 159:117 160:118 161:119 162:120 163:121 164:122 165:122 166:122 167:123 168:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2103 2106 3565 4605 2753 2202 2173 1999 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000014
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 14
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] if roman nu ##meral ##s were used , what would super bowl 50 have been called ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 19:0 20:1 21:2 22:3 23:4 24:5 25:6 26:7 27:8 28:9 29:10 30:11 31:12 32:13 33:14 34:15 35:16 36:17 37:17 38:17 39:18 40:19 41:20 42:21 43:21 44:22 45:23 46:24 47:25 48:26 49:26 50:26 51:27 52:28 53:29 54:30 55:31 56:32 57:33 58:34 59:35 60:35 61:35 62:36 63:37 64:38 65:39 66:39 67:39 68:40 69:41 70:42 71:43 72:44 73:45 74:46 75:46 76:47 77:48 78:49 79:50 80:51 81:52 82:53 83:53 84:54 85:54 86:55 87:56 88:56 89:56 90:57 91:58 92:59 93:60 94:61 95:62 96:63 97:64 98:65 99:66 100:66 101:67 102:67 103:68 104:69 105:70 106:71 107:72 108:73 109:74 110:74 111:75 112:76 113:77 114:78 115:79 116:79 117:80 118:80 119:81 120:82 121:83 122:83 123:83 124:84 125:84 126:85 127:86 128:87 129:88 130:89 131:89 132:90 133:91 134:92 135:93 136:94 137:95 138:96 139:97 140:98 141:99 142:100 143:100 144:100 145:101 146:101 147:102 148:103 149:104 150:105 151:106 152:107 153:108 154:109 155:110 156:110 157:111 158:112 159:112 160:112 161:112 162:113 163:114 164:115 165:116 166:117 167:118 168:119 169:120 170:121 171:122 172:122 173:122 174:123 175:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True 169:True 170:True 171:True 172:True 173:True 174:True 175:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2065 3142 16371 28990 2015 2020 2109 1010 2054 2052 3565 4605 2753 2031 2042 2170 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000015
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 15
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] super bowl 50 decided the nfl champion for what season ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 13:0 14:1 15:2 16:3 17:4 18:5 19:6 20:7 21:8 22:9 23:10 24:11 25:12 26:13 27:14 28:15 29:16 30:17 31:17 32:17 33:18 34:19 35:20 36:21 37:21 38:22 39:23 40:24 41:25 42:26 43:26 44:26 45:27 46:28 47:29 48:30 49:31 50:32 51:33 52:34 53:35 54:35 55:35 56:36 57:37 58:38 59:39 60:39 61:39 62:40 63:41 64:42 65:43 66:44 67:45 68:46 69:46 70:47 71:48 72:49 73:50 74:51 75:52 76:53 77:53 78:54 79:54 80:55 81:56 82:56 83:56 84:57 85:58 86:59 87:60 88:61 89:62 90:63 91:64 92:65 93:66 94:66 95:67 96:67 97:68 98:69 99:70 100:71 101:72 102:73 103:74 104:74 105:75 106:76 107:77 108:78 109:79 110:79 111:80 112:80 113:81 114:82 115:83 116:83 117:83 118:84 119:84 120:85 121:86 122:87 123:88 124:89 125:89 126:90 127:91 128:92 129:93 130:94 131:95 132:96 133:97 134:98 135:99 136:100 137:100 138:100 139:101 140:101 141:102 142:103 143:104 144:105 145:106 146:107 147:108 148:109 149:110 150:110 151:111 152:112 153:112 154:112 155:112 156:113 157:114 158:115 159:116 160:117 161:118 162:119 163:120 164:121 165:122 166:122 167:122 168:123 169:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True 169:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 3565 4605 2753 2787 1996 5088 3410 2005 2054 2161 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000016
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 16
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what year did the denver broncos secure a super bowl title for the third time ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 18:0 19:1 20:2 21:3 22:4 23:5 24:6 25:7 26:8 27:9 28:10 29:11 30:12 31:13 32:14 33:15 34:16 35:17 36:17 37:17 38:18 39:19 40:20 41:21 42:21 43:22 44:23 45:24 46:25 47:26 48:26 49:26 50:27 51:28 52:29 53:30 54:31 55:32 56:33 57:34 58:35 59:35 60:35 61:36 62:37 63:38 64:39 65:39 66:39 67:40 68:41 69:42 70:43 71:44 72:45 73:46 74:46 75:47 76:48 77:49 78:50 79:51 80:52 81:53 82:53 83:54 84:54 85:55 86:56 87:56 88:56 89:57 90:58 91:59 92:60 93:61 94:62 95:63 96:64 97:65 98:66 99:66 100:67 101:67 102:68 103:69 104:70 105:71 106:72 107:73 108:74 109:74 110:75 111:76 112:77 113:78 114:79 115:79 116:80 117:80 118:81 119:82 120:83 121:83 122:83 123:84 124:84 125:85 126:86 127:87 128:88 129:89 130:89 131:90 132:91 133:92 134:93 135:94 136:95 137:96 138:97 139:98 140:99 141:100 142:100 143:100 144:101 145:101 146:102 147:103 148:104 149:105 150:106 151:107 152:108 153:109 154:110 155:110 156:111 157:112 158:112 159:112 160:112 161:113 162:114 163:115 164:116 165:117 166:118 167:119 168:120 169:121 170:122 171:122 172:122 173:123 174:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True 169:True 170:True 171:True 172:True 173:True 174:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2095 2106 1996 7573 14169 5851 1037 3565 4605 2516 2005 1996 2353 2051 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000017
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 17
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what city did super bowl 50 take place in ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 12:0 13:1 14:2 15:3 16:4 17:5 18:6 19:7 20:8 21:9 22:10 23:11 24:12 25:13 26:14 27:15 28:16 29:17 30:17 31:17 32:18 33:19 34:20 35:21 36:21 37:22 38:23 39:24 40:25 41:26 42:26 43:26 44:27 45:28 46:29 47:30 48:31 49:32 50:33 51:34 52:35 53:35 54:35 55:36 56:37 57:38 58:39 59:39 60:39 61:40 62:41 63:42 64:43 65:44 66:45 67:46 68:46 69:47 70:48 71:49 72:50 73:51 74:52 75:53 76:53 77:54 78:54 79:55 80:56 81:56 82:56 83:57 84:58 85:59 86:60 87:61 88:62 89:63 90:64 91:65 92:66 93:66 94:67 95:67 96:68 97:69 98:70 99:71 100:72 101:73 102:74 103:74 104:75 105:76 106:77 107:78 108:79 109:79 110:80 111:80 112:81 113:82 114:83 115:83 116:83 117:84 118:84 119:85 120:86 121:87 122:88 123:89 124:89 125:90 126:91 127:92 128:93 129:94 130:95 131:96 132:97 133:98 134:99 135:100 136:100 137:100 138:101 139:101 140:102 141:103 142:104 143:105 144:106 145:107 146:108 147:109 148:110 149:110 150:111 151:112 152:112 153:112 154:112 155:113 156:114 157:115 158:116 159:117 160:118 161:119 162:120 163:121 164:122 165:122 166:122 167:123 168:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2103 2106 3565 4605 2753 2202 2173 1999 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000018
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 18
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what stadium did super bowl 50 take place in ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 12:0 13:1 14:2 15:3 16:4 17:5 18:6 19:7 20:8 21:9 22:10 23:11 24:12 25:13 26:14 27:15 28:16 29:17 30:17 31:17 32:18 33:19 34:20 35:21 36:21 37:22 38:23 39:24 40:25 41:26 42:26 43:26 44:27 45:28 46:29 47:30 48:31 49:32 50:33 51:34 52:35 53:35 54:35 55:36 56:37 57:38 58:39 59:39 60:39 61:40 62:41 63:42 64:43 65:44 66:45 67:46 68:46 69:47 70:48 71:49 72:50 73:51 74:52 75:53 76:53 77:54 78:54 79:55 80:56 81:56 82:56 83:57 84:58 85:59 86:60 87:61 88:62 89:63 90:64 91:65 92:66 93:66 94:67 95:67 96:68 97:69 98:70 99:71 100:72 101:73 102:74 103:74 104:75 105:76 106:77 107:78 108:79 109:79 110:80 111:80 112:81 113:82 114:83 115:83 116:83 117:84 118:84 119:85 120:86 121:87 122:88 123:89 124:89 125:90 126:91 127:92 128:93 129:94 130:95 131:96 132:97 133:98 134:99 135:100 136:100 137:100 138:101 139:101 140:102 141:103 142:104 143:105 144:106 145:107 146:108 147:109 148:110 149:110 150:111 151:112 152:112 153:112 154:112 155:113 156:114 157:115 158:116 159:117 160:118 161:119 162:120 163:121 164:122 165:122 166:122 167:123 168:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 3346 2106 3565 4605 2753 2202 2173 1999 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   *** Example ***
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   unique_id: 1000000019
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   example_index: 19
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   doc_span_index: 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   tokens: [CLS] what was the final score of super bowl 50 ? [SEP] super bowl 50 was an american football game to determine the champion of the national football league ( nfl ) for the 2015 season . the american football conference ( afc ) champion denver broncos defeated the national football conference ( nfc ) champion carolina panthers 24 – 10 to earn their third super bowl title . the game was played on february 7 , 2016 , at levi ' s stadium in the san francisco bay area at santa clara , california . as this was the 50th super bowl , the league emphasized the " golden anniversary " with various gold - themed initiatives , as well as temporarily suspend ##ing the tradition of naming each super bowl game with roman nu ##meral ##s ( under which the game would have been known as " super bowl l " ) , so that the logo could prominently feature the arabic nu ##meral ##s 50 . [SEP]
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_to_orig_map: 12:0 13:1 14:2 15:3 16:4 17:5 18:6 19:7 20:8 21:9 22:10 23:11 24:12 25:13 26:14 27:15 28:16 29:17 30:17 31:17 32:18 33:19 34:20 35:21 36:21 37:22 38:23 39:24 40:25 41:26 42:26 43:26 44:27 45:28 46:29 47:30 48:31 49:32 50:33 51:34 52:35 53:35 54:35 55:36 56:37 57:38 58:39 59:39 60:39 61:40 62:41 63:42 64:43 65:44 66:45 67:46 68:46 69:47 70:48 71:49 72:50 73:51 74:52 75:53 76:53 77:54 78:54 79:55 80:56 81:56 82:56 83:57 84:58 85:59 86:60 87:61 88:62 89:63 90:64 91:65 92:66 93:66 94:67 95:67 96:68 97:69 98:70 99:71 100:72 101:73 102:74 103:74 104:75 105:76 106:77 107:78 108:79 109:79 110:80 111:80 112:81 113:82 114:83 115:83 116:83 117:84 118:84 119:85 120:86 121:87 122:88 123:89 124:89 125:90 126:91 127:92 128:93 129:94 130:95 131:96 132:97 133:98 134:99 135:100 136:100 137:100 138:101 139:101 140:102 141:103 142:104 143:105 144:106 145:107 146:108 147:109 148:110 149:110 150:111 151:112 152:112 153:112 154:112 155:113 156:114 157:115 158:116 159:117 160:118 161:119 162:120 163:121 164:122 165:122 166:122 167:123 168:123
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   token_is_max_context: 12:True 13:True 14:True 15:True 16:True 17:True 18:True 19:True 20:True 21:True 22:True 23:True 24:True 25:True 26:True 27:True 28:True 29:True 30:True 31:True 32:True 33:True 34:True 35:True 36:True 37:True 38:True 39:True 40:True 41:True 42:True 43:True 44:True 45:True 46:True 47:True 48:True 49:True 50:True 51:True 52:True 53:True 54:True 55:True 56:True 57:True 58:True 59:True 60:True 61:True 62:True 63:True 64:True 65:True 66:True 67:True 68:True 69:True 70:True 71:True 72:True 73:True 74:True 75:True 76:True 77:True 78:True 79:True 80:True 81:True 82:True 83:True 84:True 85:True 86:True 87:True 88:True 89:True 90:True 91:True 92:True 93:True 94:True 95:True 96:True 97:True 98:True 99:True 100:True 101:True 102:True 103:True 104:True 105:True 106:True 107:True 108:True 109:True 110:True 111:True 112:True 113:True 114:True 115:True 116:True 117:True 118:True 119:True 120:True 121:True 122:True 123:True 124:True 125:True 126:True 127:True 128:True 129:True 130:True 131:True 132:True 133:True 134:True 135:True 136:True 137:True 138:True 139:True 140:True 141:True 142:True 143:True 144:True 145:True 146:True 147:True 148:True 149:True 150:True 151:True 152:True 153:True 154:True 155:True 156:True 157:True 158:True 159:True 160:True 161:True 162:True 163:True 164:True 165:True 166:True 167:True 168:True
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_ids: 101 2054 2001 1996 2345 3556 1997 3565 4605 2753 1029 102 3565 4605 2753 2001 2019 2137 2374 2208 2000 5646 1996 3410 1997 1996 2120 2374 2223 1006 5088 1007 2005 1996 2325 2161 1012 1996 2137 2374 3034 1006 10511 1007 3410 7573 14169 3249 1996 2120 2374 3034 1006 22309 1007 3410 3792 12915 2484 1516 2184 2000 7796 2037 2353 3565 4605 2516 1012 1996 2208 2001 2209 2006 2337 1021 1010 2355 1010 2012 11902 1005 1055 3346 1999 1996 2624 3799 3016 2181 2012 4203 10254 1010 2662 1012 2004 2023 2001 1996 12951 3565 4605 1010 1996 2223 13155 1996 1000 3585 5315 1000 2007 2536 2751 1011 11773 11107 1010 2004 2092 2004 8184 28324 2075 1996 4535 1997 10324 2169 3565 4605 2208 2007 3142 16371 28990 2015 1006 2104 2029 1996 2208 2052 2031 2042 2124 2004 1000 3565 4605 1048 1000 1007 1010 2061 2008 1996 8154 2071 14500 3444 1996 5640 16371 28990 2015 2753 1012 102 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   input_mask: 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11/21/2019 12:55:32 - INFO - utils.utils_squad -   segment_ids: 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+
+  0%|          | 20/10570 [00:00<01:45, 99.79it/s][A[A
+
+  0%|          | 31/10570 [00:00<01:42, 102.40it/s][A[A
+
+  0%|          | 44/10570 [00:00<01:37, 108.10it/s][A[A
+
+  1%|          | 58/10570 [00:00<01:31, 115.35it/s][A[A
+
+  1%|          | 80/10570 [00:00<01:18, 133.80it/s][A[A
+
+  1%|          | 100/10570 [00:00<01:11, 146.86it/s][A[A
+
+  1%|          | 132/10570 [00:00<00:59, 174.90it/s][A[A
+
+  1%|▏         | 153/10570 [00:01<01:21, 127.34it/s][A[A
+
+  2%|▏         | 170/10570 [00:01<01:20, 129.62it/s][A[A
+
+  2%|▏         | 186/10570 [00:01<01:25, 121.33it/s][A[A
+
+  2%|▏         | 201/10570 [00:01<01:47, 96.21it/s] [A[A
+
+  2%|▏         | 213/10570 [00:01<01:49, 94.37it/s][A[A
+
+  2%|▏         | 224/10570 [00:01<02:00, 85.57it/s][A[A
+
+  2%|▏         | 234/10570 [00:02<02:11, 78.45it/s][A[A
+
+  2%|▏         | 243/10570 [00:02<02:16, 75.52it/s][A[A
+
+  2%|▏         | 252/10570 [00:02<02:27, 70.19it/s][A[A
+
+  2%|▏         | 260/10570 [00:02<03:00, 57.08it/s][A[A
+
+  3%|▎         | 267/10570 [00:02<03:24, 50.39it/s][A[A
+
+  3%|▎         | 273/10570 [00:02<03:19, 51.52it/s][A[A
+
+  3%|▎         | 282/10570 [00:02<02:55, 58.69it/s][A[A
+
+  3%|▎         | 292/10570 [00:03<02:35, 65.97it/s][A[A
+
+  3%|▎         | 304/10570 [00:03<02:15, 75.93it/s][A[A
+
+  3%|▎         | 324/10570 [00:03<01:50, 92.82it/s][A[A
+
+  3%|▎         | 343/10570 [00:03<01:33, 109.58it/s][A[A
+
+  3%|▎         | 363/10570 [00:03<01:20, 126.25it/s][A[A
+
+  4%|▎         | 379/10570 [00:03<01:16, 132.54it/s][A[A
+
+  4%|▎         | 395/10570 [00:03<01:16, 132.52it/s][A[A
+
+  4%|▍         | 410/10570 [00:03<01:30, 111.72it/s][A[A
+
+  4%|▍         | 424/10570 [00:03<01:25, 118.92it/s][A[A
+
+  4%|▍         | 440/10570 [00:04<01:18, 128.64it/s][A[A
+
+  4%|▍         | 454/10570 [00:04<01:21, 124.63it/s][A[A
+
+  4%|▍         | 468/10570 [00:04<01:20, 124.80it/s][A[A
+
+  5%|▍         | 482/10570 [00:04<01:19, 127.19it/s][A[A
+
+  5%|▍         | 501/10570 [00:04<01:11, 140.27it/s][A[A
+
+  5%|▍         | 521/10570 [00:04<01:05, 152.51it/s][A[A
+
+  5%|▌         | 539/10570 [00:04<01:03, 159.07it/s][A[A
+
+  5%|▌         | 556/10570 [00:04<01:10, 143.02it/s][A[A
+
+  5%|▌         | 572/10570 [00:04<01:09, 144.47it/s][A[A
+
+  6%|▌         | 587/10570 [00:05<01:08, 144.71it/s][A[A
+
+  6%|▌         | 602/10570 [00:05<01:16, 130.65it/s][A[A
+
+  6%|▌         | 619/10570 [00:05<01:10, 140.19it/s][A[A
+
+  6%|▌         | 639/10570 [00:05<01:06, 150.30it/s][A[A
+
+  6%|▌         | 655/10570 [00:05<01:07, 145.90it/s][A[A
+
+  6%|▋         | 678/10570 [00:05<01:00, 162.81it/s][A[A
+
+  7%|▋         | 696/10570 [00:05<01:05, 151.57it/s][A[A
+
+  7%|▋         | 712/10570 [00:05<01:11, 138.05it/s][A[A
+
+  7%|▋         | 727/10570 [00:06<01:20, 121.83it/s][A[A
+
+  7%|▋         | 741/10570 [00:06<01:20, 121.92it/s][A[A
+
+  7%|▋         | 754/10570 [00:06<01:30, 107.94it/s][A[A
+
+  7%|▋         | 768/10570 [00:06<01:26, 113.52it/s][A[A
+
+  7%|▋         | 780/10570 [00:06<01:36, 101.69it/s][A[A
+
+  7%|▋         | 791/10570 [00:06<01:49, 89.67it/s] [A[A
+
+  8%|▊         | 801/10570 [00:06<02:03, 79.37it/s][A[A
+
+  8%|▊         | 810/10570 [00:07<02:17, 70.85it/s][A[A
+
+  8%|▊         | 819/10570 [00:07<02:14, 72.30it/s][A[A
+
+  8%|▊         | 830/10570 [00:07<02:02, 79.58it/s][A[A
+
+  8%|▊         | 842/10570 [00:07<01:50, 88.04it/s][A[A
+
+  8%|▊         | 856/10570 [00:07<01:38, 98.37it/s][A[A
+
+  8%|▊         | 869/10570 [00:07<01:32, 104.55it/s][A[A
+
+  8%|▊         | 884/10570 [00:07<01:24, 114.18it/s][A[A
+
+  8%|▊         | 897/10570 [00:07<01:23, 115.92it/s][A[A
+
+  9%|▊         | 910/10570 [00:07<01:40, 96.26it/s] [A[A
+
+  9%|▊         | 921/10570 [00:08<01:39, 96.55it/s][A[A
+
+  9%|▉         | 933/10570 [00:08<01:34, 101.98it/s][A[A
+
+  9%|▉         | 944/10570 [00:08<01:32, 103.92it/s][A[A
+
+  9%|▉         | 956/10570 [00:08<01:29, 107.37it/s][A[A
+
+  9%|▉         | 968/10570 [00:08<01:32, 104.12it/s][A[A
+
+  9%|▉         | 979/10570 [00:08<01:31, 105.05it/s][A[A
+
+  9%|▉         | 990/10570 [00:08<01:34, 101.10it/s][A[A
+
+  9%|▉         | 1002/10570 [00:08<01:32, 103.32it/s][A[A
+
+ 10%|▉         | 1013/10570 [00:08<01:36, 99.16it/s] [A[A
+
+ 10%|▉         | 1024/10570 [00:09<01:35, 99.48it/s][A[A
+
+ 10%|▉         | 1035/10570 [00:09<01:36, 99.13it/s][A[A
+
+ 10%|▉         | 1046/10570 [00:09<01:35, 100.25it/s][A[A
+
+ 10%|█         | 1059/10570 [00:09<01:28, 106.88it/s][A[A
+
+ 10%|█         | 1070/10570 [00:09<01:32, 102.18it/s][A[A
+
+ 10%|█         | 1082/10570 [00:09<01:30, 105.37it/s][A[A
+
+ 10%|█         | 1094/10570 [00:09<01:30, 104.33it/s][A[A
+
+ 10%|█         | 1105/10570 [00:09<01:30, 104.16it/s][A[A
+
+ 11%|█         | 1116/10570 [00:09<01:29, 105.52it/s][A[A
+
+ 11%|█         | 1130/10570 [00:10<01:23, 112.54it/s][A[A
+
+ 11%|█         | 1142/10570 [00:10<01:22, 114.50it/s][A[A
+
+ 11%|█         | 1159/10570 [00:10<01:14, 126.90it/s][A[A
+
+ 11%|█         | 1178/10570 [00:10<01:07, 139.94it/s][A[A
+
+ 11%|█▏        | 1193/10570 [00:10<01:08, 137.35it/s][A[A
+
+ 11%|█▏        | 1208/10570 [00:10<01:10, 133.66it/s][A[A
+
+ 12%|█▏        | 1224/10570 [00:10<01:06, 139.68it/s][A[A
+
+ 12%|█▏        | 1244/10570 [00:10<01:01, 152.69it/s][A[A
+
+ 12%|█▏        | 1260/10570 [00:11<01:20, 116.09it/s][A[A
+
+ 12%|█▏        | 1277/10570 [00:11<01:12, 127.96it/s][A[A
+
+ 12%|█▏        | 1293/10570 [00:11<01:08, 135.50it/s][A[A
+
+ 12%|█▏        | 1309/10570 [00:11<01:06, 138.90it/s][A[A
+
+ 13%|█▎        | 1325/10570 [00:11<01:04, 144.15it/s][A[A
+
+ 13%|█▎        | 1341/10570 [00:11<01:07, 136.38it/s][A[A
+
+ 13%|█▎        | 1356/10570 [00:11<01:09, 132.04it/s][A[A
+
+ 13%|█▎        | 1371/10570 [00:11<01:09, 132.03it/s][A[A
+
+ 13%|█▎        | 1385/10570 [00:11<01:20, 113.59it/s][A[A
+
+ 13%|█▎        | 1398/10570 [00:12<01:29, 102.15it/s][A[A
+
+ 13%|█▎        | 1410/10570 [00:12<01:26, 105.69it/s][A[A
+
+ 13%|█▎        | 1424/10570 [00:12<01:20, 112.95it/s][A[A
+
+ 14%|█▎        | 1436/10570 [00:12<01:19, 114.35it/s][A[A
+
+ 14%|█▎        | 1452/10570 [00:12<01:13, 124.47it/s][A[A
+
+ 14%|█▍        | 1465/10570 [00:12<01:17, 118.23it/s][A[A
+
+ 14%|█▍        | 1479/10570 [00:12<01:13, 123.90it/s][A[A
+
+ 14%|█▍        | 1494/10570 [00:12<01:09, 129.93it/s][A[A
+
+ 14%|█▍        | 1510/10570 [00:12<01:06, 135.41it/s][A[A
+
+ 14%|█▍        | 1524/10570 [00:13<01:08, 132.54it/s][A[A
+
+ 15%|█▍        | 1539/10570 [00:13<01:07, 134.63it/s][A[A
+
+ 15%|█▍        | 1553/10570 [00:13<01:07, 134.23it/s][A[A
+
+ 15%|█▍        | 1569/10570 [00:13<01:03, 140.80it/s][A[A
+
+ 15%|█▍        | 1584/10570 [00:13<01:06, 135.85it/s][A[A
+
+ 15%|█▌        | 1604/10570 [00:13<01:00, 149.39it/s][A[A
+
+ 15%|█▌        | 1620/10570 [00:13<01:03, 141.38it/s][A[A
+
+ 15%|█▌        | 1635/10570 [00:13<01:04, 138.95it/s][A[A
+
+ 16%|█▌        | 1654/10570 [00:13<00:59, 150.44it/s][A[A
+
+ 16%|█▌        | 1681/10570 [00:14<00:51, 172.38it/s][A[A
+
+ 16%|█▌        | 1700/10570 [00:14<00:58, 151.57it/s][A[A
+
+ 16%|█▌        | 1717/10570 [00:14<00:57, 152.86it/s][A[A
+
+ 16%|█▋        | 1734/10570 [00:14<01:04, 137.70it/s][A[A
+
+ 17%|█▋        | 1749/10570 [00:14<01:05, 134.62it/s][A[A
+
+ 17%|█▋        | 1764/10570 [00:14<01:03, 138.88it/s][A[A
+
+ 17%|█▋        | 1779/10570 [00:14<01:03, 138.50it/s][A[A
+
+ 17%|█▋        | 1794/10570 [00:14<01:02, 139.67it/s][A[A
+
+ 17%|█▋        | 1809/10570 [00:15<01:02, 140.07it/s][A[A
+
+ 17%|█▋        | 1824/10570 [00:15<01:06, 132.47it/s][A[A
+
+ 17%|█▋        | 1838/10570 [00:15<01:09, 125.86it/s][A[A
+
+ 18%|█▊        | 1853/10570 [00:15<01:08, 127.47it/s][A[A
+
+ 18%|█▊        | 1870/10570 [00:15<01:03, 136.62it/s][A[A
+
+ 18%|█▊        | 1889/10570 [00:15<00:58, 148.02it/s][A[A
+
+ 18%|█▊        | 1912/10570 [00:15<00:52, 164.89it/s][A[A
+
+ 18%|█▊        | 1930/10570 [00:15<00:54, 159.74it/s][A[A
+
+ 18%|█▊        | 1947/10570 [00:15<00:58, 146.62it/s][A[A
+
+ 19%|█▊        | 1967/10570 [00:16<00:54, 158.14it/s][A[A
+
+ 19%|█▉        | 1984/10570 [00:16<00:54, 157.65it/s][A[A
+
+ 19%|█▉        | 2001/10570 [00:16<01:01, 139.62it/s][A[A
+
+ 19%|█▉        | 2016/10570 [00:16<01:04, 133.18it/s][A[A
+
+ 19%|█▉        | 2030/10570 [00:16<01:09, 123.02it/s][A[A
+
+ 19%|█▉        | 2050/10570 [00:16<01:01, 138.83it/s][A[A
+
+ 20%|█▉        | 2067/10570 [00:16<00:58, 145.12it/s][A[A
+
+ 20%|█▉        | 2088/10570 [00:16<00:53, 158.77it/s][A[A
+
+ 20%|█▉        | 2105/10570 [00:16<00:54, 156.52it/s][A[A
+
+ 20%|██        | 2122/10570 [00:17<01:09, 121.67it/s][A[A
+
+ 20%|██        | 2136/10570 [00:17<01:23, 100.47it/s][A[A
+
+ 20%|██        | 2149/10570 [00:17<01:18, 106.73it/s][A[A
+
+ 20%|██        | 2162/10570 [00:17<01:17, 108.89it/s][A[A
+
+ 21%|██        | 2174/10570 [00:17<01:18, 107.01it/s][A[A
+
+ 21%|██        | 2186/10570 [00:17<01:17, 108.18it/s][A[A
+
+ 21%|██        | 2203/10570 [00:17<01:09, 119.98it/s][A[A
+
+ 21%|██        | 2225/10570 [00:18<01:00, 138.11it/s][A[A
+
+ 21%|██        | 2241/10570 [00:18<01:04, 128.35it/s][A[A
+
+ 21%|██▏       | 2256/10570 [00:18<01:06, 124.70it/s][A[A
+
+ 21%|██▏       | 2270/10570 [00:18<01:10, 118.04it/s][A[A
+
+ 22%|██▏       | 2289/10570 [00:18<01:02, 132.70it/s][A[A
+
+ 22%|██▏       | 2304/10570 [00:18<01:05, 127.10it/s][A[A
+
+ 22%|██▏       | 2318/10570 [00:18<01:05, 125.12it/s][A[A
+
+ 22%|██▏       | 2334/10570 [00:18<01:01, 133.33it/s][A[A
+
+ 22%|██▏       | 2348/10570 [00:19<01:03, 128.66it/s][A[A
+
+ 22%|██▏       | 2364/10570 [00:19<01:00, 135.20it/s][A[A
+
+ 22%|██▏       | 2378/10570 [00:19<01:11, 115.09it/s][A[A
+
+ 23%|██▎       | 2391/10570 [00:19<01:16, 107.53it/s][A[A
+
+ 23%|██▎       | 2403/10570 [00:19<01:14, 109.26it/s][A[A
+
+ 23%|██▎       | 2415/10570 [00:19<01:14, 110.06it/s][A[A
+
+ 23%|██▎       | 2429/10570 [00:19<01:10, 115.68it/s][A[A
+
+ 23%|██▎       | 2442/10570 [00:19<01:09, 116.44it/s][A[A
+
+ 23%|██▎       | 2454/10570 [00:20<01:16, 106.48it/s][A[A
+
+ 23%|██▎       | 2468/10570 [00:20<01:11, 112.61it/s][A[A
+
+ 24%|██▎       | 2485/10570 [00:20<01:06, 122.25it/s][A[A
+
+ 24%|██▎       | 2498/10570 [00:20<01:17, 104.64it/s][A[A
+
+ 24%|██▎       | 2510/10570 [00:20<01:28, 91.10it/s] [A[A
+
+ 24%|██▍       | 2521/10570 [00:20<01:24, 95.54it/s][A[A
+
+ 24%|██▍       | 2533/10570 [00:20<01:19, 101.25it/s][A[A
+
+ 24%|██▍       | 2544/10570 [00:20<01:32, 86.75it/s] [A[A
+
+ 24%|██▍       | 2554/10570 [00:21<01:34, 85.24it/s][A[A
+
+ 24%|██▍       | 2564/10570 [00:21<01:36, 82.95it/s][A[A
+
+ 24%|██▍       | 2573/10570 [00:21<01:37, 82.21it/s][A[A
+
+ 24%|██▍       | 2586/10570 [00:21<01:26, 92.04it/s][A[A
+
+ 25%|██▍       | 2601/10570 [00:21<01:16, 103.70it/s][A[A
+
+ 25%|██▍       | 2616/10570 [00:21<01:09, 113.90it/s][A[A
+
+ 25%|██▍       | 2635/10570 [00:21<01:02, 126.50it/s][A[A
+
+ 25%|██▌       | 2651/10570 [00:21<00:58, 134.23it/s][A[A
+
+ 25%|██▌       | 2666/10570 [00:21<00:58, 135.04it/s][A[A
+
+ 25%|██▌       | 2681/10570 [00:22<01:02, 125.89it/s][A[A
+
+ 25%|██▌       | 2695/10570 [00:22<01:02, 126.59it/s][A[A
+
+ 26%|██▌       | 2709/10570 [00:22<01:02, 125.41it/s][A[A
+
+ 26%|██▌       | 2728/10570 [00:22<00:56, 139.11it/s][A[A
+
+ 26%|██▌       | 2743/10570 [00:22<00:56, 139.36it/s][A[A
+
+ 26%|██▌       | 2766/10570 [00:22<00:49, 158.04it/s][A[A
+
+ 26%|██▋       | 2784/10570 [00:22<00:47, 162.47it/s][A[A
+
+ 27%|██▋       | 2807/10570 [00:22<00:44, 176.20it/s][A[A
+
+ 27%|██▋       | 2826/10570 [00:22<00:51, 151.18it/s][A[A
+
+ 27%|██▋       | 2843/10570 [00:23<00:56, 136.26it/s][A[A
+
+ 27%|██▋       | 2858/10570 [00:23<00:58, 132.86it/s][A[A
+
+ 27%|██▋       | 2873/10570 [00:23<01:00, 127.78it/s][A[A
+
+ 27%|██▋       | 2887/10570 [00:23<01:07, 113.80it/s][A[A
+
+ 27%|██▋       | 2900/10570 [00:23<01:06, 115.01it/s][A[A
+
+ 28%|██▊       | 2913/10570 [00:23<01:04, 118.27it/s][A[A
+
+ 28%|██▊       | 2926/10570 [00:23<01:05, 116.80it/s][A[A
+
+ 28%|██▊       | 2940/10570 [00:23<01:02, 122.29it/s][A[A
+
+ 28%|██▊       | 2953/10570 [00:24<01:06, 115.31it/s][A[A
+
+ 28%|██▊       | 2966/10570 [00:24<01:04, 117.05it/s][A[A
+
+ 28%|██▊       | 2978/10570 [00:24<01:04, 116.86it/s][A[A
+
+ 28%|██▊       | 2992/10570 [00:24<01:01, 122.80it/s][A[A
+
+ 28%|██▊       | 3005/10570 [00:24<01:02, 121.88it/s][A[A
+
+ 29%|██▊       | 3018/10570 [00:24<01:02, 121.73it/s][A[A
+
+ 29%|██▊       | 3034/10570 [00:24<00:57, 129.96it/s][A[A
+
+ 29%|██▉       | 3048/10570 [00:24<01:03, 118.54it/s][A[A
+
+ 29%|██▉       | 3061/10570 [00:24<01:03, 117.91it/s][A[A
+
+ 29%|██▉       | 3074/10570 [00:25<01:09, 107.43it/s][A[A
+
+ 29%|██▉       | 3088/10570 [00:25<01:05, 114.87it/s][A[A
+
+ 29%|██▉       | 3102/10570 [00:25<01:02, 118.75it/s][A[A
+
+ 29%|██▉       | 3115/10570 [00:25<01:05, 113.47it/s][A[A
+
+ 30%|██▉       | 3128/10570 [00:25<01:04, 115.79it/s][A[A
+
+ 30%|██▉       | 3140/10570 [00:25<01:07, 109.46it/s][A[A
+
+ 30%|██▉       | 3152/10570 [00:25<01:09, 106.25it/s][A[A
+
+ 30%|██▉       | 3165/10570 [00:25<01:06, 111.07it/s][A[A
+
+ 30%|███       | 3177/10570 [00:26<01:11, 103.75it/s][A[A
+
+ 30%|███       | 3188/10570 [00:26<01:13, 100.69it/s][A[A
+
+ 30%|███       | 3201/10570 [00:26<01:08, 107.41it/s][A[A
+
+ 30%|███       | 3212/10570 [00:26<01:09, 106.26it/s][A[A
+
+ 30%|███       | 3223/10570 [00:26<01:08, 107.28it/s][A[A
+
+ 31%|███       | 3234/10570 [00:26<01:15, 97.57it/s] [A[A
+
+ 31%|███       | 3245/10570 [00:26<01:14, 98.16it/s][A[A
+
+ 31%|███       | 3256/10570 [00:26<01:12, 101.14it/s][A[A
+
+ 31%|███       | 3269/10570 [00:26<01:08, 106.92it/s][A[A
+
+ 31%|███       | 3280/10570 [00:27<01:12, 99.99it/s] [A[A
+
+ 31%|███       | 3292/10570 [00:27<01:09, 104.76it/s][A[A
+
+ 31%|███▏      | 3304/10570 [00:27<01:08, 106.21it/s][A[A
+
+ 31%|███▏      | 3317/10570 [00:27<01:05, 110.19it/s][A[A
+
+ 31%|███▏      | 3329/10570 [00:27<01:04, 111.83it/s][A[A
+
+ 32%|███▏      | 3343/10570 [00:27<01:01, 117.82it/s][A[A
+
+ 32%|███▏      | 3355/10570 [00:27<01:02, 114.66it/s][A[A
+
+ 32%|███▏      | 3367/10570 [00:27<01:05, 110.41it/s][A[A
+
+ 32%|███▏      | 3379/10570 [00:27<01:04, 112.24it/s][A[A
+
+ 32%|███▏      | 3391/10570 [00:28<01:04, 111.50it/s][A[A
+
+ 32%|███▏      | 3403/10570 [00:28<01:03, 112.33it/s][A[A
+
+ 32%|███▏      | 3415/10570 [00:28<01:09, 102.95it/s][A[A
+
+ 32%|███▏      | 3427/10570 [00:28<01:07, 106.30it/s][A[A
+
+ 33%|███▎      | 3440/10570 [00:28<01:05, 109.63it/s][A[A
+
+ 33%|███▎      | 3452/10570 [00:28<01:04, 109.71it/s][A[A
+
+ 33%|███▎      | 3464/10570 [00:28<01:05, 109.21it/s][A[A
+
+ 33%|███▎      | 3475/10570 [00:28<01:08, 103.16it/s][A[A
+
+ 33%|███▎      | 3486/10570 [00:28<01:10, 100.28it/s][A[A
+
+ 33%|███▎      | 3497/10570 [00:29<01:08, 102.94it/s][A[A
+
+ 33%|███▎      | 3508/10570 [00:29<01:08, 102.63it/s][A[A
+
+ 33%|███▎      | 3521/10570 [00:29<01:05, 108.01it/s][A[A
+
+ 33%|███▎      | 3535/10570 [00:29<01:00, 115.73it/s][A[A
+
+ 34%|███▎      | 3548/10570 [00:29<00:59, 117.25it/s][A[A
+
+ 34%|███▎      | 3560/10570 [00:29<01:04, 109.15it/s][A[A
+
+ 34%|███▍      | 3572/10570 [00:29<01:06, 105.16it/s][A[A
+
+ 34%|███▍      | 3583/10570 [00:29<01:09, 100.08it/s][A[A
+
+ 34%|███▍      | 3595/10570 [00:29<01:07, 103.14it/s][A[A
+
+ 34%|███▍      | 3606/10570 [00:30<01:07, 103.14it/s][A[A
+
+ 34%|███▍      | 3617/10570 [00:30<01:06, 104.26it/s][A[A
+
+ 34%|███▍      | 3631/10570 [00:30<01:02, 111.15it/s][A[A
+
+ 34%|███▍      | 3644/10570 [00:30<01:00, 114.89it/s][A[A
+
+ 35%|███▍      | 3657/10570 [00:30<00:59, 116.17it/s][A[A
+
+ 35%|███▍      | 3669/10570 [00:30<01:02, 111.19it/s][A[A
+
+ 35%|███▍      | 3683/10570 [00:30<00:58, 117.05it/s][A[A
+
+ 35%|███▍      | 3695/10570 [00:30<01:00, 113.79it/s][A[A
+
+ 35%|███▌      | 3708/10570 [00:30<00:58, 116.86it/s][A[A
+
+ 35%|███▌      | 3721/10570 [00:31<00:57, 119.33it/s][A[A
+
+ 35%|███▌      | 3734/10570 [00:31<01:00, 113.80it/s][A[A
+
+ 35%|███▌      | 3746/10570 [00:31<01:03, 107.56it/s][A[A
+
+ 36%|███▌      | 3761/10570 [00:31<00:58, 115.73it/s][A[A
+
+ 36%|███▌      | 3776/10570 [00:31<00:55, 122.89it/s][A[A
+
+ 36%|███▌      | 3789/10570 [00:31<00:58, 116.80it/s][A[A
+
+ 36%|███▌      | 3801/10570 [00:31<01:06, 101.84it/s][A[A
+
+ 36%|███▌      | 3813/10570 [00:31<01:05, 103.81it/s][A[A
+
+ 36%|███▌      | 3824/10570 [00:31<01:04, 104.99it/s][A[A
+
+ 36%|███▋      | 3836/10570 [00:32<01:01, 109.00it/s][A[A
+
+ 36%|███▋      | 3848/10570 [00:32<01:00, 110.48it/s][A[A
+
+ 37%|███▋      | 3860/10570 [00:32<01:01, 109.20it/s][A[A
+
+ 37%|███▋      | 3872/10570 [00:32<01:01, 109.16it/s][A[A
+
+ 37%|███▋      | 3884/10570 [00:32<01:01, 108.71it/s][A[A
+
+ 37%|███▋      | 3895/10570 [00:32<01:02, 106.18it/s][A[A
+
+ 37%|███▋      | 3906/10570 [00:32<01:02, 107.12it/s][A[A
+
+ 37%|███▋      | 3918/10570 [00:32<01:01, 108.11it/s][A[A
+
+ 37%|███▋      | 3929/10570 [00:32<01:01, 108.08it/s][A[A
+
+ 37%|███▋      | 3941/10570 [00:33<00:59, 110.78it/s][A[A
+
+ 37%|███▋      | 3954/10570 [00:33<00:57, 115.08it/s][A[A
+
+ 38%|███▊      | 3967/10570 [00:33<00:55, 118.03it/s][A[A
+
+ 38%|███▊      | 3981/10570 [00:33<00:54, 121.97it/s][A[A
+
+ 38%|███▊      | 3994/10570 [00:33<00:57, 113.61it/s][A[A
+
+ 38%|███▊      | 4006/10570 [00:33<01:02, 104.79it/s][A[A
+
+ 38%|███▊      | 4019/10570 [00:33<01:00, 108.81it/s][A[A
+
+ 38%|███▊      | 4031/10570 [00:33<01:02, 105.34it/s][A[A
+
+ 38%|███▊      | 4043/10570 [00:33<01:00, 107.61it/s][A[A
+
+ 38%|███▊      | 4056/10570 [00:34<00:58, 111.43it/s][A[A
+
+ 39%|███▊      | 4070/10570 [00:34<00:55, 117.31it/s][A[A
+
+ 39%|███▊      | 4082/10570 [00:34<00:55, 117.16it/s][A[A
+
+ 39%|███▊      | 4094/10570 [00:34<01:02, 103.54it/s][A[A
+
+ 39%|███▉      | 4105/10570 [00:34<01:23, 77.41it/s] [A[A
+
+ 39%|███▉      | 4114/10570 [00:34<01:25, 75.15it/s][A[A
+
+ 39%|███▉      | 4124/10570 [00:34<01:19, 81.06it/s][A[A
+
+ 39%|███▉      | 4133/10570 [00:35<01:34, 68.24it/s][A[A
+
+ 39%|███▉      | 4141/10570 [00:35<01:37, 66.23it/s][A[A
+
+ 39%|███▉      | 4149/10570 [00:35<02:17, 46.63it/s][A[A
+
+ 39%|███▉      | 4155/10570 [00:35<02:31, 42.44it/s][A[A
+
+ 39%|███▉      | 4161/10570 [00:35<02:19, 45.84it/s][A[A
+
+ 39%|███▉      | 4167/10570 [00:35<02:16, 46.95it/s][A[A
+
+ 39%|███▉      | 4173/10570 [00:35<02:13, 47.82it/s][A[A
+
+ 40%|███▉      | 4179/10570 [00:36<02:12, 48.38it/s][A[A
+
+ 40%|███▉      | 4185/10570 [00:36<02:35, 41.19it/s][A[A
+
+ 40%|███▉      | 4190/10570 [00:36<02:40, 39.71it/s][A[A
+
+ 40%|███▉      | 4196/10570 [00:36<02:31, 42.11it/s][A[A
+
+ 40%|███▉      | 4201/10570 [00:36<02:27, 43.15it/s][A[A
+
+ 40%|███▉      | 4206/10570 [00:36<02:30, 42.39it/s][A[A
+
+ 40%|███▉      | 4211/10570 [00:36<02:30, 42.25it/s][A[A
+
+ 40%|███▉      | 4220/10570 [00:37<02:07, 49.65it/s][A[A
+
+ 40%|████      | 4228/10570 [00:37<01:55, 54.86it/s][A[A
+
+ 40%|████      | 4238/10570 [00:37<01:41, 62.53it/s][A[A
+
+ 40%|████      | 4248/10570 [00:37<01:33, 67.91it/s][A[A
+
+ 40%|████      | 4256/10570 [00:37<01:38, 63.92it/s][A[A
+
+ 40%|████      | 4263/10570 [00:37<02:09, 48.68it/s][A[A
+
+ 40%|████      | 4269/10570 [00:37<02:44, 38.31it/s][A[A
+
+ 40%|████      | 4274/10570 [00:38<02:55, 35.95it/s][A[A
+
+ 40%|████      | 4279/10570 [00:38<02:50, 36.86it/s][A[A
+
+ 41%|████      | 4284/10570 [00:38<03:20, 31.39it/s][A[A
+
+ 41%|████      | 4291/10570 [00:38<02:50, 36.86it/s][A[A
+
+ 41%|████      | 4297/10570 [00:38<02:33, 40.79it/s][A[A
+
+ 41%|████      | 4302/10570 [00:38<03:17, 31.80it/s][A[A
+
+ 41%|████      | 4306/10570 [00:39<03:22, 30.92it/s][A[A
+
+ 41%|████      | 4315/10570 [00:39<02:44, 38.03it/s][A[A
+
+ 41%|████      | 4325/10570 [00:39<02:15, 46.26it/s][A[A
+
+ 41%|████      | 4337/10570 [00:39<01:49, 56.67it/s][A[A
+
+ 41%|████      | 4352/10570 [00:39<01:30, 68.69it/s][A[A
+
+ 41%|████▏     | 4362/10570 [00:39<01:25, 72.38it/s][A[A
+
+ 41%|████▏     | 4373/10570 [00:39<01:17, 79.77it/s][A[A
+
+ 41%|████▏     | 4384/10570 [00:39<01:11, 86.72it/s][A[A
+
+ 42%|████▏     | 4394/10570 [00:39<01:10, 87.83it/s][A[A
+
+ 42%|████▏     | 4404/10570 [00:40<01:10, 88.04it/s][A[A
+
+ 42%|████▏     | 4416/10570 [00:40<01:04, 95.65it/s][A[A
+
+ 42%|████▏     | 4430/10570 [00:40<00:58, 104.58it/s][A[A
+
+ 42%|████▏     | 4442/10570 [00:40<00:56, 108.32it/s][A[A
+
+ 42%|████▏     | 4454/10570 [00:40<00:55, 109.76it/s][A[A
+
+ 42%|████▏     | 4469/10570 [00:40<00:51, 119.12it/s][A[A
+
+ 42%|████▏     | 4482/10570 [00:40<00:49, 121.80it/s][A[A
+
+ 43%|████▎     | 4495/10570 [00:40<00:53, 114.08it/s][A[A
+
+ 43%|████▎     | 4507/10570 [00:40<01:00, 99.78it/s] [A[A
+
+ 43%|████▎     | 4518/10570 [00:41<01:07, 90.27it/s][A[A
+
+ 43%|████▎     | 4528/10570 [00:41<01:10, 85.86it/s][A[A
+
+ 43%|████▎     | 4538/10570 [00:41<01:08, 88.19it/s][A[A
+
+ 43%|████▎     | 4548/10570 [00:41<01:09, 86.05it/s][A[A
+
+ 43%|████▎     | 4563/10570 [00:41<01:01, 98.03it/s][A[A
+
+ 43%|████▎     | 4574/10570 [00:41<01:00, 98.40it/s][A[A
+
+ 43%|████▎     | 4585/10570 [00:41<01:03, 94.14it/s][A[A
+
+ 43%|████▎     | 4596/10570 [00:41<01:03, 93.68it/s][A[A
+
+ 44%|████▎     | 4606/10570 [00:42<01:06, 89.64it/s][A[A
+
+ 44%|████▎     | 4616/10570 [00:42<01:04, 92.23it/s][A[A
+
+ 44%|████▍     | 4628/10570 [00:42<01:00, 97.69it/s][A[A
+
+ 44%|████▍     | 4641/10570 [00:42<00:57, 102.23it/s][A[A
+
+ 44%|████▍     | 4652/10570 [00:42<01:10, 84.45it/s] [A[A
+
+ 44%|████▍     | 4662/10570 [00:42<01:11, 82.33it/s][A[A
+
+ 44%|████▍     | 4671/10570 [00:42<01:14, 78.92it/s][A[A
+
+ 44%|████▍     | 4685/10570 [00:42<01:05, 89.85it/s][A[A
+
+ 44%|████▍     | 4700/10570 [00:42<00:58, 100.60it/s][A[A
+
+ 45%|████▍     | 4713/10570 [00:43<00:54, 107.05it/s][A[A
+
+ 45%|████▍     | 4725/10570 [00:43<00:56, 102.74it/s][A[A
+
+ 45%|████▍     | 4737/10570 [00:43<00:56, 103.84it/s][A[A
+
+ 45%|████▍     | 4748/10570 [00:43<00:57, 101.54it/s][A[A
+
+ 45%|████▌     | 4759/10570 [00:43<01:12, 80.01it/s] [A[A
+
+ 45%|████▌     | 4768/10570 [00:43<01:11, 80.68it/s][A[A
+
+ 45%|████▌     | 4777/10570 [00:43<01:11, 81.43it/s][A[A
+
+ 45%|████▌     | 4790/10570 [00:43<01:03, 90.36it/s][A[A
+
+ 45%|████▌     | 4803/10570 [00:44<00:58, 99.17it/s][A[A
+
+ 46%|████▌     | 4814/10570 [00:44<00:56, 102.11it/s][A[A
+
+ 46%|████▌     | 4829/10570 [00:44<00:51, 112.42it/s][A[A
+
+ 46%|████▌     | 4842/10570 [00:44<00:48, 117.11it/s][A[A
+
+ 46%|████▌     | 4855/10570 [00:44<01:09, 81.64it/s] [A[A
+
+ 46%|████▌     | 4870/10570 [00:44<01:00, 94.23it/s][A[A
+
+ 46%|████▌     | 4882/10570 [00:44<01:00, 93.65it/s][A[A
+
+ 46%|████▋     | 4893/10570 [00:44<00:58, 97.78it/s][A[A
+
+ 46%|████▋     | 4905/10570 [00:45<01:27, 65.08it/s][A[A
+
+ 47%|████▋     | 4917/10570 [00:45<01:16, 74.23it/s][A[A
+
+ 47%|████▋     | 4927/10570 [00:45<01:10, 79.83it/s][A[A
+
+ 47%|████▋     | 4940/10570 [00:45<01:03, 89.04it/s][A[A
+
+ 47%|████▋     | 4951/10570 [00:45<01:03, 88.58it/s][A[A
+
+ 47%|████▋     | 4962/10570 [00:45<00:59, 93.47it/s][A[A
+
+ 47%|████▋     | 4973/10570 [00:45<01:01, 90.94it/s][A[A
+
+ 47%|████▋     | 4986/10570 [00:46<00:56, 99.39it/s][A[A
+
+ 47%|████▋     | 4997/10570 [00:46<01:08, 81.90it/s][A[A
+
+ 47%|████▋     | 5007/10570 [00:46<01:07, 82.88it/s][A[A
+
+ 47%|████▋     | 5017/10570 [00:46<01:04, 86.30it/s][A[A
+
+ 48%|████▊     | 5027/10570 [00:46<01:02, 89.21it/s][A[A
+
+ 48%|████▊     | 5037/10570 [00:46<01:01, 90.02it/s][A[A
+
+ 48%|████▊     | 5048/10570 [00:46<00:58, 93.98it/s][A[A
+
+ 48%|████▊     | 5061/10570 [00:46<00:54, 101.16it/s][A[A
+
+ 48%|████▊     | 5072/10570 [00:47<00:58, 94.35it/s] [A[A
+
+ 48%|████▊     | 5082/10570 [00:47<00:59, 92.46it/s][A[A
+
+ 48%|████▊     | 5092/10570 [00:47<01:00, 90.60it/s][A[A
+
+ 48%|████▊     | 5105/10570 [00:47<00:55, 98.55it/s][A[A
+
+ 48%|████▊     | 5117/10570 [00:47<00:52, 104.10it/s][A[A
+
+ 49%|████▊     | 5128/10570 [00:47<00:52, 103.07it/s][A[A
+
+ 49%|████▊     | 5140/10570 [00:47<00:50, 107.53it/s][A[A
+
+ 49%|████▊     | 5151/10570 [00:47<00:53, 101.62it/s][A[A
+
+ 49%|████▉     | 5163/10570 [00:47<00:51, 104.31it/s][A[A
+
+ 49%|████▉     | 5174/10570 [00:48<00:50, 105.85it/s][A[A
+
+ 49%|████▉     | 5185/10570 [00:48<00:52, 103.18it/s][A[A
+
+ 49%|████▉     | 5196/10570 [00:48<00:51, 103.74it/s][A[A
+
+ 49%|████▉     | 5207/10570 [00:48<00:50, 105.19it/s][A[A
+
+ 49%|████▉     | 5218/10570 [00:48<00:53, 100.75it/s][A[A
+
+ 49%|████▉     | 5231/10570 [00:48<00:49, 107.66it/s][A[A
+
+ 50%|████▉     | 5242/10570 [00:48<00:50, 105.96it/s][A[A
+
+ 50%|████▉     | 5253/10570 [00:48<00:50, 104.46it/s][A[A
+
+ 50%|████▉     | 5266/10570 [00:48<00:47, 110.58it/s][A[A
+
+ 50%|████▉     | 5279/10570 [00:48<00:46, 113.70it/s][A[A
+
+ 50%|█████     | 5291/10570 [00:49<00:45, 115.52it/s][A[A
+
+ 50%|█████     | 5305/10570 [00:49<00:43, 121.87it/s][A[A
+
+ 50%|█████     | 5318/10570 [00:49<00:44, 117.79it/s][A[A
+
+ 50%|█████     | 5331/10570 [00:49<00:44, 118.99it/s][A[A
+
+ 51%|█████     | 5344/10570 [00:49<00:48, 107.36it/s][A[A
+
+ 51%|█████     | 5356/10570 [00:49<00:50, 103.37it/s][A[A
+
+ 51%|█████     | 5367/10570 [00:49<00:49, 104.46it/s][A[A
+
+ 51%|█████     | 5378/10570 [00:49<00:49, 105.91it/s][A[A
+
+ 51%|█████     | 5390/10570 [00:49<00:47, 108.75it/s][A[A
+
+ 51%|█████     | 5401/10570 [00:50<00:47, 107.99it/s][A[A
+
+ 51%|█████     | 5412/10570 [00:50<00:48, 105.29it/s][A[A
+
+ 51%|█████▏    | 5423/10570 [00:50<00:53, 96.20it/s] [A[A
+
+ 51%|█████▏    | 5435/10570 [00:50<00:50, 101.65it/s][A[A
+
+ 52%|█████▏    | 5446/10570 [00:50<00:59, 86.26it/s] [A[A
+
+ 52%|█████▏    | 5456/10570 [00:50<01:08, 74.12it/s][A[A
+
+ 52%|█████▏    | 5465/10570 [00:50<01:10, 72.45it/s][A[A
+
+ 52%|█████▏    | 5475/10570 [00:51<01:05, 77.52it/s][A[A
+
+ 52%|█████▏    | 5484/10570 [00:51<01:16, 66.32it/s][A[A
+
+ 52%|█████▏    | 5495/10570 [00:51<01:07, 74.88it/s][A[A
+
+ 52%|█████▏    | 5504/10570 [00:51<01:04, 78.30it/s][A[A
+
+ 52%|█████▏    | 5513/10570 [00:51<01:05, 76.83it/s][A[A
+
+ 52%|█████▏    | 5522/10570 [00:51<01:06, 75.45it/s][A[A
+
+ 52%|█████▏    | 5532/10570 [00:51<01:02, 80.11it/s][A[A
+
+ 52%|█████▏    | 5544/10570 [00:51<00:57, 87.18it/s][A[A
+
+ 53%|█████▎    | 5554/10570 [00:52<01:00, 82.74it/s][A[A
+
+ 53%|█████▎    | 5563/10570 [00:52<01:00, 82.92it/s][A[A
+
+ 53%|█████▎    | 5574/10570 [00:52<00:56, 87.67it/s][A[A
+
+ 53%|█████▎    | 5583/10570 [00:52<00:58, 85.09it/s][A[A
+
+ 53%|█████▎    | 5596/10570 [00:52<00:52, 94.84it/s][A[A
+
+ 53%|█████▎    | 5606/10570 [00:52<00:52, 93.76it/s][A[A
+
+ 53%|█████▎    | 5616/10570 [00:52<00:57, 86.10it/s][A[A
+
+ 53%|█████▎    | 5625/10570 [00:52<00:59, 83.30it/s][A[A
+
+ 53%|█████▎    | 5635/10570 [00:52<00:57, 86.38it/s][A[A
+
+ 53%|█████▎    | 5645/10570 [00:53<00:55, 89.00it/s][A[A
+
+ 54%|█████▎    | 5655/10570 [00:53<00:57, 85.79it/s][A[A
+
+ 54%|█████▎    | 5666/10570 [00:53<00:53, 91.62it/s][A[A
+
+ 54%|█████▎    | 5678/10570 [00:53<00:50, 96.37it/s][A[A
+
+ 54%|█████▍    | 5692/10570 [00:53<00:46, 103.96it/s][A[A
+
+ 54%|█████▍    | 5704/10570 [00:53<00:45, 106.09it/s][A[A
+
+ 54%|█████▍    | 5716/10570 [00:53<00:44, 107.97it/s][A[A
+
+ 54%|█████▍    | 5727/10570 [00:53<00:48, 99.86it/s] [A[A
+
+ 54%|█████▍    | 5738/10570 [00:53<00:50, 95.00it/s][A[A
+
+ 54%|█████▍    | 5748/10570 [00:54<00:50, 95.40it/s][A[A
+
+ 54%|█████▍    | 5759/10570 [00:54<00:49, 97.93it/s][A[A
+
+ 55%|█████▍    | 5769/10570 [00:54<00:55, 86.76it/s][A[A
+
+ 55%|█████▍    | 5779/10570 [00:54<00:53, 90.23it/s][A[A
+
+ 55%|█████▍    | 5789/10570 [00:54<00:54, 87.65it/s][A[A
+
+ 55%|█████▍    | 5798/10570 [00:54<00:56, 85.18it/s][A[A
+
+ 55%|█████▍    | 5808/10570 [00:54<00:54, 87.42it/s][A[A
+
+ 55%|█████▌    | 5819/10570 [00:54<00:51, 92.04it/s][A[A
+
+ 55%|█████▌    | 5830/10570 [00:54<00:49, 96.13it/s][A[A
+
+ 55%|█████▌    | 5841/10570 [00:55<00:48, 98.05it/s][A[A
+
+ 55%|█████▌    | 5851/10570 [00:55<00:53, 88.61it/s][A[A
+
+ 55%|█████▌    | 5861/10570 [00:55<00:52, 89.59it/s][A[A
+
+ 56%|█████▌    | 5873/10570 [00:55<00:49, 95.09it/s][A[A
+
+ 56%|█████▌    | 5885/10570 [00:55<00:46, 99.80it/s][A[A
+
+ 56%|█████▌    | 5897/10570 [00:55<00:46, 101.19it/s][A[A
+
+ 56%|█████▌    | 5908/10570 [00:55<00:49, 93.85it/s] [A[A
+
+ 56%|█████▌    | 5918/10570 [00:55<00:50, 91.42it/s][A[A
+
+ 56%|█████▌    | 5928/10570 [00:55<00:50, 92.35it/s][A[A
+
+ 56%|█████▌    | 5940/10570 [00:56<00:47, 98.36it/s][A[A
+
+ 56%|█████▋    | 5952/10570 [00:56<00:45, 102.08it/s][A[A
+
+ 56%|█████▋    | 5963/10570 [00:56<00:45, 100.54it/s][A[A
+
+ 57%|█████▋    | 5975/10570 [00:56<00:43, 105.19it/s][A[A
+
+ 57%|█████▋    | 5987/10570 [00:56<00:42, 107.28it/s][A[A
+
+ 57%|█████▋    | 5998/10570 [00:56<00:46, 97.31it/s] [A[A
+
+ 57%|█████▋    | 6008/10570 [00:56<00:49, 91.76it/s][A[A
+
+ 57%|█████▋    | 6021/10570 [00:56<00:46, 98.72it/s][A[A
+
+ 57%|█████▋    | 6032/10570 [00:57<00:47, 95.94it/s][A[A
+
+ 57%|█████▋    | 6042/10570 [00:57<00:50, 89.14it/s][A[A
+
+ 57%|█████▋    | 6052/10570 [00:57<00:51, 86.96it/s][A[A
+
+ 57%|█████▋    | 6061/10570 [00:57<00:58, 77.03it/s][A[A
+
+ 57%|█████▋    | 6071/10570 [00:57<00:55, 81.56it/s][A[A
+
+ 58%|█████▊    | 6081/10570 [00:57<00:53, 83.93it/s][A[A
+
+ 58%|█████▊    | 6090/10570 [00:57<00:53, 82.97it/s][A[A
+
+ 58%|█████▊    | 6100/10570 [00:57<00:52, 85.94it/s][A[A
+
+ 58%|█████▊    | 6112/10570 [00:57<00:48, 92.20it/s][A[A
+
+ 58%|█████▊    | 6125/10570 [00:58<00:44, 100.67it/s][A[A
+
+ 58%|█████▊    | 6138/10570 [00:58<00:41, 107.61it/s][A[A
+
+ 58%|█████▊    | 6151/10570 [00:58<00:39, 112.23it/s][A[A
+
+ 58%|█████▊    | 6163/10570 [00:58<00:40, 108.67it/s][A[A
+
+ 58%|█████▊    | 6175/10570 [00:58<00:39, 110.46it/s][A[A
+
+ 59%|█████▊    | 6187/10570 [00:58<00:41, 105.11it/s][A[A
+
+ 59%|█████▊    | 6199/10570 [00:58<00:41, 105.30it/s][A[A
+
+ 59%|█████▉    | 6210/10570 [00:58<00:43, 100.37it/s][A[A
+
+ 59%|█████▉    | 6221/10570 [00:58<00:42, 102.34it/s][A[A
+
+ 59%|█████▉    | 6232/10570 [00:59<00:52, 81.98it/s] [A[A
+
+ 59%|█████▉    | 6243/10570 [00:59<00:49, 88.27it/s][A[A
+
+ 59%|█████▉    | 6253/10570 [00:59<00:49, 87.71it/s][A[A
+
+ 59%|█████▉    | 6263/10570 [00:59<00:49, 86.50it/s][A[A
+
+ 59%|█████▉    | 6274/10570 [00:59<00:46, 91.76it/s][A[A
+
+ 59%|█████▉    | 6287/10570 [00:59<00:42, 100.38it/s][A[A
+
+ 60%|█████▉    | 6298/10570 [00:59<00:42, 100.82it/s][A[A
+
+ 60%|█████▉    | 6310/10570 [00:59<00:40, 103.90it/s][A[A
+
+ 60%|█████▉    | 6321/10570 [01:00<00:42, 100.79it/s][A[A
+
+ 60%|█████▉    | 6332/10570 [01:00<00:42, 99.31it/s] [A[A
+
+ 60%|██████    | 6345/10570 [01:00<00:39, 106.00it/s][A[A
+
+ 60%|██████    | 6356/10570 [01:00<00:39, 106.64it/s][A[A
+
+ 60%|██████    | 6369/10570 [01:00<00:38, 110.30it/s][A[A
+
+ 60%|██████    | 6381/10570 [01:00<00:46, 90.43it/s] [A[A
+
+ 60%|██████    | 6394/10570 [01:00<00:42, 98.03it/s][A[A
+
+ 61%|██████    | 6408/10570 [01:00<00:39, 105.98it/s][A[A
+
+ 61%|██████    | 6420/10570 [01:00<00:37, 109.30it/s][A[A
+
+ 61%|██████    | 6432/10570 [01:01<00:37, 110.16it/s][A[A
+
+ 61%|██████    | 6446/10570 [01:01<00:35, 116.99it/s][A[A
+
+ 61%|██████    | 6459/10570 [01:01<00:34, 120.02it/s][A[A
+
+ 61%|██████    | 6472/10570 [01:01<00:37, 110.24it/s][A[A
+
+ 61%|██████▏   | 6484/10570 [01:01<00:36, 111.69it/s][A[A
+
+ 61%|██████▏   | 6496/10570 [01:01<00:36, 111.34it/s][A[A
+
+ 62%|██████▏   | 6508/10570 [01:01<00:37, 109.71it/s][A[A
+
+ 62%|██████▏   | 6520/10570 [01:01<00:40, 99.80it/s] [A[A
+
+ 62%|██████▏   | 6532/10570 [01:01<00:38, 105.08it/s][A[A
+
+ 62%|██████▏   | 6545/10570 [01:02<00:36, 109.70it/s][A[A
+
+ 62%|██████▏   | 6557/10570 [01:02<00:38, 103.94it/s][A[A
+
+ 62%|██████▏   | 6569/10570 [01:02<00:37, 107.63it/s][A[A
+
+ 62%|██████▏   | 6580/10570 [01:02<00:38, 103.05it/s][A[A
+
+ 62%|██████▏   | 6591/10570 [01:02<00:43, 91.56it/s] [A[A
+
+ 62%|██████▏   | 6601/10570 [01:02<00:44, 89.78it/s][A[A
+
+ 63%|██████▎   | 6614/10570 [01:02<00:40, 97.71it/s][A[A
+
+ 63%|██████▎   | 6627/10570 [01:02<00:38, 103.71it/s][A[A
+
+ 63%|██████▎   | 6639/10570 [01:03<00:36, 107.71it/s][A[A
+
+ 63%|██████▎   | 6652/10570 [01:03<00:35, 110.88it/s][A[A
+
+ 63%|██████▎   | 6664/10570 [01:03<00:35, 110.33it/s][A[A
+
+ 63%|██████▎   | 6676/10570 [01:03<00:35, 109.85it/s][A[A
+
+ 63%|██████▎   | 6688/10570 [01:03<00:36, 105.74it/s][A[A
+
+ 63%|██████▎   | 6699/10570 [01:03<00:40, 96.31it/s] [A[A
+
+ 63%|██████▎   | 6709/10570 [01:03<00:44, 87.28it/s][A[A
+
+ 64%|██████▎   | 6719/10570 [01:03<00:43, 87.97it/s][A[A
+
+ 64%|██████▎   | 6731/10570 [01:03<00:40, 95.39it/s][A[A
+
+ 64%|██████▍   | 6743/10570 [01:04<00:38, 99.59it/s][A[A
+
+ 64%|██████▍   | 6758/10570 [01:04<00:34, 109.89it/s][A[A
+
+ 64%|██████▍   | 6773/10570 [01:04<00:31, 118.79it/s][A[A
+
+ 64%|██████▍   | 6786/10570 [01:04<00:38, 99.29it/s] [A[A
+
+ 64%|██████▍   | 6797/10570 [01:04<00:37, 100.46it/s][A[A
+
+ 64%|██████▍   | 6808/10570 [01:04<00:39, 95.63it/s] [A[A
+
+ 65%|██████▍   | 6819/10570 [01:04<00:40, 92.12it/s][A[A
+
+ 65%|██████▍   | 6829/10570 [01:04<00:41, 89.75it/s][A[A
+
+ 65%|██████▍   | 6839/10570 [01:05<00:44, 84.61it/s][A[A
+
+ 65%|██████▍   | 6851/10570 [01:05<00:40, 92.22it/s][A[A
+
+ 65%|██████▍   | 6861/10570 [01:05<00:39, 93.80it/s][A[A
+
+ 65%|██████▌   | 6871/10570 [01:05<00:42, 87.13it/s][A[A
+
+ 65%|██████▌   | 6881/10570 [01:05<00:42, 86.04it/s][A[A
+
+ 65%|██████▌   | 6892/10570 [01:05<00:40, 91.25it/s][A[A
+
+ 65%|██████▌   | 6902/10570 [01:05<00:41, 88.35it/s][A[A
+
+ 65%|██████▌   | 6912/10570 [01:05<00:43, 83.54it/s][A[A
+
+ 66%|██████▌   | 6928/10570 [01:05<00:37, 96.33it/s][A[A
+
+ 66%|██████▌   | 6941/10570 [01:06<00:35, 103.06it/s][A[A
+
+ 66%|██████▌   | 6953/10570 [01:06<00:35, 101.83it/s][A[A
+
+ 66%|██████▌   | 6965/10570 [01:06<00:34, 105.44it/s][A[A
+
+ 66%|██████▌   | 6976/10570 [01:06<00:34, 103.34it/s][A[A
+
+ 66%|██████▌   | 6989/10570 [01:06<00:32, 109.13it/s][A[A
+
+ 66%|██████▌   | 7002/10570 [01:06<00:31, 113.27it/s][A[A
+
+ 66%|██████▋   | 7014/10570 [01:06<00:31, 113.58it/s][A[A
+
+ 66%|██████▋   | 7027/10570 [01:06<00:30, 115.55it/s][A[A
+
+ 67%|██████▋   | 7039/10570 [01:06<00:31, 113.34it/s][A[A
+
+ 67%|██████▋   | 7051/10570 [01:07<00:32, 108.20it/s][A[A
+
+ 67%|██████▋   | 7062/10570 [01:07<00:33, 103.80it/s][A[A
+
+ 67%|██████▋   | 7073/10570 [01:07<00:34, 101.27it/s][A[A
+
+ 67%|██████▋   | 7084/10570 [01:07<00:35, 98.39it/s] [A[A
+
+ 67%|██████▋   | 7098/10570 [01:07<00:32, 107.06it/s][A[A
+
+ 67%|██████▋   | 7109/10570 [01:07<00:32, 106.45it/s][A[A
+
+ 67%|██████▋   | 7123/10570 [01:07<00:30, 114.09it/s][A[A
+
+ 68%|██████▊   | 7135/10570 [01:07<00:31, 110.23it/s][A[A
+
+ 68%|██████▊   | 7149/10570 [01:07<00:29, 115.87it/s][A[A
+
+ 68%|██████▊   | 7161/10570 [01:08<00:29, 114.33it/s][A[A
+
+ 68%|██████▊   | 7173/10570 [01:08<00:30, 110.13it/s][A[A
+
+ 68%|██████▊   | 7185/10570 [01:08<00:31, 107.84it/s][A[A
+
+ 68%|██████▊   | 7196/10570 [01:08<00:32, 102.47it/s][A[A
+
+ 68%|██████▊   | 7207/10570 [01:08<00:33, 100.17it/s][A[A
+
+ 68%|██████▊   | 7218/10570 [01:08<00:34, 96.08it/s] [A[A
+
+ 68%|██████▊   | 7228/10570 [01:08<00:34, 96.66it/s][A[A
+
+ 68%|██████▊   | 7238/10570 [01:08<00:34, 96.33it/s][A[A
+
+ 69%|██████▊   | 7248/10570 [01:08<00:34, 96.99it/s][A[A
+
+ 69%|██████▊   | 7258/10570 [01:09<00:34, 94.78it/s][A[A
+
+ 69%|██████▉   | 7268/10570 [01:09<00:36, 89.32it/s][A[A
+
+ 69%|██████▉   | 7278/10570 [01:09<00:36, 89.13it/s][A[A
+
+ 69%|██████▉   | 7291/10570 [01:09<00:33, 97.55it/s][A[A
+
+ 69%|██████▉   | 7302/10570 [01:09<00:33, 97.96it/s][A[A
+
+ 69%|██████▉   | 7316/10570 [01:09<00:30, 106.38it/s][A[A
+
+ 69%|██████▉   | 7327/10570 [01:09<00:33, 96.74it/s] [A[A
+
+ 69%|██████▉   | 7338/10570 [01:10<00:43, 74.09it/s][A[A
+
+ 70%|██████▉   | 7347/10570 [01:10<00:43, 74.25it/s][A[A
+
+ 70%|██████▉   | 7363/10570 [01:10<00:36, 87.40it/s][A[A
+
+ 70%|██████▉   | 7374/10570 [01:10<00:36, 88.57it/s][A[A
+
+ 70%|██████▉   | 7384/10570 [01:10<00:39, 81.11it/s][A[A
+
+ 70%|██████▉   | 7393/10570 [01:10<00:38, 81.98it/s][A[A
+
+ 70%|███████   | 7405/10570 [01:10<00:35, 88.85it/s][A[A
+
+ 70%|███████   | 7417/10570 [01:10<00:33, 94.89it/s][A[A
+
+ 70%|███████   | 7429/10570 [01:10<00:31, 100.27it/s][A[A
+
+ 70%|███████   | 7440/10570 [01:11<00:33, 94.16it/s] [A[A
+
+ 70%|███████   | 7451/10570 [01:11<00:31, 98.10it/s][A[A
+
+ 71%|███████   | 7462/10570 [01:11<00:35, 86.83it/s][A[A
+
+ 71%|███████   | 7472/10570 [01:11<00:34, 89.59it/s][A[A
+
+ 71%|███████   | 7485/10570 [01:11<00:31, 97.78it/s][A[A
+
+ 71%|███████   | 7496/10570 [01:11<00:31, 96.57it/s][A[A
+
+ 71%|███████   | 7507/10570 [01:11<00:30, 100.01it/s][A[A
+
+ 71%|███████   | 7520/10570 [01:11<00:28, 105.24it/s][A[A
+
+ 71%|███████▏  | 7532/10570 [01:11<00:28, 107.81it/s][A[A
+
+ 71%|███████▏  | 7543/10570 [01:12<00:30, 98.02it/s] [A[A
+
+ 71%|███████▏  | 7554/10570 [01:12<00:29, 101.15it/s][A[A
+
+ 72%|███████▏  | 7566/10570 [01:12<00:28, 103.97it/s][A[A
+
+ 72%|███████▏  | 7578/10570 [01:12<00:27, 107.94it/s][A[A
+
+ 72%|███████▏  | 7589/10570 [01:12<00:29, 102.76it/s][A[A
+
+ 72%|███████▏  | 7601/10570 [01:12<00:27, 107.22it/s][A[A
+
+ 72%|███████▏  | 7612/10570 [01:12<00:28, 104.14it/s][A[A
+
+ 72%|███████▏  | 7624/10570 [01:12<00:27, 106.16it/s][A[A
+
+ 72%|███████▏  | 7635/10570 [01:12<00:27, 106.87it/s][A[A
+
+ 72%|███████▏  | 7646/10570 [01:13<00:28, 103.53it/s][A[A
+
+ 72%|███████▏  | 7657/10570 [01:13<00:32, 89.55it/s] [A[A
+
+ 73%|███████▎  | 7668/10570 [01:13<00:31, 93.50it/s][A[A
+
+ 73%|███████▎  | 7683/10570 [01:13<00:27, 104.11it/s][A[A
