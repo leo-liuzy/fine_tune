@@ -352,8 +352,9 @@ class BertEncoder(nn.Module):
         self.output_attentions = config.output_attentions
         self.output_hidden_states = config.output_hidden_states
         self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
+        self.adapters = None
         if config.apply_adapter_between_layer:
-            pass
+            self.adapters = nn.ModuleList([AdapterBlock(config) for _ in range(config.num_hidden_layers)])
 
     def forward(self, hidden_states, attention_mask=None, head_mask=None, weights=None):
         all_hidden_states = ()  # TODO: ()
@@ -367,6 +368,9 @@ class BertEncoder(nn.Module):
 
             layer_outputs = layer_module(hidden_states, attention_mask, head_mask[i])
             hidden_states = layer_outputs[0]
+            if self.adapters:
+                adapter = self.adapters[i]
+                hidden_states = adapter(hidden_states)
 
             if self.output_attentions:
                 all_attentions = all_attentions + (layer_outputs[1],)
