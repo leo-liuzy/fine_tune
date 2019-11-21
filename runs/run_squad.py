@@ -25,7 +25,6 @@ import os
 import random
 
 import numpy as np
-from ipdb import set_trace as bp
 import torch
 from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
                               TensorDataset)
@@ -87,7 +86,7 @@ def create_filter_conditions(args, model):
     if args.elmo_style:
         fns.append(lambda x: x.startswith("elmo"))
     if args.apply_first_adapter_in_layer or args.apply_second_adapter_in_layer or args.apply_adapter_between_layer:
-            fns.append(lambda x: "adapter" in x)
+        fns.append(lambda x: "adapter" in x)
     fns.append(lambda x: any(idx in x for idx in unfreeze_layer_idxs))
     return lambda x: any(fn(x) for fn in fns)
 
@@ -105,13 +104,16 @@ def train(args, train_dataset, model, tokenizer):
     if args.num_sample > -1:
         random_indices = np.arange(len(train_dataset))
         np.random.shuffle(random_indices)
-        random_indices = random_indices[:args.num_sample]	
+        random_indices = random_indices[:args.num_sample]
         train_dataset = torch.utils.data.TensorDataset(*train_dataset[random_indices])
 
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
 
     if args.max_steps > 0:
+        if self.adapters:
+            adapter = self.adapters[i]
+            hidden_states = adapter(hidden_states)
         t_total = args.max_steps
         args.num_train_epochs = args.max_steps // (len(train_dataloader) // args.gradient_accumulation_steps) + 1
     else:
@@ -406,7 +408,7 @@ def main(args):
     if args.local_rank == -1 or args.no_cuda:
         device = torch.device(
             f"cuda:{args.gpu_id}" if torch.cuda.is_available() and not args.no_cuda else "cpu")  # TODO: delete :0
-        args.n_gpu =  1  # TODO:  torch.cuda.device_count()
+        args.n_gpu = 1  # TODO:  torch.cuda.device_count()
     else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
@@ -706,7 +708,9 @@ if __name__ == "__main__":
         num_tune = 5
 
         all_hypers = list(itertools.product(lrs, epochs))
+        print(f"All Hypers: {all_hypers}")
         hyper_idxs = np.random.randint(0, len(all_hypers), num_tune)
+        print(f"Hyper_idxs: {hyper_idxs}")
         for i, idx in enumerate(hyper_idxs):
             print(f"The {i}th set of hyperparameters")
             lr, epoch = all_hypers[idx]
