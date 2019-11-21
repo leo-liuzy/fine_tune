@@ -244,7 +244,7 @@ class BertSelfOutput(nn.Module):
     def __init__(self, config):
         super(BertSelfOutput, self).__init__()
         self.adapter = None
-        if config.apply_adapter:
+        if config.apply_first_adapter_in_layer:
             self.adapter = AdapterBlock(config)
         self.dense = nn.Linear(config.hidden_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
@@ -254,7 +254,7 @@ class BertSelfOutput(nn.Module):
         hidden_states = self.dense(hidden_states)
         hidden_states = self.dropout(hidden_states)
         # if self.adapter:
-            # hidden_states = self.adapter(hidden_states)
+        # hidden_states = self.adapter(hidden_states)
         hidden_states = self.LayerNorm(hidden_states + input_tensor)
         return hidden_states
 
@@ -315,7 +315,7 @@ class BertOutput(nn.Module):
     def __init__(self, config):
         super(BertOutput, self).__init__()
         self.adapter = None
-        if config.apply_adapter:
+        if config.apply_second_adapter_in_layer:
             self.adapter = AdapterBlock(config)
         self.dense = nn.Linear(config.intermediate_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
@@ -351,7 +351,11 @@ class BertEncoder(nn.Module):
         super(BertEncoder, self).__init__()
         self.output_attentions = config.output_attentions
         self.output_hidden_states = config.output_hidden_states
-        self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
+        if config.apply_adapter_between_layer:
+            self.layer = nn.ModuleList([nn.Sequential(BertLayer(config),
+                                                      AdapterBlock(config)) for _ in range(config.num_hidden_layers)])
+        else:
+            self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
 
     def forward(self, hidden_states, attention_mask=None, head_mask=None, weights=None):
         all_hidden_states = ()  # TODO: ()

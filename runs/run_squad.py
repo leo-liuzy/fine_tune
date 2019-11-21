@@ -439,7 +439,9 @@ def main(args):
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     # adapter argument
     config.adapter_activation = args.adapter_activation
-    config.apply_adapter = args.apply_adapter  # apply adapter
+    config.apply_first_adapter_in_layer = args.apply_first_adapter_in_layer  # apply first adapter in layer
+    config.apply_second_adapter_in_layer = args.apply_second_adapter_in_layer  # apply first adapter in layer
+    config.apply_adapter_between_layer = args.apply_adapter_between_layer  # apply first adapter in layer
     config.bottleneck_size = args.bottleneck_size  # set bottleneck size
     config.init_scale = args.init_scale  # set bottleneck size
     assert args.init_scale >= 0
@@ -578,12 +580,16 @@ if __name__ == "__main__":
     parser.add_argument("--unfreeze_top_k_bert_layer", default=0, type=int,
                         help="unfreeze top k transformer layers")
     # adapter parameter
-    parser.add_argument("--apply_adapter", action='store_true',
-                        help="choose to whether apply adapter at each layer")
+    parser.add_argument("--apply_first_adapter_in_layer", action='store_true',
+                        help="choose to whether apply adapter in each layer")
+    parser.add_argument("--apply_second_adapter_in_layer", action='store_true',
+                        help="choose to whether apply adapter in each layer")
+    parser.add_argument("--apply_adapter_between_layer", action='store_true',
+                        help="choose to whether apply adapter between each layer")
     parser.add_argument("--bottleneck_size", default=64, type=int,
-                        help="unfreeze top k transformer layers")
+                        help="the size of bottleneck design")
     parser.add_argument("--init_scale", default=1e-3, type=float,
-                        help="unfreeze top k transformer layers")
+                        help="the std of the truncated normal distribution used for initialization")
     parser.add_argument("--adapter_activation", default=1, type=int,
                         help="0/1 flag to decide if apply non-linearity function on bottleneck")
     # bidaf parameter
