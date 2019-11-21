@@ -351,11 +351,9 @@ class BertEncoder(nn.Module):
         super(BertEncoder, self).__init__()
         self.output_attentions = config.output_attentions
         self.output_hidden_states = config.output_hidden_states
+        self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
         if config.apply_adapter_between_layer:
-            self.layer = nn.ModuleList([nn.Sequential(BertLayer(config),
-                                                      AdapterBlock(config)) for _ in range(config.num_hidden_layers)])
-        else:
-            self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
+            pass
 
     def forward(self, hidden_states, attention_mask=None, head_mask=None, weights=None):
         all_hidden_states = ()  # TODO: ()
