@@ -190,7 +190,7 @@ def train(args, train_dataset, model, tokenizer):
             # bp()
             outputs = model(**inputs)
             loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
-
+            results = evaluate(args, model, tokenizer)
             if args.n_gpu > 1:
                 loss = loss.mean()  # mean() to average on multi-gpu parallel (not distributed) training
             if args.gradient_accumulation_steps > 1:
@@ -249,7 +249,7 @@ def train(args, train_dataset, model, tokenizer):
 
 
 def evaluate(args, model, tokenizer, prefix=""):
-    dataset, examples, features = load_and_cache_examples(args, tokenizer, evaluate=True, output_examples=True)
+    dataset, examples, features = load_and_cache_examples(args, tokenizer, evaluate=True, output_examples=False)
 
     if not os.path.exists(args.output_dir) and args.local_rank in [-1, 0]:
         os.makedirs(args.output_dir)
