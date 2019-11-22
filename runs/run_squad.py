@@ -392,8 +392,8 @@ def parse_range(string: str):
     assert ']' == string[-1]
     pair = string.split("-")
     assert len(pair) == 2
-    lower = int(pair[1:])
-    upper = int(pair[:-1])
+    lower = int(pair[0][1:])
+    upper = int(pair[1][:-1])
     return list(range(lower, upper + 1))
 
 
