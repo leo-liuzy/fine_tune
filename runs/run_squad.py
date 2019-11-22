@@ -709,10 +709,13 @@ if __name__ == "__main__":
 
         all_hypers = list(itertools.product(lrs, epochs))
         print(f"All Hypers: {all_hypers}")
-        hyper_idxs = np.random.randint(0, len(all_hypers), num_tune)
+        hyper_idxs = set()
+        while len(hyper_idxs) < num_tune:
+            hyper_idxs.add(np.random.randint(0, len(all_hypers)))
         print(f"Hyper_idxs: {hyper_idxs}")
         for i, idx in enumerate(hyper_idxs):
             print(f"The {i}th set of hyperparameters")
+
             lr, epoch = all_hypers[idx]
             args.learning_rate = lr
             args.num_train_epochs = epoch
