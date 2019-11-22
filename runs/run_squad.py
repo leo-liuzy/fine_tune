@@ -384,12 +384,26 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
     return dataset
 
 
+def parse_range(string: str):
+    """Return a tuple that represent the range, inclusive on both sides"""
+    string = string.strip()
+    assert '-' in string
+    assert '[' == string[0]
+    assert ']' == string[-1]
+    pair = string.split("-")
+    assert len(pair) == 2
+    lower = int(pair[1:])
+    upper = int(pair[:-1])
+    return list(range(lower, upper + 1))
+
+
 def main(args):
     if args.num_sample == 0:
         raise ValueError("Either -1 to indicate not using sampling, "
                          "or > 0 to indicate the legitimate number of samples")
     if args.adapter_activation not in [0, 1]:
         raise ValueError("Only 0/1 are legit")
+    args.adapter_range = parse_range(args.adapter_range)
     if os.path.exists(args.output_dir) and os.listdir(
             args.output_dir) and args.do_train and not args.overwrite_output_dir:
         raise ValueError(
@@ -440,6 +454,7 @@ def main(args):
     config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     # adapter argument
+    config.adapter_range = args.adapter_range
     config.adapter_activation = args.adapter_activation
     config.apply_first_adapter_in_layer = args.apply_first_adapter_in_layer  # apply first adapter in layer
     config.apply_second_adapter_in_layer = args.apply_second_adapter_in_layer  # apply first adapter in layer
@@ -586,6 +601,8 @@ if __name__ == "__main__":
     parser.add_argument("--unfreeze_top_k_bert_layer", default=0, type=int,
                         help="unfreeze top k transformer layers")
     # adapter parameter
+    parser.add_argument("--adapter_range", default="[0-11]", type=str,
+                        help="In put has to be '[x-y]' format, 0 <= x <= y <= 11")
     parser.add_argument("--apply_first_adapter_in_layer", action='store_true',
                         help="choose to whether apply adapter in each layer")
     parser.add_argument("--apply_second_adapter_in_layer", action='store_true',
@@ -637,7 +654,6 @@ if __name__ == "__main__":
                         help="Rul evaluation during training at each logging step.")
     parser.add_argument("--do_lower_case", action='store_true',
                         help="Set this flag if you are using an uncased model.")
-
     parser.add_argument("--per_gpu_train_batch_size", default=8, type=int,
                         help="Batch size per GPU/CPU for training.")
     parser.add_argument("--per_gpu_eval_batch_size", default=8, type=int,

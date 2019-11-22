@@ -241,10 +241,10 @@ class BertSelfAttention(nn.Module):
 
 
 class BertSelfOutput(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config, idx=None):
         super(BertSelfOutput, self).__init__()
         self.adapter = None
-        if config.apply_first_adapter_in_layer:
+        if idx in config.adapter_range and config.apply_first_adapter_in_layer:
             self.adapter = AdapterBlock(config)
         self.dense = nn.Linear(config.hidden_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
@@ -253,8 +253,8 @@ class BertSelfOutput(nn.Module):
     def forward(self, hidden_states, input_tensor):
         hidden_states = self.dense(hidden_states)
         hidden_states = self.dropout(hidden_states)
-        # if self.adapter:
-        # hidden_states = self.adapter(hidden_states)
+        if self.adapter:
+            hidden_states = self.adapter(hidden_states)
         hidden_states = self.LayerNorm(hidden_states + input_tensor)
         return hidden_states
 
@@ -312,10 +312,10 @@ class BertIntermediate(nn.Module):
 
 
 class BertOutput(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config, idx=None):
         super(BertOutput, self).__init__()
         self.adapter = None
-        if config.apply_second_adapter_in_layer:
+        if idx in config.adapter_range and config.apply_second_adapter_in_layer:
             self.adapter = AdapterBlock(config)
         self.dense = nn.Linear(config.intermediate_size, config.hidden_size)
         self.LayerNorm = BertLayerNorm(config.hidden_size, eps=config.layer_norm_eps)
@@ -331,11 +331,11 @@ class BertOutput(nn.Module):
 
 
 class BertLayer(nn.Module):
-    def __init__(self, config):
+    def __init__(self, config, idx=None):
         super(BertLayer, self).__init__()
-        self.attention = BertAttention(config)
+        self.attention = BertAttention(config, idx)
         self.intermediate = BertIntermediate(config)
-        self.output = BertOutput(config)
+        self.output = BertOutput(config, idx)
 
     def forward(self, hidden_states, attention_mask=None, head_mask=None):
         attention_outputs = self.attention(hidden_states, attention_mask, head_mask)
@@ -351,10 +351,11 @@ class BertEncoder(nn.Module):
         super(BertEncoder, self).__init__()
         self.output_attentions = config.output_attentions
         self.output_hidden_states = config.output_hidden_states
-        self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
+        self.layer = nn.ModuleList([BertLayer(config, i) for i in range(config.num_hidden_layers)])
         self.adapters = None
         if config.apply_adapter_between_layer:
-            self.adapters = nn.ModuleList([AdapterBlock(config) for _ in range(config.num_hidden_layers)])
+            self.adapters_range = config.adapter_range
+            self.adapters = nn.ModuleList([AdapterBlock(config) for _ in config.adapter_range])
 
     def forward(self, hidden_states, attention_mask=None, head_mask=None, weights=None):
         all_hidden_states = ()  # TODO: ()
@@ -368,7 +369,7 @@ class BertEncoder(nn.Module):
 
             layer_outputs = layer_module(hidden_states, attention_mask, head_mask[i])
             hidden_states = layer_outputs[0]
-            if self.adapters:
+            if self.adapters and i in self.adapters_range:
                 adapter = self.adapters[i]
                 hidden_states = adapter(hidden_states)
 
