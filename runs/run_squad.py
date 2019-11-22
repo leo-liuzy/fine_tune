@@ -111,9 +111,6 @@ def train(args, train_dataset, model, tokenizer):
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
 
     if args.max_steps > 0:
-        if self.adapters:
-            adapter = self.adapters[i]
-            hidden_states = adapter(hidden_states)
         t_total = args.max_steps
         args.num_train_epochs = args.max_steps // (len(train_dataloader) // args.gradient_accumulation_steps) + 1
     else:
@@ -403,7 +400,6 @@ def main(args):
                          "or > 0 to indicate the legitimate number of samples")
     if args.adapter_activation not in [0, 1]:
         raise ValueError("Only 0/1 are legit")
-    args.adapter_range = parse_range(args.adapter_range)
     if os.path.exists(args.output_dir) and os.listdir(
             args.output_dir) and args.do_train and not args.overwrite_output_dir:
         raise ValueError(
@@ -454,7 +450,7 @@ def main(args):
     config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     # adapter argument
-    config.adapter_range = args.adapter_range
+    config.adapter_range = parse_range(args.adapter_range)
     config.adapter_activation = args.adapter_activation
     config.apply_first_adapter_in_layer = args.apply_first_adapter_in_layer  # apply first adapter in layer
     config.apply_second_adapter_in_layer = args.apply_second_adapter_in_layer  # apply first adapter in layer
@@ -561,6 +557,7 @@ def construct_folder_name(args):
         model_dir_name += f".adapter{args.bottleneck_size}.AdaBetweenLayer"
     if args.adapter_activation == 0:
         model_dir_name += f".adapterNoActivation"
+    model_dir_name += f".adapterRange{args.adapter_range}"
     if args.num_sample > -1:
         model_dir_name += f".sample{args.num_sample}"
     if args.check:
