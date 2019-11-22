@@ -370,7 +370,8 @@ class BertEncoder(nn.Module):
             layer_outputs = layer_module(hidden_states, attention_mask, head_mask[i])
             hidden_states = layer_outputs[0]
             if self.adapters and i in self.adapters_range:
-                adapter = self.adapters[i]
+                idx = self.adapters_range.index(i)
+                adapter = self.adapters[idx]
                 hidden_states = adapter(hidden_states)
 
             if self.output_attentions:
