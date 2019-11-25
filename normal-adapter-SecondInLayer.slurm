@@ -2,7 +2,7 @@
 
 ## Job Name
 
-#SBATCH --job-name=sample_adapter
+#SBATCH --job-name=ada_second
 
 #SBATCH --partition=stf-gpu
 
@@ -50,7 +50,7 @@ export TOKENIZER_PATH="$PROJ_DIR/cache/bert-base-uncased-vocab.txt"
 # export TBD_DIR="/gscratch/stf/zeyuliu2/fine_tune/out/fine_tune_top_layer+unfreeze8/checkpoint-11080"
 # tbd
 # python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --apply_adapter --bottleneck_size 64 --unfreeze_top_k_bert_layer 0 --output_dir $PROJ_DIR/out/fine_tune_top_layer+adapter64 --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP
-python runs/run_squad.py --run_mode "single_run" --learning_rate 0.0001 --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --evaluate_during_training --train_file "$SQUAD_DIR/train-v1.1.json" --predict_file "$SQUAD_DIR/dev-v1.1.json" --apply_second_adapter_in_layer --bottleneck_size 64 --adapter_activation 0 --unfreeze_top_k_bert_layer 0 --output_dir "$PROJ_DIR/out" --logging_dir "$LOG_DIR" --save_steps 7386 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --num_train_epochs 10 --gpu_id 0  > normal-adapter-lr0.0001-bs12-epoch10-adapter64-adapterNoActivation-SecondInLayer.txt 2>&1
+python runs/run_squad.py --run_mode "single_run" --learning_rate 0.0001 --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --overwrite_output_dir --train_file "$SQUAD_DIR/train-v1.1.json" --predict_file "$SQUAD_DIR/dev-v1.1.json" --apply_second_adapter_in_layer --bottleneck_size 64 --adapter_activation 0 --unfreeze_top_k_bert_layer 0 --output_dir "$PROJ_DIR/out" --logging_dir "$LOG_DIR" --save_steps 7386 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --num_train_epochs 10 --gpu_id 0  > normal-adapter-lr0.0001-bs12-epoch10-adapter64-adapterNoActivation-SecondInLayer.txt 2>&1
 
 # bert as extractor
 # python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --freeze_pretrained --unfreeze_top_k_layer 1 --output_dir out/fine_tune_top_layer+unfreeze1 --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP
