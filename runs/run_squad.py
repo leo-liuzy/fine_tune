@@ -564,7 +564,8 @@ def construct_folder_name(args):
         model_dir_name += f".adapter{args.bottleneck_size}.AdaBetweenLayer"
     if args.adapter_activation == 0:
         model_dir_name += f".adapterNoActivation"
-    model_dir_name += f".adapterRange{args.adapter_range}"
+    if args.apply_first_adapter_in_layer or args.apply_second_adapter_in_layer or args.apply_adapter_between_layer:
+        model_dir_name += f".adapterRange{args.adapter_range}"
     if args.num_sample > -1:
         model_dir_name += f".sample{args.num_sample}"
     if args.check:
