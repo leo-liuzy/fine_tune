@@ -82,12 +82,14 @@ def to_list(tensor):
 
 def create_filter_conditions(args, model):
     unfreeze_layer_idxs = [str(len(model.bert.encoder.layer) - 1 - i) for i in range(args.unfreeze_top_k_bert_layer)]
+    unfreeze_layernorm_idxs = [str(len(model.bert.encoder.layer) - 1 - i) for i in range(args.unfreeze_top_k_layernorm)]
     fns = [lambda x: x.startswith("qa_outputs")]
     if args.elmo_style:
         fns.append(lambda x: x.startswith("elmo"))
     if args.apply_first_adapter_in_layer or args.apply_second_adapter_in_layer or args.apply_adapter_between_layer:
         fns.append(lambda x: "adapter" in x)
     fns.append(lambda x: any(idx in x for idx in unfreeze_layer_idxs))
+    fns.append(lambda x: any(idx in x and "LayerNorm" in x for idx in unfreeze_layernorm_idxs))
     return lambda x: any(fn(x) for fn in fns)
 
 
@@ -596,6 +598,8 @@ if __name__ == "__main__":
     parser.add_argument("--elmo_style", action='store_true',
                         help="Have our output to be weighted in a ELMo-like fashion")  # TODO: This is not working
     parser.add_argument("--unfreeze_top_k_bert_layer", default=0, type=int,
+                        help="unfreeze top k transformer layers")
+    parser.add_argument("--unfreeze_top_k_layernorm", default=0, type=int,
                         help="unfreeze top k transformer layers")
     # adapter parameter
     parser.add_argument("--adapter_range", default="[0-11]", type=str,
