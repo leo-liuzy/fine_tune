@@ -88,8 +88,8 @@ def create_filter_conditions(args):
         fns.append(lambda x: x.startswith("elmo"))
     if args.apply_first_adapter_in_layer or args.apply_second_adapter_in_layer or args.apply_adapter_between_layer:
         fns.append(lambda x: "adapter" in x)
-    fns.append(lambda x: any(str(idx) in x for idx in unfreeze_layer_idxs))
-    fns.append(lambda x: any(str(idx) in x and "LayerNorm" in x for idx in unfreeze_layernorm_idxs))
+    fns.append(lambda x: any(f".{idx}." in x for idx in unfreeze_layer_idxs))
+    fns.append(lambda x: any(f".{idx}." in x and "LayerNorm" in x for idx in unfreeze_layernorm_idxs))
     return lambda x: any(fn(x) for fn in fns)
 
 
