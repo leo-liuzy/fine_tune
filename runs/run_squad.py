@@ -556,16 +556,17 @@ def construct_folder_name(args):
     model_dir_name = f"lr{args.learning_rate}.unfreeze_{args.unfreeze_bert_layer_range}_bert_layer" \
                      f".unfreeze_{args.unfreeze_layernorm_range}_layernorm.epoch{args.num_train_epochs}" \
                      f".bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
-    if args.apply_first_adapter_in_layer:
-        model_dir_name += f".adapter{args.bottleneck_size}.FirstAdaInLayer"
-    if args.apply_second_adapter_in_layer:
-        model_dir_name += f".adapter{args.bottleneck_size}.SecondAdaInLayer"
-    if args.apply_adapter_between_layer:
-        model_dir_name += f".adapter{args.bottleneck_size}.AdaBetweenLayer"
-    if args.adapter_activation == 0:
-        model_dir_name += f".adapterNoActivation"
     if args.apply_first_adapter_in_layer or args.apply_second_adapter_in_layer or args.apply_adapter_between_layer:
-        model_dir_name += f".adapterRange{args.adapter_range}"
+        model_dir_name += f".adapterRange{args.adapter_range}.adapter{args.bottleneck_size}"
+        if args.adapter_activation == 0:
+            model_dir_name += f".adapterNoActivation"
+
+    if args.apply_first_adapter_in_layer:
+        model_dir_name += f".FirstAdaInLayer"
+    if args.apply_second_adapter_in_layer:
+        model_dir_name += f".SecondAdaInLayer"
+    if args.apply_adapter_between_layer:
+        model_dir_name += f".AdaBetweenLayer"
     if args.num_sample > -1:
         model_dir_name += f".sample{args.num_sample}"
     if args.check:
