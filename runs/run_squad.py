@@ -80,9 +80,9 @@ def to_list(tensor):
     return tensor.detach().cpu().tolist()
 
 
-def create_filter_conditions(args, model):
-    unfreeze_layer_idxs = [str(len(model.bert.encoder.layer) - 1 - i) for i in range(args.unfreeze_top_k_bert_layer)]
-    unfreeze_layernorm_idxs = [str(len(model.bert.encoder.layer) - 1 - i) for i in range(args.unfreeze_top_k_layernorm)]
+def create_filter_conditions(args):
+    unfreeze_layer_idxs = parse_range(args.unfreeze_bert_layer_range)
+    unfreeze_layernorm_idxs = parse_range(args.unfreeze_layernorm_range)
     fns = [lambda x: x.startswith("qa_outputs")]
     if args.elmo_style:
         fns.append(lambda x: x.startswith("elmo"))
@@ -120,7 +120,7 @@ def train(args, train_dataset, model, tokenizer):
 
     # Prepare optimizer and schedule (linear warmup and decay)
     no_decay = ['bias', 'LayerNorm.weight']
-    condition_fn = create_filter_conditions(args, model)
+    condition_fn = create_filter_conditions(args)
     optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
                                     {'params': [], 'weight_decay': 0.0}]
     optimizer_parameters_name = []
@@ -386,6 +386,8 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
 def parse_range(string: str):
     """Return a tuple that represent the range, inclusive on both sides"""
     string = string.strip()
+    if string == "None":
+        return []
     assert '-' in string
     assert '[' == string[0]
     assert ']' == string[-1]
@@ -452,6 +454,8 @@ def main(args):
     config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
     # adapter argument
+    config.unfreeze_bert_layer_range = parse_range(args.unfreeze_bert_layer_range)
+    config.unfreeze_layernorm_range = parse_range(args.unfreeze_layernorm_range)
     config.adapter_range = parse_range(args.adapter_range)
     config.adapter_activation = args.adapter_activation
     config.apply_first_adapter_in_layer = args.apply_first_adapter_in_layer  # apply first adapter in layer
@@ -549,8 +553,8 @@ def main(args):
 
 
 def construct_folder_name(args):
-    model_dir_name = f"lr{args.learning_rate}.unfreeze_top_{args.unfreeze_top_k_bert_layer}_bert_layer" \
-                     f".unfreeze_top_{args.unfreeze_top_k_layernorm}_layernorm.epoch{args.num_train_epochs}" \
+    model_dir_name = f"lr{args.learning_rate}.unfreeze_{args.unfreeze_bert_layer_range}_bert_layer" \
+                     f".unfreeze_{args.unfreeze_layernorm_range}_layernorm.epoch{args.num_train_epochs}" \
                      f".bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
     if args.apply_first_adapter_in_layer:
         model_dir_name += f".adapter{args.bottleneck_size}.FirstAdaInLayer"
@@ -598,9 +602,9 @@ if __name__ == "__main__":
     #                     help="Store the pretrained BERT weights and only train the last layer")
     parser.add_argument("--elmo_style", action='store_true',
                         help="Have our output to be weighted in a ELMo-like fashion")  # TODO: This is not working
-    parser.add_argument("--unfreeze_top_k_bert_layer", default=0, type=int,
+    parser.add_argument("--unfreeze_bert_layer_range", default="None", type=str,
                         help="unfreeze top k transformer layers")
-    parser.add_argument("--unfreeze_top_k_layernorm", default=0, type=int,
+    parser.add_argument("--unfreeze_layernorm_range", default="None", type=str,
                         help="unfreeze top k transformer layers")
     # adapter parameter
     parser.add_argument("--adapter_range", default="[0-11]", type=str,
