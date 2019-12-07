@@ -789,9 +789,9 @@ if __name__ == "__main__":
     if args.run_mode == "single_run":
         model_dir_name = construct_folder_name(args)
         print(model_dir_name)
-        import sys
-
-        sys.exit(0)
+        # import sys
+        #
+        # sys.exit(0)
         args.output_dir = out_dir + f"/{model_dir_name}"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         print(args.output_dir)
