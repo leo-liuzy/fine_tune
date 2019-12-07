@@ -11,7 +11,7 @@
 #SBATCH --gres=gpu:P100:1
 
 
-#SBATCH --time=12:00:00
+#SBATCH --time=10:00:00
 
 ## Memory per node. It is important to specify the memory since the default memory is very small.
 
@@ -43,8 +43,9 @@ export LOG_DIR="$PROJ_DIR/logs"
 export HOME="/gscratch/stf/zeyuliu2"
 export EPOCH=10
 export LR=0.0001
-export RANGE=[1-8]
-export K_LAYERNORM=12
+export RANGE=None
+export BERT_LAYER_RANGE=None
+export LAYERNORM_RANGE=[11-11]
 export BATCH_SIZE=12
 export ACC_STEP=3
 export MODEL_NAME="bert-base-uncased"
@@ -55,7 +56,7 @@ export TOKENIZER_PATH="$PROJ_DIR/cache/bert-base-uncased-vocab.txt"
 # tbd
 # python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --apply_adapter --bottleneck_size 64 --unfreeze_top_k_bert_layer 0 --output_dir $PROJ_DIR/out/fine_tune_top_layer+adapter64 --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP
 # echo "normal-adapter-lr$LR-bs36-epoch$EPOCH-adapter64-adapterActivaion-$K_LAYERNORM"LayerNorm.txt
-python runs/run_squad.py --run_mode single_run --learning_rate $LR --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file "$SQUAD_DIR/train-v1.1.json" --predict_file "$SQUAD_DIR/dev-v1.1.json" --adapter_range $RANGE --bottleneck_size 64 --adapter_activation 1 --unfreeze_top_k_bert_layer 0 --unfreeze_top_k_layernorm 12 --output_dir "$PROJ_DIR/out" --logging_dir "$LOG_DIR" --overwrite_output_dir --save_steps 7386 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --num_train_epochs $EPOCH --gpu_id 0  > "normal-adapter-lr$LR-bs36-epoch$EPOCH-adapter64-range$RANGE-adapterActivaion-unfreeze$K_LAYERNORM"LayerNorm.txt 2>&1
+python runs/run_squad.py --run_mode single_run --learning_rate $LR --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file "$SQUAD_DIR/train-v1.1.json" --predict_file "$SQUAD_DIR/dev-v1.1.json" --adapter_range $RANGE --bottleneck_size 64 --adapter_activation 1 --unfreeze_bert_layer_range $BERT_LAYER_RANGE --unfreeze_layernorm_range $LAYERNORM_RANGE --output_dir "$PROJ_DIR/out" --logging_dir "$LOG_DIR" --overwrite_output_dir --save_steps 7386 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP --num_train_epochs $EPOCH --gpu_id 0  > "normal-adapter-lr$LR-bs36-epoch$EPOCH-adapter64-range$RANGE-adapterActivaion-unfreeze$LAYERNORM_RANGE"LayerNorm"-unfreeze$BERT_LAYER_RANGE"BertLayer.txt 2>&1
 
 # bert as extractor
 # python runs/run_squad.py --model_type bert --model_name_or_path $MODEL_PATH --config_name $CONFIG_PATH --tokenizer_name $TOKENIZER_PATH --do_train --do_eval --do_lower_case --train_file $SQUAD_DIR/train-v1.1.json --predict_file $SQUAD_DIR/dev-v1.1.json --freeze_pretrained --unfreeze_top_k_layer 1 --output_dir out/fine_tune_top_layer+unfreeze1 --overwrite_output_dir  --save_steps 5540 --per_gpu_train_batch_size $BATCH_SIZE --per_gpu_eval_batch_size $BATCH_SIZE --gradient_accumulation_steps $ACC_STEP
