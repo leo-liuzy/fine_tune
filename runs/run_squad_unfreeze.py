@@ -596,11 +596,16 @@ def main(args):
 
 
 def construct_folder_name(args):
-    model_dir_name = f"lr{args.learning_rate}.unfreeze_{args.unfreeze_bert_layer_range}_bert_layer" \
-                     f".unfreeze_{args.unfreeze_layernorm_range}_layernorm" \
+    model_dir_name = f"lr{args.learning_rate}.epoch{args.num_train_epochs}" \
+                     f".bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}" \
+                     f".unfreeze_{args.unfreeze_embedding_components}_embedding" \
+                     f".unfreeze_{args.unfreeze_bert_layer_range}_bert_layer" \
+                     f".unfreeze_{args.unfreeze_attn_range}_layer_{args.unfreeze_attn_components}_attn" \
+                     f".unfreeze_{args.unfreeze_attn_dense_range}_attn_dense" \
                      f".unfreeze_{args.unfreeze_intermediate_range}_intermediate" \
-                     f".unfreeze_{args.unfreeze_embedding_components}_embedding.epoch{args.num_train_epochs}" \
-                     f".bs{args.per_gpu_train_batch_size * args.gradient_accumulation_steps}"
+                     f".unfreeze_{args.unfreeze_output_dense_range}_output" \
+                     f".unfreeze_{args.unfreeze_layernorm_range}_layernorm"
+
     if args.apply_first_adapter_in_layer or args.apply_second_adapter_in_layer or args.apply_adapter_between_layer:
         model_dir_name += f".adapterRange{args.adapter_range}.adapter{args.bottleneck_size}"
         if args.adapter_activation == 0:
@@ -783,6 +788,10 @@ if __name__ == "__main__":
 
     if args.run_mode == "single_run":
         model_dir_name = construct_folder_name(args)
+        print(model_dir_name)
+        import sys
+
+        sys.exit(0)
         args.output_dir = out_dir + f"/{model_dir_name}"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         print(args.output_dir)
