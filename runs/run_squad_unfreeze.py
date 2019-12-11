@@ -428,6 +428,41 @@ def parse_list(string: str):
     return lst
 
 
+def set_customized_arguments(config, args):
+    # customized config
+    # elmo_style argument
+    config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
+    config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
+    # unfreezing argument
+    config.unfreeze_bert_layer_range = parse_range(args.unfreeze_bert_layer_range)
+    config.unfreeze_layernorm_range = parse_range(args.unfreeze_layernorm_range)
+    ## embedding
+    config.unfreeze_embedding_components = parse_list(args.unfreeze_embedding_components)
+    ## attn
+    # these two should be used together
+    config.unfreeze_attn_range = parse_range(args.unfreeze_attn_range)
+    config.unfreeze_attn_type = parse_list(args.unfreeze_attn_components)
+
+    ## feedforward
+    config.unfreeze_intermediate_range = parse_range(args.unfreeze_intermediate_range)
+    config.unfreeze_attn_dense_range = parse_range(args.unfreeze_attn_dense_range)
+    config.unfreeze_output_dense_range = parse_range(args.unfreeze_output_dense_range)
+
+    # adapter argument
+    config.adapter_range = parse_range(args.adapter_range)
+    config.adapter_activation = args.adapter_activation
+    config.apply_first_adapter_in_layer = args.apply_first_adapter_in_layer  # apply first adapter in layer
+    config.apply_second_adapter_in_layer = args.apply_second_adapter_in_layer  # apply first adapter in layer
+    config.apply_adapter_between_layer = args.apply_adapter_between_layer  # apply first adapter in layer
+    config.bottleneck_size = args.bottleneck_size  # set bottleneck size
+    config.init_scale = args.init_scale  # set bottleneck size
+    assert args.init_scale >= 0
+    config.init_scale = args.init_scale  # standard deviation for normal
+    # bidaf argument
+    config.top_layer = args.top_layer
+    config.dropout = args.dropout
+
+
 def main(args):
     if args.num_sample == 0:
         raise ValueError("Either -1 to indicate not using sampling, "
@@ -479,38 +514,7 @@ def main(args):
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
     config = config_class.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
-    # customized config
-    # elmo_style argument
-    config.output_hidden_states = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
-    config.elmo_style = args.elmo_style  # TODO: experiment weighting different layers(ELMo style)
-    # unfreezing argument
-    config.unfreeze_bert_layer_range = parse_range(args.unfreeze_bert_layer_range)
-    config.unfreeze_layernorm_range = parse_range(args.unfreeze_layernorm_range)
-    ## embedding
-    config.unfreeze_embedding_components = parse_list(args.unfreeze_embedding_components)
-    ## attn
-    # these two should be used together
-    config.unfreeze_attn_range = parse_range(args.unfreeze_attn_range)
-    config.unfreeze_attn_type = parse_list(args.unfreeze_attn_components)
-
-    ## feedforward
-    config.unfreeze_intermediate_range = parse_range(args.unfreeze_intermediate_range)
-    config.unfreeze_attn_dense_range = parse_range(args.unfreeze_attn_dense_range)
-    config.unfreeze_output_dense_range = parse_range(args.unfreeze_output_dense_range)
-
-    # adapter argument
-    config.adapter_range = parse_range(args.adapter_range)
-    config.adapter_activation = args.adapter_activation
-    config.apply_first_adapter_in_layer = args.apply_first_adapter_in_layer  # apply first adapter in layer
-    config.apply_second_adapter_in_layer = args.apply_second_adapter_in_layer  # apply first adapter in layer
-    config.apply_adapter_between_layer = args.apply_adapter_between_layer  # apply first adapter in layer
-    config.bottleneck_size = args.bottleneck_size  # set bottleneck size
-    config.init_scale = args.init_scale  # set bottleneck size
-    assert args.init_scale >= 0
-    config.init_scale = args.init_scale  # standard deviation for normal
-    # bidaf argument
-    config.top_layer = args.top_layer
-    config.dropout = args.dropout
+    set_customized_arguments(config, args)
     tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
                                                 do_lower_case=args.do_lower_case)
     config.sep = tokenizer._convert_token_to_id('[SEP]')
@@ -792,7 +796,7 @@ if __name__ == "__main__":
         # import sys
         #
         # sys.exit(0)
-        args.output_dir = out_dir + f"/{model_dir_name}"
+        # args.output_dir = out_dir + f"/{model_dir_name}"
         print(f"lr: {args.learning_rate} \t num_train_epochs: {args.num_train_epochs}")
         print(args.output_dir)
         main(args)
