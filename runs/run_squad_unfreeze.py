@@ -137,6 +137,7 @@ def train(args, train_dataset, model, tokenizer):
     optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
                                     {'params': [], 'weight_decay': 0.0}]
     optimizer_parameters_name = []
+    # 201 components
     for n, p in model.named_parameters():
         # print(n)
         if condition_fn(n):
@@ -149,9 +150,8 @@ def train(args, train_dataset, model, tokenizer):
         else:
             p.requires_grad = False
     print(f"Parameters to be optimized: {optimizer_parameters_name}")
-    import sys
 
-    sys.exit(0)
+    # sys.exit(0)
     # bp()
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
@@ -526,7 +526,7 @@ def main(args):
         torch.distributed.barrier()  # Make sure only the first process in distributed training will download model & vocab
 
     model.to(args.device)
-
+    # feedforward_decomp()
     logger.info("Training/evaluation parameters %s", args)
 
     # Before we do anything with models, we want to ensure that we get fp16 execution of torch.einsum if args.fp16 is set.

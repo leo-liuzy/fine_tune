@@ -22,6 +22,7 @@ import math
 import os
 import sys
 
+import numpy as np
 import torch
 import torch.nn.functional as F
 from torch import nn
@@ -294,6 +295,10 @@ class BertAttention(nn.Module):
         attention_output = self.output(self_outputs[0], input_tensor)
         outputs = (attention_output,) + self_outputs[1:]  # add attentions if we output them
         return outputs
+
+    def distill(self):
+        for m in self.children():
+            pass
 
 
 class BertIntermediate(nn.Module):
@@ -1425,3 +1430,42 @@ class BiDAFBlock(nn.Module):
 
         # (batch, c_len), (batch, c_len)
         return p1, p2  # TODO: return q_lens, c_lens to help calculate start_positions
+
+
+def feedforward_decomp(ff, **kwargs):
+    assert hasattr(ff, "weight")
+    assert hasattr(ff, "bias")
+    assert len(ff.weight.shape) == 2
+
+    ret = {"bias": ff.bias}
+    weight = ff.weight.detach().numpy()
+    out_dim, in_dim = weight.shape
+    min_dim = min(out_dim, in_dim)
+
+    if kwargs["scheme"] == "SVD":
+        from numpy.linalg import svd
+        U, S, V = svd(weight)
+        tmp = np.zeros(out_dim, in_dim)
+        k = kwargs["n_components"] if "n_components" in kwargs else 0
+        S = np.diag(S[:k].tolist() + [0] * (len(S) - k))
+        tmp[:min_dim, :min_dim] = S
+        S = tmp
+    else:
+        raise Exception("Unrecognized decomposition scheme")
+
+    return ret
+
+
+class DistillFF(nn.Module):
+    def __init__(self, ff, **kwargs):
+        super(DistillFF, self).__init__()
+        decomp_out = feedforward_decomp(ff, kwargs)
+        self.compress = nn.Linear(decomp_out["in_dim"], decomp_out["bottleneck"], bias=False)
+        self.decompress = nn.Linear(decomp_out["bottleneck"], decomp_out["out_dim"], bias=False)
+        self.bias = decomp_out["bias"]
+        self.ave_recon_error = decomp_out["ave_recon_error"]
+
+    def forward(self, x):
+        x = self.compress(x)
+        x = self.decompress(x)
+        return x + self.bias
