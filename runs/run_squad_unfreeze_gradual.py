@@ -417,19 +417,33 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
     return dataset
 
 
+
 def parse_range(string: str):
     """Return a tuple that represent the range, inclusive on both sides"""
+
+    def h(elem):
+        if "-" in elem:
+            pair = elem.split("-")
+            assert len(pair) == 2
+            lower, upper = int(pair[0]), int(pair[1])
+            return list(range(lower, upper + 1))
+        else:
+            assert elem.isdigit()
+            return [int(elem)]
+
     string = string.strip()
+    lst = []
     if string == "None":
-        return []
-    assert '-' in string
-    assert '[' == string[0]
-    assert ']' == string[-1]
-    pair = string.split("-")
-    assert len(pair) == 2
-    lower = int(pair[0][1:])
-    upper = int(pair[1][:-1])
-    return list(range(lower, upper + 1))
+        return lst
+    assert '[' == string[0] and ']' == string[-1]
+    string = string[1:-1]
+    if "," not in string:
+        lst = h(string)
+    else:
+        elems = string.split(",")
+        lsts = [h(elem.strip()) for elem in elems if elem != ""]
+        lst = list(set(itertools.chain(*lsts)))
+    return lst
 
 
 def parse_list(string: str):
