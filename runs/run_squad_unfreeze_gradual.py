@@ -155,6 +155,7 @@ def train(args, train_dataset, model, tokenizer):
     # bp()
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
+    parse_range("[1-3, 5,7]")
     if args.fp16:
         try:
             from apex import amp
@@ -191,7 +192,7 @@ def train(args, train_dataset, model, tokenizer):
     set_seed(args)  # Added here for reproductibility (even between python 2 and 3)
 
     for idx in train_iterator:
-        if idx >= args.num_train_epochs // 2:
+        if idx == args.num_train_epochs // 2:
             condition_fn = create_filter_conditions(args)
             optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
                                             {'params': [], 'weight_decay': -1.0}]
@@ -419,21 +420,34 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
 
 def parse_range(string: str):
     """Return a tuple that represent the range, inclusive on both sides"""
+
+    def h(elem):
+        if "-" in elem:
+            pair = elem.split("-")
+            assert len(pair) == 2
+            lower, upper = int(pair[0]), int(pair[1])
+            return list(range(lower, upper + 1))
+        else:
+            assert elem.isdigit()
+            return [int(elem)]
+
     string = string.strip()
+    lst = []
     if string == "None":
-        return []
-    assert '-' in string
-    assert '[' == string[0]
-    assert ']' == string[-1]
-    pair = string.split("-")
-    assert len(pair) == 2
-    lower = int(pair[0][1:])
-    upper = int(pair[1][:-1])
-    return list(range(lower, upper + 1))
+        return lst
+    assert '[' == string[0] and ']' == string[-1]
+    string = string[1:-1]
+    if "," not in string:
+        lst = h(string)
+    else:
+        elems = string.split(",")
+        lsts = [h(elem.strip()) for elem in elems if elem != ""]
+        lst = list(set(itertools.chain(*lsts)))
+    return lst
 
 
 def parse_list(string: str):
-    """Return a tuple that represent the range, inclusive on both sides"""
+    """Return a list of strings that's expressed by the string"""
     string = string.strip()
     if string == "None":
         return []

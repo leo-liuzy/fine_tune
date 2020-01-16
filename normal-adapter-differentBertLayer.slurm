@@ -2,7 +2,7 @@
 
 ## Job Name
 
-#SBATCH --job-name=ada_tune
+#SBATCH --job-name=layer11
 
 #SBATCH --partition=stf-gpu
 
@@ -44,8 +44,8 @@ export HOME="/gscratch/stf/zeyuliu2"
 export EPOCH=3
 export LR=0.00005
 export RANGE=None
-export BERT_LAYER_RANGE=[0-11]
-export LAYERNORM_RANGE=None
+export BERT_LAYER_RANGE=[11-11]
+export LAYERNORM_RANGE=[0-11]
 export BATCH_SIZE=12
 export ACC_STEP=3
 export MODEL_NAME="bert-base-uncased"
