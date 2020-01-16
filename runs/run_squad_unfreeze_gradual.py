@@ -191,7 +191,7 @@ def train(args, train_dataset, model, tokenizer):
     set_seed(args)  # Added here for reproductibility (even between python 2 and 3)
 
     for idx in train_iterator:
-        if idx >= args.num_train_epochs // 2:
+        if idx == args.num_train_epochs // 2:
             condition_fn = create_filter_conditions(args)
             optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
                                             {'params': [], 'weight_decay': -1.0}]
