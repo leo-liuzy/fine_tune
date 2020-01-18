@@ -197,7 +197,7 @@ def train(args, train_dataset, model, tokenizer):
         epoch_iterator = tqdm(train_dataloader, desc="Iteration", disable=args.local_rank not in [-1, 0])
         # bp()
         for step, batch in enumerate(epoch_iterator):
-            bp()
+            # bp()
             for i in range(2):
                 if i == 1:
                     condition_fn = create_filter_conditions(args)
