@@ -1,0 +1,37 @@
+To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
+To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
+01/15/2020 11:02:24 - WARNING - __main__ -   Process rank: -1, device: cuda:0, n_gpu: 1, distributed training: False, 16-bits training: False
+01/15/2020 11:02:24 - INFO - modules.configuration_utils -   loading configuration file /gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-config.json
+01/15/2020 11:02:24 - INFO - modules.configuration_utils -   Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 2,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 2,
+  "use_bfloat16": false,
+  "vocab_size": 30522
+}
+
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   Model name '/gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-vocab.txt' not found in model shortcut name list (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, bert-base-german-dbmdz-uncased). Assuming '/gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-vocab.txt' is a path or url to a directory containing tokenizer files.
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   Didn't find file /gscratch/stf/zeyuliu2/fine_tune/cache/added_tokens.json. We won't load it.
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   Didn't find file /gscratch/stf/zeyuliu2/fine_tune/cache/special_tokens_map.json. We won't load it.
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   Didn't find file /gscratch/stf/zeyuliu2/fine_tune/cache/tokenizer_config.json. We won't load it.
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   loading file /gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-vocab.txt
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   loading file None
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   loading file None
+01/15/2020 11:02:24 - INFO - utils.tokenization_utils -   loading file None
+01/15/2020 11:02:24 - INFO - modules.modeling_utils -   loading weights file /gscratch/stf/zeyuliu2/fine_tune/cache/bert-base-uncased-pytorch_model.bin
