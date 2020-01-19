@@ -50,7 +50,6 @@ from transformers import AdamW, WarmupLinearSchedule
 from utils.utils_squad import (read_squad_examples, convert_examples_to_features,
                                RawResult, write_predictions,
                                RawResultExtended, write_predictions_extended)
-from ipdb import set_trace as bp
 
 # The follwing import is the official SQuAD evaluation script (2.0).
 # You can remove it from the dependencies if you are using this script outside of the library
@@ -191,103 +190,104 @@ def train(args, train_dataset, model, tokenizer):
     # only fine-tune the last layer
     train_iterator = trange(int(args.num_train_epochs), desc="Epoch", disable=args.local_rank not in [-1, 0])
     set_seed(args)  # Added here for reproductibility (even between python 2 and 3)
-
+    all_param = 0
+    half_param = 0
     for idx in train_iterator:
+        if idx == args.num_train_epochs // 2:
+            condition_fn = create_filter_conditions(args)
+            optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
+                                            {'params': [], 'weight_decay': -1.0}]
+            optimizer_parameters_name = []
+            for n, p in model.named_parameters():
+                # print(n)
+                if condition_fn(n):
+                    p.requires_grad = True
+                    optimizer_parameters_name.append(n)
+                    if any(nd in n for nd in no_decay):
+                        optimizer_grouped_parameters[1]['params'].append(p)
+                    else:
+                        optimizer_grouped_parameters[0]['params'].append(p)
+                else:
+                    p.requires_grad = False
+            print(f"Parameters to be optimized: {optimizer_parameters_name}")
+            optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
 
         epoch_iterator = tqdm(train_dataloader, desc="Iteration", disable=args.local_rank not in [-1, 0])
         # bp()
         for step, batch in enumerate(epoch_iterator):
             # bp()
-            for i in range(2):
-                if i == 1:
-                    condition_fn = create_filter_conditions(args)
-                    optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
-                                                    {'params': [], 'weight_decay': -1.0}]
-                    optimizer_parameters_name = []
-                    for n, p in model.named_parameters():
-                        # print(n)
-                        if condition_fn(n):
-                            p.requires_grad = True
-                            optimizer_parameters_name.append(n)
-                            if any(nd in n for nd in no_decay):
-                                optimizer_grouped_parameters[1]['params'].append(p)
-                            else:
-                                optimizer_grouped_parameters[0]['params'].append(p)
-                        else:
-                            p.requires_grad = False
-                    print(f"Parameters to be optimized: {optimizer_parameters_name}")
-                    optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
-                model.train()
-                batch = tuple(t.to(args.device) for t in batch)
-                inputs = {'input_ids': batch[0],
-                          'attention_mask': batch[1],
-                          'start_positions': batch[3],
-                          'end_positions': batch[4]}
-                if args.model_type != 'distilbert':
-                    inputs['token_type_ids'] = None if args.model_type == 'xlm' else batch[2]
-                if args.model_type in ['xlnet', 'xlm']:
-                    inputs.update({'cls_index': batch[5],
-                                   'p_mask': batch[6]})
-                outputs = model(**inputs)
-                loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
-                # results = evaluate(args, model, tokenizer)
-                if args.n_gpu > 1:
-                    loss = loss.mean()  # mean() to average on multi-gpu parallel (not distributed) training
-                if args.gradient_accumulation_steps > 1:
-                    loss = loss / args.gradient_accumulation_steps
+            model.train()
+            batch = tuple(t.to(args.device) for t in batch)
+            inputs = {'input_ids': batch[0],
+                      'attention_mask': batch[1],
+                      'start_positions': batch[3],
+                      'end_positions': batch[4]}
+            if args.model_type != 'distilbert':
+                inputs['token_type_ids'] = None if args.model_type == 'xlm' else batch[2]
+            if args.model_type in ['xlnet', 'xlm']:
+                inputs.update({'cls_index': batch[5],
+                               'p_mask': batch[6]})
+            outputs = model(**inputs)
+            loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
+            # results = evaluate(args, model, tokenizer)
+            if args.n_gpu > 1:
+                loss = loss.mean()  # mean() to average on multi-gpu parallel (not distributed) training
+            if args.gradient_accumulation_steps > 1:
+                loss = loss / args.gradient_accumulation_steps
 
-                from time import time
-                start = time()
+            from time import time
+            start = time()
+            if args.fp16:
+                with amp.scale_loss(loss, optimizer) as scaled_loss:
+                    scaled_loss.backward()
+            else:
+                loss.backward()
+            if idx >= 2:
+                half_param += time() - start
+            else:
+                all_param += time() - start
+            tr_loss += loss.item()
+            if (step + 1) % args.gradient_accumulation_steps == 0:
                 if args.fp16:
-                    with amp.scale_loss(loss, optimizer) as scaled_loss:
-                        scaled_loss.backward()
+                    torch.nn.utils.clip_grad_norm_(amp.master_params(optimizer), args.max_grad_norm)
                 else:
-                    loss.backward()
-                print(f"i = {i}, time = {time() - start}")
-                if i == 1:
-                    exit(0)
-                tr_loss += loss.item()
-                if (step + 1) % args.gradient_accumulation_steps == 0:
-                    if args.fp16:
-                        torch.nn.utils.clip_grad_norm_(amp.master_params(optimizer), args.max_grad_norm)
-                    else:
-                        torch.nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), args.max_grad_norm)
 
-                    optimizer.step()
-                    scheduler.step()  # Update learning rate schedule
-                    model.zero_grad()
-                    global_step += 1
+                optimizer.step()
+                scheduler.step()  # Update learning rate schedule
+                model.zero_grad()
+                global_step += 1
 
-                    if args.local_rank in [-1, 0] and args.logging_steps > 0 and global_step % args.logging_steps == 0:
-                        # Log metrics
-                        if args.local_rank == -1 and args.evaluate_during_training:  # Only evaluate when single GPU otherwise metrics may not average well
-                            results = evaluate(args, model, tokenizer)
-                            for key, value in results.items():
-                                tb_writer.add_scalar('eval_{}'.format(key), value, global_step)
-                        tb_writer.add_scalar('lr', scheduler.get_lr()[0], global_step)
-                        tb_writer.add_scalar('loss', (tr_loss - logging_loss) / args.logging_steps, global_step)
-                        logging_loss = tr_loss
+                if args.local_rank in [-1, 0] and args.logging_steps > 0 and global_step % args.logging_steps == 0:
+                    # Log metrics
+                    if args.local_rank == -1 and args.evaluate_during_training:  # Only evaluate when single GPU otherwise metrics may not average well
+                        results = evaluate(args, model, tokenizer)
+                        for key, value in results.items():
+                            tb_writer.add_scalar('eval_{}'.format(key), value, global_step)
+                    tb_writer.add_scalar('lr', scheduler.get_lr()[0], global_step)
+                    tb_writer.add_scalar('loss', (tr_loss - logging_loss) / args.logging_steps, global_step)
+                    logging_loss = tr_loss
 
-                    if args.local_rank in [-1, 0] and args.save_steps > 0 and global_step % args.save_steps == 0:
-                        # Save model checkpoi1nt
-                        output_dir = os.path.join(args.output_dir, 'checkpoint-{}'.format(global_step))
-                        if not os.path.exists(output_dir):
-                            os.makedirs(output_dir)
-                        model_to_save = model.module if hasattr(model,
-                                                                'module') else model  # Take care of distributed/parallel training
-                        model_to_save.save_pretrained(output_dir)
-                        torch.save(args, os.path.join(output_dir, 'training_args.bin'))
-                        logger.info("Saving model checkpoint to %s", output_dir)
+                if args.local_rank in [-1, 0] and args.save_steps > 0 and global_step % args.save_steps == 0:
+                    # Save model checkpoi1nt
+                    output_dir = os.path.join(args.output_dir, 'checkpoint-{}'.format(global_step))
+                    if not os.path.exists(output_dir):
+                        os.makedirs(output_dir)
+                    model_to_save = model.module if hasattr(model,
+                                                            'module') else model  # Take care of distributed/parallel training
+                    model_to_save.save_pretrained(output_dir)
+                    torch.save(args, os.path.join(output_dir, 'training_args.bin'))
+                    logger.info("Saving model checkpoint to %s", output_dir)
 
-                if args.max_steps > 0 and global_step > args.max_steps:
-                    epoch_iterator.close()
-                    break
             if args.max_steps > 0 and global_step > args.max_steps:
-                train_iterator.close()
+                epoch_iterator.close()
                 break
+        if args.max_steps > 0 and global_step > args.max_steps:
+            train_iterator.close()
+            break
 
-        if args.local_rank in [-1, 0]:
-            tb_writer.close()
+    if args.local_rank in [-1, 0]:
+        tb_writer.close()
 
     return global_step, tr_loss / global_step
 
@@ -423,7 +423,6 @@ def load_and_cache_examples(args, tokenizer, evaluate=False, output_examples=Fal
     if output_examples:
         return dataset, examples, features
     return dataset
-
 
 
 def parse_range(string: str):
