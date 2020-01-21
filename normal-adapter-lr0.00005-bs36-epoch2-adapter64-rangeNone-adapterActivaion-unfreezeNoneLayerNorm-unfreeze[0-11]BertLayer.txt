@@ -1,0 +1,388 @@
+To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
+To use data.metrics please install scikit-learn. See https://scikit-learn.org/stable/index.html
+01/20/2020 16:23:35 - WARNING - __main__ -   Process rank: -1, device: cuda:1, n_gpu: 1, distributed training: False, 16-bits training: False
+01/20/2020 16:23:35 - INFO - modules.configuration_utils -   loading configuration file /home/leo/fine_tune/cache/bert-base-uncased-config.json
+01/20/2020 16:23:35 - INFO - modules.configuration_utils -   Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "is_decoder": false,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 2,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 2,
+  "use_bfloat16": false,
+  "vocab_size": 30522
+}
+
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   Model name '/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt' not found in model shortcut name list (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, bert-base-german-dbmdz-uncased). Assuming '/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt' is a path or url to a directory containing tokenizer files.
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/added_tokens.json. We won't load it.
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/special_tokens_map.json. We won't load it.
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   Didn't find file /home/leo/fine_tune/cache/tokenizer_config.json. We won't load it.
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   loading file /home/leo/fine_tune/cache/bert-base-uncased-vocab.txt
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   loading file None
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   loading file None
+01/20/2020 16:23:35 - INFO - utils.tokenization_utils -   loading file None
+01/20/2020 16:23:35 - INFO - modules.modeling_utils -   loading weights file /home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin
+01/20/2020 16:23:37 - INFO - modules.modeling_utils -   Weights of BertForQuestionAnswering not initialized from pretrained model: ['qa_outputs.weight', 'qa_outputs.bias']
+01/20/2020 16:23:37 - INFO - modules.modeling_utils -   Weights from pretrained model not used in BertForQuestionAnswering: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+01/20/2020 16:23:40 - INFO - __main__ -   Training/evaluation parameters Namespace(adam_epsilon=1e-08, adapter_activation=1, adapter_range='None', apply_adapter_between_layer=False, apply_first_adapter_in_layer=False, apply_second_adapter_in_layer=False, bottleneck_size=64, cache_dir='', check=False, config_name='/home/leo/fine_tune/cache/bert-base-uncased-config.json', device=device(type='cuda', index=1), do_eval=True, do_lower_case=True, do_train=True, doc_stride=128, dropout=0.2, elmo_style=False, eval_all_checkpoints=False, evaluate_during_training=False, fp16=False, fp16_opt_level='O1', gpu_id=1, gradient_accumulation_steps=1, init_scale=0.001, learning_rate=5e-05, local_rank=-1, logging_dir='/home/leo/fine_tune/logs', logging_steps=50, max_answer_length=30, max_grad_norm=1.0, max_query_length=64, max_seq_length=384, max_steps=-1, model_name_or_path='/home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin', model_type='bert', n_best_size=20, n_gpu=1, no_cuda=False, null_score_diff_threshold=0.0, num_sample=-1, num_train_epochs=2, output_dir='/home/leo/fine_tune/out', overwrite_cache=False, overwrite_output_dir=True, per_gpu_eval_batch_size=10, per_gpu_train_batch_size=10, predict_file='/home/leo/fine_tune/data/squad1_1/dev-v1.1.json', run_mode='single_run', save_steps=7386, seed=42, server_ip='', server_port='', tokenizer_name='/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt', top_layer='linear', train_file='/home/leo/fine_tune/data/squad1_1/train-v1.1.json', unfreeze_attn_components='None', unfreeze_attn_dense_range='None', unfreeze_attn_range='None', unfreeze_bert_layer_range='[0-11]', unfreeze_embedding_components='None', unfreeze_intermediate_range='None', unfreeze_layernorm_range='None', unfreeze_output_dense_range='None', verbose_logging=False, version_2_with_negative=False, warmup_steps=0, weight_decay=0.0)
+01/20/2020 16:23:40 - INFO - __main__ -   Loading features from cached file /home/leo/fine_tune/data/squad1_1/cached_train_bert-base-uncased-pytorch_model.bin_384
+lr5e-05.epoch2.bs10.unfreeze_None_embedding.unfreeze_[0-11]_bert_layer.unfreeze_None_layer_None_attn.unfreeze_None_attn_dense.unfreeze_None_intermediate.unfreeze_None_output.unfreeze_None_layernorm
+lr: 5e-05 	 num_train_epochs: 2
+/home/leo/fine_tune/out
+Namespace(adam_epsilon=1e-08, adapter_activation=1, adapter_range='None', apply_adapter_between_layer=False, apply_first_adapter_in_layer=False, apply_second_adapter_in_layer=False, bottleneck_size=64, cache_dir='', check=False, config_name='/home/leo/fine_tune/cache/bert-base-uncased-config.json', device=device(type='cuda', index=1), do_eval=True, do_lower_case=True, do_train=True, doc_stride=128, dropout=0.2, elmo_style=False, eval_all_checkpoints=False, evaluate_during_training=False, fp16=False, fp16_opt_level='O1', gpu_id=1, gradient_accumulation_steps=1, init_scale=0.001, learning_rate=5e-05, local_rank=-1, logging_dir='/home/leo/fine_tune/logs', logging_steps=50, max_answer_length=30, max_grad_norm=1.0, max_query_length=64, max_seq_length=384, max_steps=-1, model_name_or_path='/home/leo/fine_tune/cache/bert-base-uncased-pytorch_model.bin', model_type='bert', n_best_size=20, n_gpu=1, no_cuda=False, null_score_diff_threshold=0.0, num_sample=-1, num_train_epochs=2, output_dir='/home/leo/fine_tune/out', overwrite_cache=False, overwrite_output_dir=True, per_gpu_eval_batch_size=10, per_gpu_train_batch_size=10, predict_file='/home/leo/fine_tune/data/squad1_1/dev-v1.1.json', run_mode='single_run', save_steps=7386, seed=42, server_ip='', server_port='', tokenizer_name='/home/leo/fine_tune/cache/bert-base-uncased-vocab.txt', top_layer='linear', train_file='/home/leo/fine_tune/data/squad1_1/train-v1.1.json', unfreeze_attn_components='None', unfreeze_attn_dense_range='None', unfreeze_attn_range='None', unfreeze_bert_layer_range='[0-11]', unfreeze_embedding_components='None', unfreeze_intermediate_range='None', unfreeze_layernorm_range='None', unfreeze_output_dense_range='None', verbose_logging=False, version_2_with_negative=False, warmup_steps=0, weight_decay=0.0)
+Parameters to be optimized: ['bert.encoder.layer.0.attention.self.query.weight', 'bert.encoder.layer.0.attention.self.query.bias', 'bert.encoder.layer.0.attention.self.key.weight', 'bert.encoder.layer.0.attention.self.key.bias', 'bert.encoder.layer.0.attention.self.value.weight', 'bert.encoder.layer.0.attention.self.value.bias', 'bert.encoder.layer.0.attention.output.dense.weight', 'bert.encoder.layer.0.attention.output.dense.bias', 'bert.encoder.layer.0.attention.output.LayerNorm.weight', 'bert.encoder.layer.0.attention.output.LayerNorm.bias', 'bert.encoder.layer.0.intermediate.dense.weight', 'bert.encoder.layer.0.intermediate.dense.bias', 'bert.encoder.layer.0.output.dense.weight', 'bert.encoder.layer.0.output.dense.bias', 'bert.encoder.layer.0.output.LayerNorm.weight', 'bert.encoder.layer.0.output.LayerNorm.bias', 'bert.encoder.layer.1.attention.self.query.weight', 'bert.encoder.layer.1.attention.self.query.bias', 'bert.encoder.layer.1.attention.self.key.weight', 'bert.encoder.layer.1.attention.self.key.bias', 'bert.encoder.layer.1.attention.self.value.weight', 'bert.encoder.layer.1.attention.self.value.bias', 'bert.encoder.layer.1.attention.output.dense.weight', 'bert.encoder.layer.1.attention.output.dense.bias', 'bert.encoder.layer.1.attention.output.LayerNorm.weight', 'bert.encoder.layer.1.attention.output.LayerNorm.bias', 'bert.encoder.layer.1.intermediate.dense.weight', 'bert.encoder.layer.1.intermediate.dense.bias', 'bert.encoder.layer.1.output.dense.weight', 'bert.encoder.layer.1.output.dense.bias', 'bert.encoder.layer.1.output.LayerNorm.weight', 'bert.encoder.layer.1.output.LayerNorm.bias', 'bert.encoder.layer.2.attention.self.query.weight', 'bert.encoder.layer.2.attention.self.query.bias', 'bert.encoder.layer.2.attention.self.key.weight', 'bert.encoder.layer.2.attention.self.key.bias', 'bert.encoder.layer.2.attention.self.value.weight', 'bert.encoder.layer.2.attention.self.value.bias', 'bert.encoder.layer.2.attention.output.dense.weight', 'bert.encoder.layer.2.attention.output.dense.bias', 'bert.encoder.layer.2.attention.output.LayerNorm.weight', 'bert.encoder.layer.2.attention.output.LayerNorm.bias', 'bert.encoder.layer.2.intermediate.dense.weight', 'bert.encoder.layer.2.intermediate.dense.bias', 'bert.encoder.layer.2.output.dense.weight', 'bert.encoder.layer.2.output.dense.bias', 'bert.encoder.layer.2.output.LayerNorm.weight', 'bert.encoder.layer.2.output.LayerNorm.bias', 'bert.encoder.layer.3.attention.self.query.weight', 'bert.encoder.layer.3.attention.self.query.bias', 'bert.encoder.layer.3.attention.self.key.weight', 'bert.encoder.layer.3.attention.self.key.bias', 'bert.encoder.layer.3.attention.self.value.weight', 'bert.encoder.layer.3.attention.self.value.bias', 'bert.encoder.layer.3.attention.output.dense.weight', 'bert.encoder.layer.3.attention.output.dense.bias', 'bert.encoder.layer.3.attention.output.LayerNorm.weight', 'bert.encoder.layer.3.attention.output.LayerNorm.bias', 'bert.encoder.layer.3.intermediate.dense.weight', 'bert.encoder.layer.3.intermediate.dense.bias', 'bert.encoder.layer.3.output.dense.weight', 'bert.encoder.layer.3.output.dense.bias', 'bert.encoder.layer.3.output.LayerNorm.weight', 'bert.encoder.layer.3.output.LayerNorm.bias', 'bert.encoder.layer.4.attention.self.query.weight', 'bert.encoder.layer.4.attention.self.query.bias', 'bert.encoder.layer.4.attention.self.key.weight', 'bert.encoder.layer.4.attention.self.key.bias', 'bert.encoder.layer.4.attention.self.value.weight', 'bert.encoder.layer.4.attention.self.value.bias', 'bert.encoder.layer.4.attention.output.dense.weight', 'bert.encoder.layer.4.attention.output.dense.bias', 'bert.encoder.layer.4.attention.output.LayerNorm.weight', 'bert.encoder.layer.4.attention.output.LayerNorm.bias', 'bert.encoder.layer.4.intermediate.dense.weight', 'bert.encoder.layer.4.intermediate.dense.bias', 'bert.encoder.layer.4.output.dense.weight', 'bert.encoder.layer.4.output.dense.bias', 'bert.encoder.layer.4.output.LayerNorm.weight', 'bert.encoder.layer.4.output.LayerNorm.bias', 'bert.encoder.layer.5.attention.self.query.weight', 'bert.encoder.layer.5.attention.self.query.bias', 'bert.encoder.layer.5.attention.self.key.weight', 'bert.encoder.layer.5.attention.self.key.bias', 'bert.encoder.layer.5.attention.self.value.weight', 'bert.encoder.layer.5.attention.self.value.bias', 'bert.encoder.layer.5.attention.output.dense.weight', 'bert.encoder.layer.5.attention.output.dense.bias', 'bert.encoder.layer.5.attention.output.LayerNorm.weight', 'bert.encoder.layer.5.attention.output.LayerNorm.bias', 'bert.encoder.layer.5.intermediate.dense.weight', 'bert.encoder.layer.5.intermediate.dense.bias', 'bert.encoder.layer.5.output.dense.weight', 'bert.encoder.layer.5.output.dense.bias', 'bert.encoder.layer.5.output.LayerNorm.weight', 'bert.encoder.layer.5.output.LayerNorm.bias', 'bert.encoder.layer.6.attention.self.query.weight', 'bert.encoder.layer.6.attention.self.query.bias', 'bert.encoder.layer.6.attention.self.key.weight', 'bert.encoder.layer.6.attention.self.key.bias', 'bert.encoder.layer.6.attention.self.value.weight', 'bert.encoder.layer.6.attention.self.value.bias', 'bert.encoder.layer.6.attention.output.dense.weight', 'bert.encoder.layer.6.attention.output.dense.bias', 'bert.encoder.layer.6.attention.output.LayerNorm.weight', 'bert.encoder.layer.6.attention.output.LayerNorm.bias', 'bert.encoder.layer.6.intermediate.dense.weight', 'bert.encoder.layer.6.intermediate.dense.bias', 'bert.encoder.layer.6.output.dense.weight', 'bert.encoder.layer.6.output.dense.bias', 'bert.encoder.layer.6.output.LayerNorm.weight', 'bert.encoder.layer.6.output.LayerNorm.bias', 'bert.encoder.layer.7.attention.self.query.weight', 'bert.encoder.layer.7.attention.self.query.bias', 'bert.encoder.layer.7.attention.self.key.weight', 'bert.encoder.layer.7.attention.self.key.bias', 'bert.encoder.layer.7.attention.self.value.weight', 'bert.encoder.layer.7.attention.self.value.bias', 'bert.encoder.layer.7.attention.output.dense.weight', 'bert.encoder.layer.7.attention.output.dense.bias', 'bert.encoder.layer.7.attention.output.LayerNorm.weight', 'bert.encoder.layer.7.attention.output.LayerNorm.bias', 'bert.encoder.layer.7.intermediate.dense.weight', 'bert.encoder.layer.7.intermediate.dense.bias', 'bert.encoder.layer.7.output.dense.weight', 'bert.encoder.layer.7.output.dense.bias', 'bert.encoder.layer.7.output.LayerNorm.weight', 'bert.encoder.layer.7.output.LayerNorm.bias', 'bert.encoder.layer.8.attention.self.query.weight', 'bert.encoder.layer.8.attention.self.query.bias', 'bert.encoder.layer.8.attention.self.key.weight', 'bert.encoder.layer.8.attention.self.key.bias', 'bert.encoder.layer.8.attention.self.value.weight', 'bert.encoder.layer.8.attention.self.value.bias', 'bert.encoder.layer.8.attention.output.dense.weight', 'bert.encoder.layer.8.attention.output.dense.bias', 'bert.encoder.layer.8.attention.output.LayerNorm.weight', 'bert.encoder.layer.8.attention.output.LayerNorm.bias', 'bert.encoder.layer.8.intermediate.dense.weight', 'bert.encoder.layer.8.intermediate.dense.bias', 'bert.encoder.layer.8.output.dense.weight', 'bert.encoder.layer.8.output.dense.bias', 'bert.encoder.layer.8.output.LayerNorm.weight', 'bert.encoder.layer.8.output.LayerNorm.bias', 'bert.encoder.layer.9.attention.self.query.weight', 'bert.encoder.layer.9.attention.self.query.bias', 'bert.encoder.layer.9.attention.self.key.weight', 'bert.encoder.layer.9.attention.self.key.bias', 'bert.encoder.layer.9.attention.self.value.weight', 'bert.encoder.layer.9.attention.self.value.bias', 'bert.encoder.layer.9.attention.output.dense.weight', 'bert.encoder.layer.9.attention.output.dense.bias', 'bert.encoder.layer.9.attention.output.LayerNorm.weight', 'bert.encoder.layer.9.attention.output.LayerNorm.bias', 'bert.encoder.layer.9.intermediate.dense.weight', 'bert.encoder.layer.9.intermediate.dense.bias', 'bert.encoder.layer.9.output.dense.weight', 'bert.encoder.layer.9.output.dense.bias', 'bert.encoder.layer.9.output.LayerNorm.weight', 'bert.encoder.layer.9.output.LayerNorm.bias', 'bert.encoder.layer.10.attention.self.query.weight', 'bert.encoder.layer.10.attention.self.query.bias', 'bert.encoder.layer.10.attention.self.key.weight', 'bert.encoder.layer.10.attention.self.key.bias', 'bert.encoder.layer.10.attention.self.value.weight', 'bert.encoder.layer.10.attention.self.value.bias', 'bert.encoder.layer.10.attention.output.dense.weight', 'bert.encoder.layer.10.attention.output.dense.bias', 'bert.encoder.layer.10.attention.output.LayerNorm.weight', 'bert.encoder.layer.10.attention.output.LayerNorm.bias', 'bert.encoder.layer.10.intermediate.dense.weight', 'bert.encoder.layer.10.intermediate.dense.bias', 'bert.encoder.layer.10.output.dense.weight', 'bert.encoder.layer.10.output.dense.bias', 'bert.encoder.layer.10.output.LayerNorm.weight', 'bert.encoder.layer.10.output.LayerNorm.bias', 'bert.encoder.layer.11.attention.self.query.weight', 'bert.encoder.layer.11.attention.self.query.bias', 'bert.encoder.layer.11.attention.self.key.weight', 'bert.encoder.layer.11.attention.self.key.bias', 'bert.encoder.layer.11.attention.self.value.weight', 'bert.encoder.layer.11.attention.self.value.bias', 'bert.encoder.layer.11.attention.output.dense.weight', 'bert.encoder.layer.11.attention.output.dense.bias', 'bert.encoder.layer.11.attention.output.LayerNorm.weight', 'bert.encoder.layer.11.attention.output.LayerNorm.bias', 'bert.encoder.layer.11.intermediate.dense.weight', 'bert.encoder.layer.11.intermediate.dense.bias', 'bert.encoder.layer.11.output.dense.weight', 'bert.encoder.layer.11.output.dense.bias', 'bert.encoder.layer.11.output.LayerNorm.weight', 'bert.encoder.layer.11.output.LayerNorm.bias', 'qa_outputs.weight', 'qa_outputs.bias']01/20/2020 16:23:53 - INFO - __main__ -   ***** Running training *****
+01/20/2020 16:23:53 - INFO - __main__ -     Num examples = 88641
+01/20/2020 16:23:53 - INFO - __main__ -     Num Epochs = 2
+01/20/2020 16:23:53 - INFO - __main__ -     Instantaneous batch size per GPU = 10
+01/20/2020 16:23:53 - INFO - __main__ -     Total train batch size (w. parallel, distributed & accumulation) = 10
+01/20/2020 16:23:53 - INFO - __main__ -     Gradient Accumulation steps = 1
+01/20/2020 16:23:53 - INFO - __main__ -     Total optimization steps = 17730
+Epoch:   0%|          | 0/2 [00:00<?, ?it/s]
+Iteration:   0%|          | 0/8865 [00:00<?, ?it/s][A
+Iteration:   0%|          | 1/8865 [00:00<1:13:57,  2.00it/s][A
+Iteration:   0%|          | 2/8865 [00:00<1:05:14,  2.26it/s][A
+Iteration:   0%|          | 3/8865 [00:01<59:06,  2.50it/s]  [A
+Iteration:   0%|          | 4/8865 [00:01<54:52,  2.69it/s][A
+Iteration:   0%|          | 5/8865 [00:01<51:54,  2.84it/s][A
+Iteration:   0%|          | 6/8865 [00:02<49:50,  2.96it/s][A
+Iteration:   0%|          | 7/8865 [00:02<48:22,  3.05it/s][A
+Iteration:   0%|          | 8/8865 [00:02<47:21,  3.12it/s][A
+Iteration:   0%|          | 9/8865 [00:02<46:39,  3.16it/s][A
+Iteration:   0%|          | 10/8865 [00:03<46:09,  3.20it/s][A
+Iteration:   0%|          | 11/8865 [00:03<45:48,  3.22it/s][A
+Iteration:   0%|          | 12/8865 [00:03<45:35,  3.24it/s][A
+Iteration:   0%|          | 13/8865 [00:04<45:24,  3.25it/s][A
+Iteration:   0%|          | 14/8865 [00:04<45:17,  3.26it/s][A
+Iteration:   0%|          | 15/8865 [00:04<45:13,  3.26it/s][A
+Iteration:   0%|          | 16/8865 [00:05<45:09,  3.27it/s][A
+Iteration:   0%|          | 17/8865 [00:05<45:07,  3.27it/s][A
+Iteration:   0%|          | 18/8865 [00:05<45:05,  3.27it/s][A
+Iteration:   0%|          | 19/8865 [00:05<45:05,  3.27it/s][A
+Iteration:   0%|          | 20/8865 [00:06<45:07,  3.27it/s][A
+Iteration:   0%|          | 21/8865 [00:06<45:05,  3.27it/s][A
+Iteration:   0%|          | 22/8865 [00:06<45:04,  3.27it/s][A
+Iteration:   0%|          | 23/8865 [00:07<45:08,  3.27it/s][A
+Iteration:   0%|          | 24/8865 [00:07<45:09,  3.26it/s][A
+Iteration:   0%|          | 25/8865 [00:07<45:10,  3.26it/s][A
+Iteration:   0%|          | 26/8865 [00:08<45:10,  3.26it/s][A
+Iteration:   0%|          | 27/8865 [00:08<45:11,  3.26it/s][A
+Iteration:   0%|          | 28/8865 [00:08<45:12,  3.26it/s][A
+Iteration:   0%|          | 29/8865 [00:09<45:12,  3.26it/s][A
+Iteration:   0%|          | 30/8865 [00:09<45:14,  3.25it/s][A
+Iteration:   0%|          | 31/8865 [00:09<45:12,  3.26it/s][A
+Iteration:   0%|          | 32/8865 [00:09<45:12,  3.26it/s][A
+Iteration:   0%|          | 33/8865 [00:10<45:13,  3.26it/s][A
+Iteration:   0%|          | 34/8865 [00:10<45:13,  3.25it/s][A
+Iteration:   0%|          | 35/8865 [00:10<45:14,  3.25it/s][A
+Iteration:   0%|          | 36/8865 [00:11<45:13,  3.25it/s][A
+Iteration:   0%|          | 37/8865 [00:11<45:13,  3.25it/s][A
+Iteration:   0%|          | 38/8865 [00:11<45:14,  3.25it/s][A
+Iteration:   0%|          | 39/8865 [00:12<45:15,  3.25it/s][A
+Iteration:   0%|          | 40/8865 [00:12<45:15,  3.25it/s][A
+Iteration:   0%|          | 41/8865 [00:12<45:14,  3.25it/s][A
+Iteration:   0%|          | 42/8865 [00:13<45:15,  3.25it/s][A
+Iteration:   0%|          | 43/8865 [00:13<45:16,  3.25it/s][A
+Iteration:   0%|          | 44/8865 [00:13<45:14,  3.25it/s][A
+Iteration:   1%|          | 45/8865 [00:13<45:15,  3.25it/s][A
+Iteration:   1%|          | 46/8865 [00:14<45:16,  3.25it/s][A
+Iteration:   1%|          | 47/8865 [00:14<45:17,  3.24it/s][A
+Iteration:   1%|          | 48/8865 [00:14<45:18,  3.24it/s][A
+Iteration:   1%|          | 49/8865 [00:15<45:19,  3.24it/s][A
+Iteration:   1%|          | 50/8865 [00:15<45:20,  3.24it/s][A
+Iteration:   1%|          | 51/8865 [00:15<45:21,  3.24it/s][A
+Iteration:   1%|          | 52/8865 [00:16<45:20,  3.24it/s][A
+Iteration:   1%|          | 53/8865 [00:16<45:21,  3.24it/s][A
+Iteration:   1%|          | 54/8865 [00:16<45:22,  3.24it/s][A
+Iteration:   1%|          | 55/8865 [00:17<45:22,  3.24it/s][A
+Iteration:   1%|          | 56/8865 [00:17<45:22,  3.24it/s][A
+Iteration:   1%|          | 57/8865 [00:17<45:23,  3.23it/s][A
+Iteration:   1%|          | 58/8865 [00:17<45:23,  3.23it/s][A
+Iteration:   1%|          | 59/8865 [00:18<45:23,  3.23it/s][A
+Iteration:   1%|          | 60/8865 [00:18<45:22,  3.23it/s][A
+Iteration:   1%|          | 61/8865 [00:18<45:22,  3.23it/s][A
+Iteration:   1%|          | 62/8865 [00:19<45:22,  3.23it/s][A
+Iteration:   1%|          | 63/8865 [00:19<45:23,  3.23it/s][A
+Iteration:   1%|          | 64/8865 [00:19<45:23,  3.23it/s][A
+Iteration:   1%|          | 65/8865 [00:20<45:22,  3.23it/s][A
+Iteration:   1%|          | 66/8865 [00:20<45:23,  3.23it/s][A
+Iteration:   1%|          | 67/8865 [00:20<45:25,  3.23it/s][A
+Iteration:   1%|          | 68/8865 [00:21<45:24,  3.23it/s][A
+Iteration:   1%|          | 69/8865 [00:21<45:26,  3.23it/s][A
+Iteration:   1%|          | 70/8865 [00:21<45:25,  3.23it/s][A
+Iteration:   1%|          | 71/8865 [00:22<45:25,  3.23it/s][A
+Iteration:   1%|          | 72/8865 [00:22<45:25,  3.23it/s][A
+Iteration:   1%|          | 73/8865 [00:22<45:26,  3.22it/s][A
+Iteration:   1%|          | 74/8865 [00:22<45:26,  3.22it/s][A
+Iteration:   1%|          | 75/8865 [00:23<45:26,  3.22it/s][A
+Iteration:   1%|          | 76/8865 [00:23<45:26,  3.22it/s][A
+Iteration:   1%|          | 77/8865 [00:23<45:27,  3.22it/s][A
+Iteration:   1%|          | 78/8865 [00:24<45:27,  3.22it/s][A
+Iteration:   1%|          | 79/8865 [00:24<45:26,  3.22it/s][A
+Iteration:   1%|          | 80/8865 [00:24<45:26,  3.22it/s][A
+Iteration:   1%|          | 81/8865 [00:25<45:25,  3.22it/s][A
+Iteration:   1%|          | 82/8865 [00:25<45:25,  3.22it/s][A
+Iteration:   1%|          | 83/8865 [00:25<45:25,  3.22it/s][A
+Iteration:   1%|          | 84/8865 [00:26<45:25,  3.22it/s][A
+Iteration:   1%|          | 85/8865 [00:26<45:25,  3.22it/s][A
+Iteration:   1%|          | 86/8865 [00:26<45:26,  3.22it/s][A
+Iteration:   1%|          | 87/8865 [00:26<45:28,  3.22it/s][A
+Iteration:   1%|          | 88/8865 [00:27<45:30,  3.21it/s][A
+Iteration:   1%|          | 89/8865 [00:27<45:30,  3.21it/s][A
+Iteration:   1%|          | 90/8865 [00:27<45:57,  3.18it/s][A
+Iteration:   1%|          | 91/8865 [00:28<45:47,  3.19it/s][A
+Iteration:   1%|          | 92/8865 [00:28<45:42,  3.20it/s][A
+Iteration:   1%|          | 93/8865 [00:28<45:40,  3.20it/s][A
+Iteration:   1%|          | 94/8865 [00:29<45:39,  3.20it/s][A
+Iteration:   1%|          | 95/8865 [00:29<45:37,  3.20it/s][A
+Iteration:   1%|          | 96/8865 [00:29<45:36,  3.20it/s][A
+Iteration:   1%|          | 97/8865 [00:30<45:35,  3.20it/s][A
+Iteration:   1%|          | 98/8865 [00:30<45:35,  3.21it/s][A
+Iteration:   1%|          | 99/8865 [00:30<45:34,  3.21it/s][A
+Iteration:   1%|          | 100/8865 [00:31<45:33,  3.21it/s][A
+Iteration:   1%|          | 101/8865 [00:31<45:33,  3.21it/s][A
+Iteration:   1%|          | 102/8865 [00:31<45:32,  3.21it/s][A
+Iteration:   1%|          | 103/8865 [00:31<45:33,  3.21it/s][A
+Iteration:   1%|          | 104/8865 [00:32<45:34,  3.20it/s][A
+Iteration:   1%|          | 105/8865 [00:32<45:34,  3.20it/s][A
+Iteration:   1%|          | 106/8865 [00:32<45:34,  3.20it/s][A
+Iteration:   1%|          | 107/8865 [00:33<45:34,  3.20it/s][A
+Iteration:   1%|          | 108/8865 [00:33<45:33,  3.20it/s][A
+Iteration:   1%|          | 109/8865 [00:33<45:33,  3.20it/s][A
+Iteration:   1%|          | 110/8865 [00:34<45:35,  3.20it/s][A
+Iteration:   1%|▏         | 111/8865 [00:34<45:33,  3.20it/s][A
+Iteration:   1%|▏         | 112/8865 [00:34<45:33,  3.20it/s][A
+Iteration:   1%|▏         | 113/8865 [00:35<45:34,  3.20it/s][A
+Iteration:   1%|▏         | 114/8865 [00:35<45:34,  3.20it/s][A
+Iteration:   1%|▏         | 115/8865 [00:35<45:35,  3.20it/s][A
+Iteration:   1%|▏         | 116/8865 [00:36<45:36,  3.20it/s][A
+Iteration:   1%|▏         | 117/8865 [00:36<45:36,  3.20it/s][A
+Iteration:   1%|▏         | 118/8865 [00:36<45:35,  3.20it/s][A
+Iteration:   1%|▏         | 119/8865 [00:36<45:35,  3.20it/s][A
+Iteration:   1%|▏         | 120/8865 [00:37<45:36,  3.20it/s][A
+Iteration:   1%|▏         | 121/8865 [00:37<45:35,  3.20it/s][A
+Iteration:   1%|▏         | 122/8865 [00:37<45:34,  3.20it/s][A
+Iteration:   1%|▏         | 123/8865 [00:38<45:34,  3.20it/s][A
+Iteration:   1%|▏         | 124/8865 [00:38<45:35,  3.20it/s][A
+Iteration:   1%|▏         | 125/8865 [00:38<45:34,  3.20it/s][A
+Iteration:   1%|▏         | 126/8865 [00:39<45:35,  3.19it/s][A
+Iteration:   1%|▏         | 127/8865 [00:39<45:36,  3.19it/s][A
+Iteration:   1%|▏         | 128/8865 [00:39<45:36,  3.19it/s][A
+Iteration:   1%|▏         | 129/8865 [00:40<45:34,  3.19it/s][A
+Iteration:   1%|▏         | 130/8865 [00:40<45:34,  3.19it/s][A
+Iteration:   1%|▏         | 131/8865 [00:40<45:34,  3.19it/s][A
+Iteration:   1%|▏         | 132/8865 [00:41<45:33,  3.19it/s][A
+Iteration:   2%|▏         | 133/8865 [00:41<45:32,  3.20it/s][A
+Iteration:   2%|▏         | 134/8865 [00:41<45:32,  3.19it/s][A
+Iteration:   2%|▏         | 135/8865 [00:41<45:33,  3.19it/s][A
+Iteration:   2%|▏         | 136/8865 [00:42<45:32,  3.19it/s][A
+Iteration:   2%|▏         | 137/8865 [00:42<45:33,  3.19it/s][A
+Iteration:   2%|▏         | 138/8865 [00:42<45:32,  3.19it/s][A
+Iteration:   2%|▏         | 139/8865 [00:43<45:31,  3.19it/s][A
+Iteration:   2%|▏         | 140/8865 [00:43<45:31,  3.19it/s][A
+Iteration:   2%|▏         | 141/8865 [00:43<45:30,  3.20it/s][A
+Iteration:   2%|▏         | 142/8865 [00:44<45:30,  3.19it/s][A
+Iteration:   2%|▏         | 143/8865 [00:44<45:29,  3.20it/s][A
+Iteration:   2%|▏         | 144/8865 [00:44<45:29,  3.20it/s][A
+Iteration:   2%|▏         | 145/8865 [00:45<45:29,  3.19it/s][A
+Iteration:   2%|▏         | 146/8865 [00:45<45:29,  3.19it/s][A
+Iteration:   2%|▏         | 147/8865 [00:45<45:28,  3.19it/s][A
+Iteration:   2%|▏         | 148/8865 [00:46<45:29,  3.19it/s][A
+Iteration:   2%|▏         | 149/8865 [00:46<45:29,  3.19it/s][A
+Iteration:   2%|▏         | 150/8865 [00:46<45:28,  3.19it/s][A
+Iteration:   2%|▏         | 151/8865 [00:47<45:44,  3.17it/s][A
+Iteration:   2%|▏         | 152/8865 [00:47<45:39,  3.18it/s][A
+Iteration:   2%|▏         | 153/8865 [00:47<45:36,  3.18it/s][A
+Iteration:   2%|▏         | 154/8865 [00:47<45:33,  3.19it/s][A
+Iteration:   2%|▏         | 155/8865 [00:48<45:31,  3.19it/s][A
+Iteration:   2%|▏         | 156/8865 [00:48<45:29,  3.19it/s][A
+Iteration:   2%|▏         | 157/8865 [00:48<45:28,  3.19it/s][A
+Iteration:   2%|▏         | 158/8865 [00:49<45:27,  3.19it/s][A
+Iteration:   2%|▏         | 159/8865 [00:49<45:27,  3.19it/s][A
+Iteration:   2%|▏         | 160/8865 [00:49<45:25,  3.19it/s][A
+Iteration:   2%|▏         | 161/8865 [00:50<45:25,  3.19it/s][A
+Iteration:   2%|▏         | 162/8865 [00:50<45:24,  3.19it/s][A
+Iteration:   2%|▏         | 163/8865 [00:50<45:24,  3.19it/s][A
+Iteration:   2%|▏         | 164/8865 [00:51<45:23,  3.19it/s][A
+Iteration:   2%|▏         | 165/8865 [00:51<45:21,  3.20it/s][A
+Iteration:   2%|▏         | 166/8865 [00:51<45:22,  3.20it/s][A
+Iteration:   2%|▏         | 167/8865 [00:52<45:22,  3.19it/s][A
+Iteration:   2%|▏         | 168/8865 [00:52<45:21,  3.20it/s][A
+Iteration:   2%|▏         | 169/8865 [00:52<45:21,  3.19it/s][A
+Iteration:   2%|▏         | 170/8865 [00:52<45:20,  3.20it/s][A
+Iteration:   2%|▏         | 171/8865 [00:53<45:19,  3.20it/s][A
+Iteration:   2%|▏         | 172/8865 [00:53<45:20,  3.20it/s][A
+Iteration:   2%|▏         | 173/8865 [00:53<45:20,  3.19it/s][A
+Iteration:   2%|▏         | 174/8865 [00:54<45:21,  3.19it/s][A
+Iteration:   2%|▏         | 175/8865 [00:54<45:21,  3.19it/s][A
+Iteration:   2%|▏         | 176/8865 [00:54<45:19,  3.20it/s][A
+Iteration:   2%|▏         | 177/8865 [00:55<45:18,  3.20it/s][A
+Iteration:   2%|▏         | 178/8865 [00:55<45:19,  3.19it/s][A
+Iteration:   2%|▏         | 179/8865 [00:55<45:17,  3.20it/s][A
+Iteration:   2%|▏         | 180/8865 [00:56<45:18,  3.19it/s][A
+Iteration:   2%|▏         | 181/8865 [00:56<45:18,  3.19it/s][A
+Iteration:   2%|▏         | 182/8865 [00:56<45:20,  3.19it/s][A
+Iteration:   2%|▏         | 183/8865 [00:57<45:20,  3.19it/s][A
+Iteration:   2%|▏         | 184/8865 [00:57<45:19,  3.19it/s][A
+Iteration:   2%|▏         | 185/8865 [00:57<45:17,  3.19it/s][A
+Iteration:   2%|▏         | 186/8865 [00:57<45:17,  3.19it/s][A
+Iteration:   2%|▏         | 187/8865 [00:58<45:40,  3.17it/s][A
+Iteration:   2%|▏         | 188/8865 [00:58<45:33,  3.17it/s][A
+Iteration:   2%|▏         | 189/8865 [00:58<45:28,  3.18it/s][A
+Iteration:   2%|▏         | 190/8865 [00:59<45:25,  3.18it/s][A
+Iteration:   2%|▏         | 191/8865 [00:59<45:23,  3.19it/s][A
+Iteration:   2%|▏         | 192/8865 [00:59<45:18,  3.19it/s][A
+Iteration:   2%|▏         | 193/8865 [01:00<45:18,  3.19it/s][A
+Iteration:   2%|▏         | 194/8865 [01:00<45:17,  3.19it/s][A
+Iteration:   2%|▏         | 195/8865 [01:00<45:16,  3.19it/s][A
+Iteration:   2%|▏         | 196/8865 [01:01<45:16,  3.19it/s][A
+Iteration:   2%|▏         | 197/8865 [01:01<45:13,  3.19it/s][A
+Iteration:   2%|▏         | 198/8865 [01:01<45:14,  3.19it/s][A
+Iteration:   2%|▏         | 199/8865 [01:02<45:14,  3.19it/s][A
+Iteration:   2%|▏         | 200/8865 [01:02<45:14,  3.19it/s][A
+Iteration:   2%|▏         | 201/8865 [01:02<45:13,  3.19it/s][A
+Iteration:   2%|▏         | 202/8865 [01:02<45:12,  3.19it/s][A
+Iteration:   2%|▏         | 203/8865 [01:03<45:12,  3.19it/s][A
+Iteration:   2%|▏         | 204/8865 [01:03<45:09,  3.20it/s][A
+Iteration:   2%|▏         | 205/8865 [01:03<45:10,  3.19it/s][A
+Iteration:   2%|▏         | 206/8865 [01:04<45:10,  3.19it/s][A
+Iteration:   2%|▏         | 207/8865 [01:04<45:10,  3.19it/s][A
+Iteration:   2%|▏         | 208/8865 [01:04<45:08,  3.20it/s][A
+Iteration:   2%|▏         | 209/8865 [01:05<45:09,  3.19it/s][A
+Iteration:   2%|▏         | 210/8865 [01:05<45:08,  3.19it/s][A
+Iteration:   2%|▏         | 211/8865 [01:05<45:08,  3.20it/s][A
+Iteration:   2%|▏         | 212/8865 [01:06<45:09,  3.19it/s][A
+Iteration:   2%|▏         | 213/8865 [01:06<45:09,  3.19it/s][A
+Iteration:   2%|▏         | 214/8865 [01:06<45:07,  3.20it/s][A
+Iteration:   2%|▏         | 215/8865 [01:07<45:07,  3.19it/s][A
+Iteration:   2%|▏         | 216/8865 [01:07<45:07,  3.19it/s][A
+Iteration:   2%|▏         | 217/8865 [01:07<45:06,  3.20it/s][A
+Iteration:   2%|▏         | 218/8865 [01:07<45:06,  3.20it/s][A
+Iteration:   2%|▏         | 219/8865 [01:08<45:04,  3.20it/s][A
+Iteration:   2%|▏         | 220/8865 [01:08<45:04,  3.20it/s][A
+Iteration:   2%|▏         | 221/8865 [01:08<45:03,  3.20it/s][A
+Iteration:   3%|▎         | 222/8865 [01:09<45:03,  3.20it/s][A
+Iteration:   3%|▎         | 223/8865 [01:09<45:04,  3.20it/s][A
+Iteration:   3%|▎         | 224/8865 [01:09<45:03,  3.20it/s][A
+Iteration:   3%|▎         | 225/8865 [01:10<45:02,  3.20it/s][A
+Iteration:   3%|▎         | 226/8865 [01:10<45:02,  3.20it/s][A
+Iteration:   3%|▎         | 227/8865 [01:10<45:01,  3.20it/s][A
+Iteration:   3%|▎         | 228/8865 [01:11<45:01,  3.20it/s][A
+Iteration:   3%|▎         | 229/8865 [01:11<45:02,  3.20it/s][A
+Iteration:   3%|▎         | 230/8865 [01:11<45:02,  3.20it/s][A
+Iteration:   3%|▎         | 231/8865 [01:12<45:02,  3.19it/s][A
+Iteration:   3%|▎         | 232/8865 [01:12<45:00,  3.20it/s][A
+Iteration:   3%|▎         | 233/8865 [01:12<45:00,  3.20it/s][A
+Iteration:   3%|▎         | 234/8865 [01:12<44:59,  3.20it/s][A
+Iteration:   3%|▎         | 235/8865 [01:13<44:58,  3.20it/s][A
+Iteration:   3%|▎         | 236/8865 [01:13<44:58,  3.20it/s][A
+Iteration:   3%|▎         | 237/8865 [01:13<44:58,  3.20it/s][A
+Iteration:   3%|▎         | 238/8865 [01:14<44:57,  3.20it/s][A
+Iteration:   3%|▎         | 239/8865 [01:14<44:57,  3.20it/s][A
+Iteration:   3%|▎         | 240/8865 [01:14<44:57,  3.20it/s][A
+Iteration:   3%|▎         | 241/8865 [01:15<44:58,  3.20it/s][A
+Iteration:   3%|▎         | 242/8865 [01:15<44:59,  3.19it/s][A
+Iteration:   3%|▎         | 243/8865 [01:15<44:57,  3.20it/s][A
+Iteration:   3%|▎         | 244/8865 [01:16<44:56,  3.20it/s][A
+Iteration:   3%|▎         | 245/8865 [01:16<44:58,  3.19it/s][A
+Iteration:   3%|▎         | 246/8865 [01:16<44:59,  3.19it/s][A
+Iteration:   3%|▎         | 247/8865 [01:17<44:56,  3.20it/s][A
+Iteration:   3%|▎         | 248/8865 [01:17<44:55,  3.20it/s][A
+Iteration:   3%|▎         | 249/8865 [01:17<44:56,  3.19it/s][A
+Iteration:   3%|▎         | 250/8865 [01:18<44:57,  3.19it/s][A
+Iteration:   3%|▎         | 251/8865 [01:18<44:56,  3.19it/s][A
+Iteration:   3%|▎         | 252/8865 [01:18<44:57,  3.19it/s][A
+Iteration:   3%|▎         | 253/8865 [01:18<44:57,  3.19it/s][A
+Iteration:   3%|▎         | 254/8865 [01:19<44:57,  3.19it/s][A
+Iteration:   3%|▎         | 255/8865 [01:19<44:56,  3.19it/s][A
+Iteration:   3%|▎         | 256/8865 [01:19<44:56,  3.19it/s][A
+Iteration:   3%|▎         | 257/8865 [01:20<44:55,  3.19it/s][A
+Iteration:   3%|▎         | 258/8865 [01:20<44:55,  3.19it/s][A
+Iteration:   3%|▎         | 259/8865 [01:20<44:54,  3.19it/s][A
+Iteration:   3%|▎         | 260/8865 [01:21<44:54,  3.19it/s][A
+Iteration:   3%|▎         | 261/8865 [01:21<44:53,  3.19it/s][A
+Iteration:   3%|▎         | 262/8865 [01:21<44:54,  3.19it/s][A
+Iteration:   3%|▎         | 263/8865 [01:22<44:53,  3.19it/s][A
+Iteration:   3%|▎         | 264/8865 [01:22<44:54,  3.19it/s][A
+Iteration:   3%|▎         | 265/8865 [01:22<44:53,  3.19it/s][A
+Iteration:   3%|▎         | 266/8865 [01:23<44:53,  3.19it/s][A
+Iteration:   3%|▎         | 267/8865 [01:23<44:52,  3.19it/s][A
+Iteration:   3%|▎         | 268/8865 [01:23<44:52,  3.19it/s][A
+Iteration:   3%|▎         | 269/8865 [01:23<44:52,  3.19it/s][A
+Iteration:   3%|▎         | 270/8865 [01:24<44:51,  3.19it/s][A
+Iteration:   3%|▎         | 271/8865 [01:24<44:52,  3.19it/s][A
+Iteration:   3%|▎         | 272/8865 [01:24<44:51,  3.19it/s][A
+Iteration:   3%|▎         | 273/8865 [01:25<44:52,  3.19it/s][A
+Iteration:   3%|▎         | 274/8865 [01:25<44:50,  3.19it/s][A
+Iteration:   3%|▎         | 275/8865 [01:25<44:50,  3.19it/s][A
+Iteration:   3%|▎         | 276/8865 [01:26<44:50,  3.19it/s][A
+Iteration:   3%|▎         | 277/8865 [01:26<44:48,  3.19it/s][A
+Iteration:   3%|▎         | 278/8865 [01:26<44:49,  3.19it/s][A
+Iteration:   3%|▎         | 279/8865 [01:27<44:49,  3.19it/s][A
+Iteration:   3%|▎         | 280/8865 [01:27<44:48,  3.19it/s][A
+Iteration:   3%|▎         | 281/8865 [01:27<44:49,  3.19it/s][A
+Iteration:   3%|▎         | 282/8865 [01:28<44:48,  3.19it/s][A
+Iteration:   3%|▎         | 283/8865 [01:28<44:48,  3.19it/s][A
+Iteration:   3%|▎         | 284/8865 [01:28<44:46,  3.19it/s][A
+Iteration:   3%|▎         | 285/8865 [01:28<44:46,  3.19it/s][A
+Iteration:   3%|▎         | 286/8865 [01:29<44:45,  3.19it/s][A
+Iteration:   3%|▎         | 287/8865 [01:29<44:45,  3.19it/s][A
+Iteration:   3%|▎         | 288/8865 [01:29<44:45,  3.19it/s][A
+Iteration:   3%|▎         | 289/8865 [01:30<44:45,  3.19it/s][A
+Iteration:   3%|▎         | 290/8865 [01:30<44:45,  3.19it/s][A
+Iteration:   3%|▎         | 291/8865 [01:30<44:44,  3.19it/s][A
+Iteration:   3%|▎         | 292/8865 [01:31<44:45,  3.19it/s][A
+Iteration:   3%|▎         | 293/8865 [01:31<44:42,  3.20it/s][A
+Iteration:   3%|▎         | 294/8865 [01:31<44:42,  3.20it/s][A
+Iteration:   3%|▎         | 295/8865 [01:32<45:00,  3.17it/s][A
+Iteration:   3%|▎         | 296/8865 [01:32<44:54,  3.18it/s][A
+Iteration:   3%|▎         | 297/8865 [01:32<44:50,  3.18it/s][A
+Iteration:   3%|▎         | 298/8865 [01:33<44:47,  3.19it/s][A
+Iteration:   3%|▎         | 299/8865 [01:33<44:45,  3.19it/s][A
+Iteration:   3%|▎         | 300/8865 [01:33<44:46,  3.19it/s][A
+Iteration:   3%|▎         | 301/8865 [01:33<44:46,  3.19it/s][A
+Iteration:   3%|▎         | 302/8865 [01:34<44:46,  3.19it/s][A
+Iteration:   3%|▎         | 303/8865 [01:34<44:43,  3.19it/s][A
+Iteration:   3%|▎         | 304/8865 [01:34<44:43,  3.19it/s][A
+Iteration:   3%|▎         | 305/8865 [01:35<44:41,  3.19it/s][A
+Iteration:   3%|▎         | 306/8865 [01:35<44:41,  3.19it/s][A
+Iteration:   3%|▎         | 307/8865 [01:35<44:39,  3.19it/s][A
+Iteration:   3%|▎         | 308/8865 [01:36<44:39,  3.19it/s][A
+Iteration:   3%|▎         | 309/8865 [01:36<44:39,  3.19it/s][A
+Iteration:   3%|▎         | 310/8865 [01:36<44:40,  3.19it/s][A
+Iteration:   4%|▎         | 311/8865 [01:37<44:39,  3.19it/s][A
+Iteration:   4%|▎         | 312/8865 [01:37<44:39,  3.19it/s][A
+Iteration:   4%|▎         | 313/8865 [01:37<44:38,  3.19it/s][A
+Iteration:   4%|▎         | 314/8865 [01:38<44:37,  3.19it/s][A
+Iteration:   4%|▎         | 315/8865 [01:38<44:37,  3.19it/s][A
+Iteration:   4%|▎         | 316/8865 [01:38<44:37,  3.19it/s][A
+Iteration:   4%|▎         | 317/8865 [01:38<44:36,  3.19it/s][A
+Iteration:   4%|▎         | 318/8865 [01:39<44:37,  3.19it/s][A
+Iteration:   4%|▎         | 319/8865 [01:39<44:36,  3.19it/s][A
+Iteration:   4%|▎         | 320/8865 [01:39<44:36,  3.19it/s][A
+Iteration:   4%|▎         | 321/8865 [01:40<44:43,  3.18it/s][A
+Iteration:   4%|▎         | 322/8865 [01:40<44:39,  3.19it/s][A
+Iteration:   4%|▎         | 323/8865 [01:40<44:38,  3.19it/s][A
+Iteration:   4%|▎         | 324/8865 [01:41<44:36,  3.19it/s][A
+Iteration:   4%|▎         | 325/8865 [01:41<44:35,  3.19it/s][A
+Iteration:   4%|▎         | 326/8865 [01:41<44:34,  3.19it/s][A
+Iteration:   4%|▎         | 327/8865 [01:42<44:32,  3.19it/s][A
+Iteration:   4%|▎         | 328/8865 [01:42<44:31,  3.20it/s][A
+Iteration:   4%|▎         | 329/8865 [01:42<44:32,  3.19it/s][A
+Iteration:   4%|▎         | 330/8865 [01:43<44:30,  3.20it/s][A
+Iteration:   4%|▎         | 331/8865 [01:43<44:31,  3.19it/s][A
+Iteration:   4%|▎         | 332/8865 [01:43<44:30,  3.20it/s][A
+Iteration:   4%|▍         | 333/8865 [01:44<44:30,  3.20it/s][A
+Iteration:   4%|▍         | 334/8865 [01:44<44:30,  3.19it/s][A
