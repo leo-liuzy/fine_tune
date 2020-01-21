@@ -193,6 +193,7 @@ def train(args, train_dataset, model, tokenizer):
     all_param = 0
     half_param = 0
     for idx in train_iterator:
+        print(f"idx: {idx}")
         if idx == args.num_train_epochs // 2:
             condition_fn = create_filter_conditions(args)
             optimizer_grouped_parameters = [{'params': [], 'weight_decay': args.weight_decay},
@@ -288,7 +289,8 @@ def train(args, train_dataset, model, tokenizer):
 
     if args.local_rank in [-1, 0]:
         tb_writer.close()
-
+    print(f"all_param: {all_param}")
+    print(f"half_param: {half_param}")
     return global_step, tr_loss / global_step
 
 

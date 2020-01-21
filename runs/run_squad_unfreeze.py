@@ -185,11 +185,12 @@ def train(args, train_dataset, model, tokenizer):
 
     global_step = 0
     tr_loss, logging_loss = 0.0, 0.0
-
+    all_param = 0
     # only fine-tune the last layer
     train_iterator = trange(int(args.num_train_epochs), desc="Epoch", disable=args.local_rank not in [-1, 0])
     set_seed(args)  # Added here for reproductibility (even between python 2 and 3)
-    for _ in train_iterator:
+    for idx in train_iterator:
+        print(f"idx: {idx}")
         epoch_iterator = tqdm(train_dataloader, desc="Iteration", disable=args.local_rank not in [-1, 0])
         # bp()
         for step, batch in enumerate(epoch_iterator):
@@ -212,12 +213,14 @@ def train(args, train_dataset, model, tokenizer):
                 loss = loss.mean()  # mean() to average on multi-gpu parallel (not distributed) training
             if args.gradient_accumulation_steps > 1:
                 loss = loss / args.gradient_accumulation_steps
-
+            from time import time
+            start = time()
             if args.fp16:
                 with amp.scale_loss(loss, optimizer) as scaled_loss:
                     scaled_loss.backward()
             else:
                 loss.backward()
+            all_param += time() - start
 
             tr_loss += loss.item()
             if (step + 1) % args.gradient_accumulation_steps == 0:
